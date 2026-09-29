@@ -219,6 +219,17 @@ The complaints centered around six distinct failure categories:
 
 ---
 
+### Prompt 23 · Web3 Landing Page Sample Pattern Inquiry
+- **Timestamp:** `2026-09-29T22:08:16Z` (23:08 WAT)
+- **Prompt:**
+  > "update the complaints.md. is the try sample a good idea for web3 projects on the landing page?"
+- **Context & Evaluation:**
+  - Evaluated the architectural rationale for "Try a sample" in Web3 versus Web2 contexts.
+  - In Web3, zero-friction simulation is essential because requiring wallet connections or gas fees causes instant visitor bounce; however, embedding raw debug tables directly into marketing copy damages visual trust. The superior design pattern is a dedicated `/demo` walkthrough or sandbox modal rather than an unstyled inline table widget on the landing page.
+- **Remediation:** Documented the pattern analysis and confirmed keeping the landing page free of inline debug desks.
+
+---
+
 ## 3. Active Rule Invariants Deduced from Complaints
 
 To avoid repeating any mistakes, the following hard rules govern all subsequent work:
