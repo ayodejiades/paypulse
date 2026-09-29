@@ -14,6 +14,7 @@ import Link from "next/link";
 import campaignData from "../../evidence/campaign-report.json";
 import { evaluateDeterministicKernel, type ReconciliationInput } from "@/lib/kernel";
 import { DashboardShell } from "@/components/dashboard-shell";
+import { PipelineFlow } from "@/components/ui/pipeline-flow";
 
 type ProofCase = ReconciliationInput & {
   title: string;

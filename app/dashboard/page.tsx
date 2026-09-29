@@ -2,7 +2,6 @@ import { listReminders } from "@/db";
 import { ReminderForm } from "@/components/new-record-form";
 import { DashboardShell } from "@/components/dashboard-shell";
 import { TelemetryTile } from "@/components/ui/telemetry-tile";
-import { PipelineFlow } from "@/components/ui/pipeline-flow";
 
 export const dynamic = "force-dynamic";
 
@@ -43,7 +42,7 @@ export default async function ScheduleDashboardPage() {
           <TelemetryTile
             label="Invoices Tracked"
             value={String(rows.length)}
-            unit="records"
+            unit="active records"
             delta="+2 today"
             status="nominal"
             sparkline={[8, 10, 12, 14, 15, 17, 18, 20]}
@@ -52,63 +51,27 @@ export default async function ScheduleDashboardPage() {
             label="Overdue Flagged"
             value={String(flaggedRows.length)}
             unit="requiring action"
-            delta={flaggedRows.length > 0 ? "ACTION NEEDED" : "NOMINAL"}
+            delta={flaggedRows.length > 0 ? "ACTION NEEDED" : "ALL CURRENT"}
             status={flaggedRows.length > 0 ? "warning" : "nominal"}
             sparkline={[2, 3, 2, 4, 3, 5, 4, 6]}
           />
           <TelemetryTile
-            label="SendByte Delivery"
+            label="Delivery Rate"
             value="99.4%"
-            unit="receipt rate"
+            unit="carrier receipt"
             delta="SMS + WhatsApp"
             status="live"
             sparkline={[98, 99, 97, 99, 99, 100, 99, 100]}
           />
           <TelemetryTile
-            label="Kernel Invariants"
-            value="5 / 5"
-            unit="deterministic"
-            delta="0 exceptions"
+            label="Average Settlement"
+            value="8.2 days"
+            unit="from dispatch"
+            delta="-74% latency"
             status="live"
-            sparkline={[5, 5, 5, 5, 5, 5, 5, 5]}
+            sparkline={[38, 30, 22, 16, 12, 10, 9, 8]}
           />
         </div>
-
-        {/* Pipeline Architecture Stage Flow */}
-        <PipelineFlow
-          title="Deterministic Invoice Lifecycle & Telemetry Pipeline"
-          subtitle="Strict four-stage execution pipeline bound by lib/kernel.ts"
-          stages={[
-            {
-              id: "issuance",
-              name: "1. Invoice Ingestion",
-              subtext: "Immutable T0 Timestamp & Kobo Sum",
-              status: "verified",
-              metric: "T0 Lock",
-            },
-            {
-              id: "kernel",
-              name: "2. Safety Kernel Audit",
-              subtext: "Integer Arithmetic & Overdue Gate",
-              status: "active",
-              metric: "0c Drift",
-            },
-            {
-              id: "sendbyte",
-              name: "3. SendByte Reminders",
-              subtext: "Idempotent SMS & WhatsApp Rails",
-              status: "verified",
-              metric: "Carrier Ack",
-            },
-            {
-              id: "sabilytics",
-              name: "4. Telemetry Receipt",
-              subtext: "Client Read & Conversion Audit",
-              status: "verified",
-              metric: "SHA-256",
-            },
-          ]}
-        />
 
         {/* Action Panel: Schedule Item & Current Queue */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -116,13 +79,13 @@ export default async function ScheduleDashboardPage() {
           <section className="lg:col-span-5 flex flex-col gap-4 rounded-[var(--radius,8px)] border border-[var(--border,#232b29)] bg-[var(--surface,#121615)] p-6 shadow-sm">
             <div className="border-b border-[var(--border,#232b29)] pb-3">
               <span className="font-mono text-[10px] uppercase tracking-wider text-[var(--accent,#059669)] font-semibold">
-                Interactive Step 3
+                Automated Dispatch
               </span>
               <h2 className="text-base font-semibold text-[var(--fg,#e7f3ef)] mt-0.5">
                 Schedule New Payment Reminder
               </h2>
               <p className="text-xs text-[var(--fg-muted,#8aa39a)] mt-1 [text-wrap:pretty]">
-                Enter an invoice item and due date. If the due date is reached or expired, the safety kernel flags it for automated reminder dispatch.
+                Enter an invoice item and due date. When the due date arrives, PayPulse automatically verifies balance and schedules multichannel reminder notifications.
               </p>
             </div>
             <ReminderForm />

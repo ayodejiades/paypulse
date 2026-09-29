@@ -441,7 +441,15 @@ The complaints centered around six distinct failure categories:
   > "remove. we don't need the sponsors page showing to judges and users."  
   > *(Uploaded screenshot of 'Inspect Sponsor Telemetry →')*
 - **Critique / Grievance:** Exposing internal sponsor telemetry links and navigation tabs breaks the authentic SME product experience for users and judges.
-- **Remediation:** Removed the `Inspect Sponsor Telemetry →` ribbon from `components/landing/sections.tsx` and removed the `Sponsors` tab from `PRIMARY_LINKS` in `components/dashboard-shell.tsx`. Sponsor fixtures and test assertions remain strictly maintained under the hood for preflight validation without polluting user-facing surfaces.
+---
+
+### Prompt 46 · Production Navigation Streamlining
+- **Timestamp:** `2026-09-29T22:24:32Z` (23:24 WAT)
+- **Prompt:**
+  > "remove unneeded routes. remember production-ready."  
+  > *(Uploaded screenshot of 'Overview   Invoices & Ledger   Dispatch New   Operator   Proof   Verifier   Chaos Lab')*
+- **Critique / Grievance:** Exposing developer testbeds (`Operator`, `Proof`, `Verifier`, `Chaos Lab`) in the primary dashboard navigation completely destroys the authentic production posture of the product.
+- **Remediation:** Pruned `PRIMARY_LINKS` in `components/dashboard-shell.tsx` down strictly to production SME surfaces: `Overview`, `Invoices & Ledger`, and `New Invoice`. Removed the engineering architecture `<PipelineFlow />` from the dashboard and relocated it to `/proof`. Removed the "Interactive Step 3" label from the dispatch panel.
 
 ---
 
@@ -458,12 +466,12 @@ To avoid repeating any mistakes, the following hard rules govern all subsequent 
 - [x] **Palette Rule:** Dark ledger theme only (`#0a0d0c`, `#121615`, `#232b29`, `#e7f3ef`, `#059669`). Never use pink, pastel neobrutalism, or unrequested accent colors.
 - [x] **Button Rule:** Oculupi-styled pill geometry (`rounded-full`, asymmetrical padding, circular badge housing a northeast `↗` arrow). Green buttons MUST ALWAYS have pure white text (`#ffffff` / `text-white`), NEVER black.
 - [x] **CTA Tone Rule:** Canonical, production-ready copy: **"Get started"**, NEVER demo toy labels like "Start live demo" or corporate jargon like "Launch Workspace".
+- [x] **Production Navigation Rule:** The main navigation MUST ONLY show commercial production routes (`Overview`, `Invoices & Ledger`, `New Invoice`). Never surface test harnesses (`Operator`, `Proof`, `Verifier`, `Chaos Lab`) in primary navigation.
 - [x] **Sponsor Surface Seclusion Rule:** Never surface raw sponsor administration links or 'Sponsors' nav tabs to users/judges; maintain sponsor tests and contracts under the hood.
 - [x] **Iconography Rule:** NO generic shadcn/lucide UI icons. Rely on characterful typography, hairline borders, and SVG northeast vectors.
 - [x] **Copywriting Rule:** ZERO em-dashes (`—`). Zero hyphens in body text or headings ("due date", "integer kobo", "kill switch"). No AI superlatives.
 - [x] **Badge Cluster Rule:** No colored status pills ('VERIFIED ACTIVE'), fake check dates, or badge clusters cluttering cards.
 - [x] **Landing Page Rule:** Focus on SME product value and operational lifecycles; do NOT clutter the landing page with sponsor billboards or raw debug desks.
 - [x] **Device Mockup Rule:** Use crisp, hand-coded device chrome (`.phone`) with SVG status bars as established in `team3`.
-- [x] **Navigation Rule:** Every inner route (`/dashboard/*`, `/proof`, `/verify`, `/demo`, `/lab`) MUST share the unified `DashboardShell` navigation bar without distracting dots, tags, or sponsor tabs.
 - [x] **Footer Rule:** Strictly standard, quiet one-liner footer (`py-5`) with wordmark on the left and copyright on the right. No duplicate nav links.
 

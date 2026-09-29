@@ -8,11 +8,7 @@ import { usePathname } from "next/navigation";
 const PRIMARY_LINKS = [
   { href: "/dashboard", label: "Overview" },
   { href: "/dashboard/items", label: "Invoices & Ledger" },
-  { href: "/dashboard/create", label: "Dispatch New" },
-  { href: "/dashboard/operator", label: "Operator" },
-  { href: "/proof", label: "Proof" },
-  { href: "/verify", label: "Verifier" },
-  { href: "/lab", label: "Chaos Lab" },
+  { href: "/dashboard/create", label: "New Invoice" },
 ];
 
 export function DashboardShell({
