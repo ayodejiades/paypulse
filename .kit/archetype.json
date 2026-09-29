@@ -1,0 +1,10 @@
+{
+  "archetype": "workflow-tool",
+  "design": "calm",
+  "fonts": {
+    "sans": "Geist",
+    "display": "Geist",
+    "mono": "Geist Mono"
+  },
+  "fixture": "evidence/campaign-report.json"
+}

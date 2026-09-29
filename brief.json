@@ -1,0 +1,67 @@
+{
+  "project": "aib-ship",
+  "idea": "PayPulse Africa: Automated SME Invoicing and SMS/WhatsApp Payment Reminders",
+  "track": "web2",
+  "team": 1,
+  "event": {
+    "name": "Title: Live Content",
+    "start": "2026-09-01T00:00:00Z",
+    "end": "2026-09-30T23:59:59Z",
+    "tz": "Africa/Lagos",
+    "submissionUrl": "https://www.africaisbuilding.com/ship/aib-ship-2026"
+  },
+  "limits": {
+    "videoMaxSeconds": 180,
+    "videoMinSeconds": 0,
+    "repoMustBePublic": true,
+    "requiresOssLicense": false,
+    "aiDisclosureRequired": false,
+    "maxTeam": 4,
+    "minTeam": 1,
+    "requiredLicense": null,
+    "source": "rules",
+    "videoTargetSeconds": 153
+  },
+  "sponsors": [],
+  "theme": "ledger",
+  "accent": "#059669",
+  "illustrations": "none",
+  "source": "heuristic",
+  "unknown": [
+    "limits.videoMaxSeconds",
+    "limits.maxTeam",
+    "limits.minTeam",
+    "limits.requiredLicense",
+    "limits.repoMustBePublic",
+    "limits.requiresOssLicense",
+    "limits.aiDisclosureRequired",
+    "sponsors"
+  ],
+  "wedge": {
+    "title": "aib-ship",
+    "sector": "WEB2 \u00b7 PayPulse Africa: Automated SME\u2026",
+    "target_user": "accounts payable manager reconciling vendor invoices under month-end close deadline",
+    "painful_moment": "Facing a critical operational failure in PayPulse Africa: Automated SME Invoicing and SMS/WhatsApp Payment Reminders with cascading downstream consequences and a deadline measured in minutes, not days.",
+    "unusual_constraint": "Zero unhandled exceptions under upstream service failure with deterministic fallback for PayPulse Africa: Automated SME\u2026",
+    "proof_metric": "TARGET (unmeasured): handle 100 sample payment records in under 2 seconds with every flag explained",
+    "essential_sponsor": "Neon Postgres",
+    "essential_sponsor_role": "Isolated branching and instant rollback for state mutations.",
+    "adversarial_critique": {
+      "why_generic_risk": "Judges may see 'PayPulse Africa: Automated\u2026' as a generic web2 wrapper; must prove the deterministic kernel handles domain edge cases that a naive LLM cannot.",
+      "obvious_competitor": "Existing web2 tools or horizontal LLM wrappers that claim similar PayPulse capabilities without domain-specific invariant enforcement.",
+      "unprovable_claim_risk": "Claims of 100% accuracy across all edge cases for PayPulse Africa: Automated\u2026; scope proof to the committed fixture set and be honest about boundaries.",
+      "superficial_sponsor_risk": "Using Neon Postgres as a simple key-value store rather than exercising its core differentiating primitive (Isolated branching and instant rollback for state ...).",
+      "hour_8_kill_criterion": "The core deterministic kernel for PayPulse Africa: Automated\u2026 must execute end-to-end against 4+ fixtures with honest PASS/FAIL verdicts by hour 8."
+    },
+    "demand_signals": [],
+    "archetype": "workflow-tool"
+  },
+  "design": {
+    "preset": "calm",
+    "fonts": {
+      "sans": "Geist",
+      "display": "Geist",
+      "mono": "Geist Mono"
+    }
+  }
+}

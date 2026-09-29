@@ -1,0 +1,245 @@
+/* components/landing/landing.css — the landing's visual system.
+   Every value is a token set on the .lp root from brief.json "design" (lib/landing.ts):
+   colour   --bg --surface --raised --ink --muted --line --accent --accent-ink
+   states   --state-clear --state-flagged --state-pending --state-refused
+   shape    --radius --radius-sm --edge --button-edge
+   depth    --shadow --button-shadow --lift --glass --bloom
+   type     --display-weight
+   so one stylesheet renders calm, editorial, neobrutalist, Swiss, terminal or glass looks. */
+
+/* No pill shapes: buttons, tags and chips take the design's small radius. */
+.lp {
+  --pill: var(--radius-sm);
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-landing-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "ss01", "cv11";
+}
+
+.lp ::selection {
+  background: color-mix(in oklab, var(--accent) 22%, transparent);
+}
+
+.lp-display {
+  font-family: var(--font-landing-display, var(--font-landing-sans)), ui-sans-serif, system-ui, sans-serif;
+  font-weight: var(--display-weight, 500);
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+.lp-mono {
+  font-family: var(--font-landing-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+.lp-pretty {
+  text-wrap: pretty;
+}
+
+/* Hero backdrop: one soft accent bloom and a hairline grid that fades out. */
+.lp-bloom {
+  background: radial-gradient(55% 60% at 78% 8%, color-mix(in oklab, var(--accent) var(--bloom, 16%), transparent), transparent 72%);
+  background:
+    radial-gradient(55% 60% at 78% 8%, color-mix(in oklab, var(--accent) var(--bloom, 16%), transparent), transparent 72%),
+    radial-gradient(40% 40% at 8% 0%, color-mix(in oklab, oklch(from var(--accent) l c calc(h + 28)) calc(var(--bloom, 16%) * 0.5), transparent), transparent 70%);
+}
+
+/* Coordinate grid: only where a grid carries meaning (the field map). */
+.lp-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--ink) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--ink) 6%, transparent) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* Elevated surface: a translucent ring instead of a solid border, so the shadow and the
+   edge never double up. Flat variant for sibling content that needs no lift. */
+.lp-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: 0 0 0 var(--edge, 1px) var(--line), var(--shadow);
+  backdrop-filter: var(--glass, none);
+}
+
+.lp-card-flat {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: 0 0 0 var(--edge, 1px) var(--line);
+}
+
+.lp-hair {
+  border-color: var(--line);
+}
+
+.lp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  position: relative;
+  height: 3rem;
+  padding: 0 1.25rem;
+  border-radius: var(--pill);
+  font-size: 1rem;
+  font-weight: 500;
+  user-select: none;
+  transition: transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
+  white-space: nowrap;
+}
+
+.lp-btn:has(> svg:first-child) {
+  padding-left: 1rem;
+}
+
+.lp-btn:has(> svg:last-child) {
+  padding-right: 1rem;
+}
+
+@media (hover: hover) {
+  .lp-btn:hover:not(:disabled) {
+    transform: translate(var(--lift, 0px), var(--lift, 0px));
+  }
+}
+
+.lp-btn:active:not(:disabled) {
+  transform: translate(calc(var(--lift, 0px) * -1), calc(var(--lift, 0px) * -1)) scale(0.98);
+  box-shadow: 0 0 0 var(--button-edge, 0px) var(--line);
+}
+
+.lp-btn:focus-visible,
+.lp-focus:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.lp-btn-primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+  box-shadow: 0 0 0 var(--button-edge, 0px) var(--line), var(--button-shadow);
+}
+
+.lp-btn-primary:hover {
+  background: color-mix(in oklab, var(--accent) 88%, var(--ink));
+}
+
+.lp-btn-quiet {
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 0 0 0 max(1px, var(--button-edge, 0px)) var(--line), var(--button-shadow);
+}
+
+.lp-btn-quiet:hover {
+  box-shadow: 0 0 0 max(1px, var(--button-edge, 0px)) color-mix(in oklab, var(--ink) 30%, var(--line)), var(--button-shadow);
+}
+
+.lp-btn-sm {
+  height: 2.5rem;
+  padding: 0 0.9rem;
+  font-size: 0.875rem;
+}
+
+.lp-btn-sm:has(> svg:first-child) {
+  padding-left: 0.75rem;
+}
+
+/* 48px touch target on coarse pointers without changing the drawn size. */
+@media (pointer: coarse) {
+  .lp-btn-sm::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: max(100%, 3rem);
+    height: max(100%, 3rem);
+    transform: translate(-50%, -50%);
+  }
+}
+
+.lp-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: var(--pill);
+  box-shadow: 0 0 0 max(1px, calc(var(--edge, 1px) - 1px)) var(--line);
+  background: color-mix(in oklab, var(--surface) 80%, transparent);
+  padding: 0.3rem 0.75rem 0.3rem 0.55rem;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+/* Decision states: the only colours besides the accent. */
+.lp-state {
+  --tone: var(--state-refused);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  border-radius: var(--pill);
+  padding: 0.3rem 0.75rem 0.3rem 0.6rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: color-mix(in oklab, var(--tone) 85%, var(--ink));
+  background: color-mix(in oklab, var(--tone) 12%, transparent);
+  border: 1px solid color-mix(in oklab, var(--tone) 24%, transparent);
+}
+
+.lp-state::before {
+  content: "";
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--tone);
+}
+
+[data-state="clear"] { --tone: var(--state-clear); }
+[data-state="flagged"] { --tone: var(--state-flagged); }
+[data-state="pending"] { --tone: var(--state-pending); }
+[data-state="refused"] { --tone: var(--state-refused); }
+
+.lp-dot {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  flex: none;
+  border-radius: 50%;
+  background: var(--tone, var(--muted));
+}
+
+.lp-quote {
+  border-left: 2px solid color-mix(in oklab, var(--accent) 60%, var(--line));
+  padding-left: 0.85rem;
+}
+
+.lp-scroll-x {
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.lp-scroll-x::-webkit-scrollbar {
+  display: none;
+}
+
+.lp-veil {
+  opacity: 0.42;
+  filter: saturate(0.6) blur(1.5px);
+  pointer-events: none;
+  user-select: none;
+}
+
+@keyframes lp-rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+.lp-rise {
+  animation: lp-rise 620ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: var(--delay, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lp-rise { animation: none; }
+  .lp-btn { transition: none; }
+}
