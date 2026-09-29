@@ -19,7 +19,7 @@ export default function Web2SponsorsPage() {
   const anyDisabled = Object.values(disabledIds).some(Boolean);
 
   return (
-    <DashboardShell project="aib-ship">
+    <DashboardShell project="PayPulse Africa">
       <div className="flex flex-col gap-6">
         <div className="flex flex-wrap items-start justify-between gap-4 border-b border-[var(--border,#e5e5e5)] pb-5">
           <div>

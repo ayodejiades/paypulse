@@ -82,7 +82,7 @@ export default function VerifyPage() {
           <div className="flex items-center gap-3">
             <Link href="/" className="inline-flex items-center gap-2 font-semibold text-[14px] text-[var(--fg,#171717)]">
               <span className="h-2 w-2 rounded-full bg-[#2563eb]" />
-              <span>aib-ship</span>
+              <span>PayPulse Africa</span>
             </Link>
             <span className="text-[#a3a3a3]">/</span>
             <span className="font-mono text-[12px] text-[var(--fg-muted,#525252)]">06 · Independent Verifier</span>

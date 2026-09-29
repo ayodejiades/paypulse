@@ -1,5 +1,6 @@
 {
   "project": "aib-ship",
+  "name": "PayPulse Africa",
   "idea": "PayPulse Africa: Automated SME Invoicing and SMS/WhatsApp Payment Reminders",
   "track": "web2",
   "team": 1,
@@ -57,7 +58,7 @@
   "source": "rules",
   "unknown": [],
   "wedge": {
-    "title": "aib-ship",
+    "title": "PayPulse Africa",
     "sector": "Fintech & Payments · PayPulse Africa: Automated SME Invoicing",
     "target_user": "African SME finance manager reconciling vendor invoices and recovering overdue receivables",
     "painful_moment": "Chasing overdue invoice payments across disparate bank transfers and WhatsApp threads without automated reminders or audit trails.",

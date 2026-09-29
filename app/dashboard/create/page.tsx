@@ -24,7 +24,7 @@ export default function Web2CreateCommitmentPage() {
   });
 
   return (
-    <DashboardShell project="aib-ship">
+    <DashboardShell project="PayPulse Africa">
       <div className="flex flex-col gap-6">
         <div className="border-b border-[var(--border,#e5e5e5)] pb-5">
           <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--fg-muted,#737373)]">

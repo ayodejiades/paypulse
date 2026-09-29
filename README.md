@@ -1,4 +1,4 @@
-# aib-ship
+# PayPulse Africa
 
 PayPulse Africa: Automated SME Invoicing and SMS/WhatsApp Payment Reminders
 

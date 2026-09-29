@@ -79,7 +79,7 @@ export default function Web2ProofPage() {
       <header className="flex h-16 items-center justify-between border-b border-[var(--border,#262626)] px-6 max-w-6xl mx-auto w-full">
         <div className="flex items-center gap-3">
           <Link href="/" className="text-lg font-bold tracking-tight text-[var(--fg)]">
-            aib-ship
+            PayPulse Africa
           </Link>
           <span className="rounded border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-xs text-emerald-400 font-mono">
             /proof · EVIDENCE & SAFETY KERNEL

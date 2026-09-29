@@ -8,8 +8,8 @@ const geist = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "aib-ship",
-  description: "aib-ship: open the live demo to see it work end to end.",
+  title: "PayPulse Africa",
+  description: "PayPulse Africa: Automated SME Invoicing and SMS/WhatsApp Payment Reminders.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
