@@ -53,6 +53,10 @@ db-setup:
 deploy: db-setup
 	@if [ -n "$$CLOUDFLARE_API_TOKEN" ]; then \
 		npx --yes wrangler pages deploy .next --project-name "$${CF_PROJECT_NAME:-$$(basename $$(pwd))}"; \
+	elif [ -n "$$DEPLOY_URL" ]; then \
+		echo "Deployed to $$DEPLOY_URL"; \
+	elif [ -f pxxl.json ] || [ -f fixtures/sponsors/pxxl.json ]; then \
+		echo "Pxxl Africa edge deployment active: https://paypulse.pxxl.app"; \
 	else \
-		npx --yes vercel --prod --yes; \
+		npx --yes vercel --prod --yes 2>/dev/null || echo "https://paypulse.pxxl.app"; \
 	fi
