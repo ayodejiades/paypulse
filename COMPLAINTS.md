@@ -547,6 +547,16 @@ The complaints centered around six distinct failure categories:
 
 ---
 
+### Prompt 57 · Invoices Header Subtitle Tag Removal
+- **Timestamp:** `2026-09-29T23:38:10Z` (23:38 WAT)
+- **Prompt:**
+  > "remove."  
+  > *(Uploaded screenshot of 'PAYSTACK / STRIPE COMMERCIAL MODEL / DETERMINISTIC KOBO LEDGER')*
+- **Critique / Grievance:** Internal architecture reference line accidentally surfaced above the Invoices & Ledger title.
+- **Remediation:** Completely removed the tagline from `components/invoices-ledger-view.tsx`.
+
+---
+
 ## 3. Active Rule Invariants Deduced from Complaints
 
 To avoid repeating any mistakes, the following hard rules govern all subsequent work:

@@ -226,11 +226,6 @@ export function InvoicesLedgerView({
       {/* Header Bar */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[var(--border,#232b29)] pb-5">
         <div>
-          <div className="flex items-center gap-2 mb-1.5 font-mono text-[10px] uppercase tracking-wider text-[var(--fg-muted,#8aa39a)]">
-            <span>Paystack / Stripe Commercial Model</span>
-            <span className="text-[#34423e]">/</span>
-            <span>Deterministic Kobo Ledger</span>
-          </div>
           <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-[var(--fg,#e7f3ef)]">
             Invoices &amp; Ledger
           </h1>
