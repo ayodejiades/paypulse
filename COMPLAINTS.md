@@ -608,8 +608,20 @@ The complaints centered around six distinct failure categories:
   1. The user wanted deeper refinement on the 4 floating mobile phones to match the tactile realism of Slush.app's device presentation.
   2. The user requested guidance on free cloud deployment options, comparing Cloudflare vs. Render given budget constraints.
 - **Remediation:**
-  1. Further elevated `.phone` chassis with multi-layered dark titanium bezel borders (`box-shadow: 0 0 0 1px #1d2522, 0 0 0 2.5px #070908`), subtle side volume/power buttons, glass specular glare reflection (`.phone::after`), pill-shaped Dynamic Island with camera lens cutout (`.ph-notch`, `.ph-lens`), and smoother 3D floating keyframes with higher hover elevation (`translateY(-20px) scale(1.05)`).
-  2. Provided comprehensive hosting breakdown explaining why Render's free tier is poor (30-day DB wipe, 50s cold start sleep) and why Cloudflare Pages struggles with Next.js Node/TCP databases; recommended the optimal 100% free stack: Vercel (Hobby Free) + Neon/Supabase (Serverless Free Postgres) + Cloudflare (Free DNS/CDN).
+  1. Refined chassis detailing, glass sheen, and camera lens cutouts.
+  2. Provided complete hosting comparison recommending Vercel Hobby Free + Neon Serverless Postgres instead of Render's 30-day expiring DB.
+
+---
+
+### Prompt 63 · Removal of Weird Floating Phone Motion ("floating phones look weird ngl.")
+- **Timestamp:** `2026-09-29T23:51:38Z` (23:51 WAT)
+- **Prompt:**
+  > "floating phones look weird ngl."
+- **Critique / Grievance:** The continuous 3D floating and bobbing keyframe animations on four phones looked unnatural, gimmicky, and cluttered rather than sleek and architectural.
+- **Remediation:**
+  1. Removed all continuous floating animations (`phone-float-1` through `4`), perspective pitch/yaw rotations, and `.phones-perspective-stage`.
+  2. Grounded the 4 phones cleanly and upright on the ledger surface.
+  3. Retained the high-fidelity hardware chassis (dark titanium rim, camera lens in dynamic island, specular glass sheen) paired with a calm, tactile hover elevation (`hover:-translate-y-1.5 duration-200`) consistent with Linear and Stripe product showcases.
 
 ---
 

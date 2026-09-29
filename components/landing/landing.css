@@ -244,114 +244,6 @@
   .lp-btn { transition: none; }
 }
 
-/* 3D Floating Phones Stage (Slush-grade device motion & perspective) */
-.phones-perspective-stage {
-  perspective: 1400px;
-  perspective-origin: 50% 35%;
-  transform-style: preserve-3d;
-}
-
-.phone-card-wrap {
-  transform-style: preserve-3d;
-  transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 500ms ease;
-  will-change: transform;
-}
-
-.phone-card-wrap:hover {
-  transform: translateY(-20px) scale(1.05) rotateX(0deg) rotateY(0deg) rotateZ(0deg) !important;
-  z-index: 40;
-}
-
-@keyframes phone-float-1 {
-  0% {
-    transform: translateY(0px) rotateY(-9deg) rotateX(9deg) rotateZ(-3deg);
-  }
-  50% {
-    transform: translateY(-16px) rotateY(-6deg) rotateX(12deg) rotateZ(-1.5deg);
-  }
-  100% {
-    transform: translateY(0px) rotateY(-9deg) rotateX(9deg) rotateZ(-3deg);
-  }
-}
-
-@keyframes phone-float-2 {
-  0% {
-    transform: translateY(0px) rotateY(8deg) rotateX(10deg) rotateZ(3deg);
-  }
-  50% {
-    transform: translateY(-22px) rotateY(11deg) rotateX(7deg) rotateZ(4deg);
-  }
-  100% {
-    transform: translateY(0px) rotateY(8deg) rotateX(10deg) rotateZ(3deg);
-  }
-}
-
-@keyframes phone-float-3 {
-  0% {
-    transform: translateY(0px) rotateY(-8deg) rotateX(9deg) rotateZ(-2.5deg);
-  }
-  50% {
-    transform: translateY(-18px) rotateY(-5deg) rotateX(11deg) rotateZ(-1.5deg);
-  }
-  100% {
-    transform: translateY(0px) rotateY(-8deg) rotateX(9deg) rotateZ(-2.5deg);
-  }
-}
-
-@keyframes phone-float-4 {
-  0% {
-    transform: translateY(0px) rotateY(10deg) rotateX(9deg) rotateZ(3.5deg);
-  }
-  50% {
-    transform: translateY(-20px) rotateY(12deg) rotateX(7deg) rotateZ(4.5deg);
-  }
-  100% {
-    transform: translateY(0px) rotateY(10deg) rotateX(9deg) rotateZ(3.5deg);
-  }
-}
-
-.phone-motion-1 {
-  animation: phone-float-1 7s ease-in-out infinite;
-}
-
-.phone-motion-2 {
-  animation: phone-float-2 8.4s ease-in-out infinite;
-  animation-delay: -2.2s;
-}
-
-.phone-motion-3 {
-  animation: phone-float-3 7.6s ease-in-out infinite;
-  animation-delay: -4.5s;
-}
-
-.phone-motion-4 {
-  animation: phone-float-4 8.8s ease-in-out infinite;
-  animation-delay: -1.8s;
-}
-
-@media (max-width: 640px) {
-  .phones-perspective-stage {
-    perspective: none;
-  }
-  .phone-motion-1,
-  .phone-motion-2,
-  .phone-motion-3,
-  .phone-motion-4 {
-    animation: none;
-    transform: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .phone-motion-1,
-  .phone-motion-2,
-  .phone-motion-3,
-  .phone-motion-4 {
-    animation: none;
-    transform: none;
-  }
-}
-
 /* Mobile Screens Chassis & Hardware Detailing */
 .phone {
   position: relative;
@@ -360,13 +252,24 @@
   padding: 8px;
   background: #090c0b;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 28px;
+  border-radius: 26px;
   box-shadow: 
     0 0 0 1px #1d2522,
     0 0 0 2.5px #070908,
-    inset 0 0 0 1px rgba(255, 255, 255, 0.1),
-    0 25px 50px -12px rgba(0, 0, 0, 0.95),
-    0 12px 24px -6px rgba(0, 0, 0, 0.85);
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 20px 35px -10px rgba(0, 0, 0, 0.85),
+    0 8px 16px -6px rgba(0, 0, 0, 0.6);
+  transition: box-shadow 200ms ease, border-color 200ms ease;
+}
+
+.phone:hover {
+  border-color: rgba(5, 150, 105, 0.4);
+  box-shadow: 
+    0 0 0 1px rgba(5, 150, 105, 0.3),
+    0 0 0 2.5px #070908,
+    inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 25px 45px -10px rgba(0, 0, 0, 0.95),
+    0 10px 20px -6px rgba(0, 0, 0, 0.7);
 }
 
 /* Glass Specular Glare across screen */
