@@ -2,6 +2,8 @@ import { listReminders } from "@/db";
 import { ReminderForm } from "@/components/new-record-form";
 import { DashboardShell } from "@/components/dashboard-shell";
 
+export const dynamic = "force-dynamic";
+
 export default async function ScheduleDashboardPage() {
   const rows = await listReminders();
   const flaggedRows = rows.filter((r) => r.overdueFlag);

@@ -1,0 +1,24 @@
+{
+  "sponsor": "Sabilytics",
+  "endpoint": "https://api.sabilytics.com/v1/telemetry",
+  "projectId": "aib_paypulse_2026",
+  "eventsTracked": [
+    {
+      "event": "invoice_viewed",
+      "invoiceNumber": "INV-2026-8910",
+      "timestamp": "2026-09-29T21:40:12.000Z",
+      "country": "NG",
+      "device": "mobile_safari",
+      "viewDurationSeconds": 48
+    },
+    {
+      "event": "reminder_link_clicked",
+      "invoiceNumber": "INV-2026-8910",
+      "timestamp": "2026-09-29T21:46:02.000Z",
+      "source": "sendbyte_sms",
+      "conversionStatus": "checkout_opened"
+    }
+  ],
+  "retentionGracePeriodMonths": 2,
+  "telemetryIntegrity": "VERIFIED"
+}

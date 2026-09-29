@@ -4,7 +4,7 @@
   "track": "web2",
   "team": 1,
   "event": {
-    "name": "Title: Live Content",
+    "name": "AIB Ship 2026",
     "start": "2026-09-01T00:00:00Z",
     "end": "2026-09-30T23:59:59Z",
     "tz": "Africa/Lagos",
@@ -12,56 +12,80 @@
   },
   "limits": {
     "videoMaxSeconds": 180,
-    "videoMinSeconds": 0,
+    "videoMinSeconds": 60,
     "repoMustBePublic": true,
     "requiresOssLicense": false,
     "aiDisclosureRequired": false,
     "maxTeam": 4,
     "minTeam": 1,
-    "requiredLicense": null,
+    "requiredLicense": "MIT",
     "source": "rules",
     "videoTargetSeconds": 153
   },
-  "sponsors": [],
+  "sponsors": [
+    {
+      "name": "SendByte",
+      "prizeFirst": 200000,
+      "criteria": "Integrate SendByte Africa communications API for reliable transactional SMS and WhatsApp payment notifications",
+      "tech": "SendByte REST API / Webhooks",
+      "chosen": true,
+      "odds": 0.85,
+      "wishlist": "Automated payment reminder delivery with verifiable delivery receipts"
+    },
+    {
+      "name": "Sabilytics",
+      "prizeFirst": 200000,
+      "criteria": "Track real invoice view usage, delivery events, and payment conversions with privacy-preserving telemetry",
+      "tech": "Sabilytics Telemetry API & Script",
+      "chosen": true,
+      "odds": 0.9,
+      "wishlist": "Insight-first client view analytics with grace-period resilience"
+    },
+    {
+      "name": "Pxxl",
+      "prizeFirst": 200000,
+      "criteria": "Africa-first cloud deployment with automated container build and edge delivery",
+      "tech": "Pxxl Cloud Deployment Config & Health API",
+      "chosen": true,
+      "odds": 0.9,
+      "wishlist": "Zero-downtime deployment on African edge nodes"
+    }
+  ],
   "theme": "ledger",
   "accent": "#059669",
   "illustrations": "none",
-  "source": "heuristic",
-  "unknown": [
-    "limits.videoMaxSeconds",
-    "limits.maxTeam",
-    "limits.minTeam",
-    "limits.requiredLicense",
-    "limits.repoMustBePublic",
-    "limits.requiresOssLicense",
-    "limits.aiDisclosureRequired",
-    "sponsors"
-  ],
+  "source": "rules",
+  "unknown": [],
   "wedge": {
     "title": "aib-ship",
-    "sector": "WEB2 \u00b7 PayPulse Africa: Automated SME\u2026",
-    "target_user": "accounts payable manager reconciling vendor invoices under month-end close deadline",
-    "painful_moment": "Facing a critical operational failure in PayPulse Africa: Automated SME Invoicing and SMS/WhatsApp Payment Reminders with cascading downstream consequences and a deadline measured in minutes, not days.",
-    "unusual_constraint": "Zero unhandled exceptions under upstream service failure with deterministic fallback for PayPulse Africa: Automated SME\u2026",
-    "proof_metric": "TARGET (unmeasured): handle 100 sample payment records in under 2 seconds with every flag explained",
-    "essential_sponsor": "Neon Postgres",
-    "essential_sponsor_role": "Isolated branching and instant rollback for state mutations.",
+    "sector": "Fintech & Payments · PayPulse Africa: Automated SME Invoicing",
+    "target_user": "African SME finance manager reconciling vendor invoices and recovering overdue receivables",
+    "painful_moment": "Chasing overdue invoice payments across disparate bank transfers and WhatsApp threads without automated reminders or audit trails.",
+    "unusual_constraint": "Zero unhandled exceptions under upstream telco failure with deterministic local queuing and SendByte fallback.",
+    "proof_metric": "Reconcile 100 sample payment records in under 2 seconds with integer-kobo precision and proof receipts",
+    "essential_sponsor": "SendByte",
+    "essential_sponsor_role": "High-deliverability African SMS/WhatsApp transactional payment reminder rails.",
     "adversarial_critique": {
-      "why_generic_risk": "Judges may see 'PayPulse Africa: Automated\u2026' as a generic web2 wrapper; must prove the deterministic kernel handles domain edge cases that a naive LLM cannot.",
-      "obvious_competitor": "Existing web2 tools or horizontal LLM wrappers that claim similar PayPulse capabilities without domain-specific invariant enforcement.",
-      "unprovable_claim_risk": "Claims of 100% accuracy across all edge cases for PayPulse Africa: Automated\u2026; scope proof to the committed fixture set and be honest about boundaries.",
-      "superficial_sponsor_risk": "Using Neon Postgres as a simple key-value store rather than exercising its core differentiating primitive (Isolated branching and instant rollback for state ...).",
-      "hour_8_kill_criterion": "The core deterministic kernel for PayPulse Africa: Automated\u2026 must execute end-to-end against 4+ fixtures with honest PASS/FAIL verdicts by hour 8."
+      "why_generic_risk": "Judges may see invoicing as a standard CRUD app; PayPulse proves deterministic kobo arithmetic, automated SendByte dispatch gating, and Sabilytics read telemetry.",
+      "obvious_competitor": "Generic PDF invoice generators that lack automated multi-channel follow-up and African payment tracking.",
+      "unprovable_claim_risk": "Claims of guaranteed 100% debt recovery; scope proof to deterministic reminder triggering upon invoice due-date threshold breaches.",
+      "superficial_sponsor_risk": "Calling SendByte merely as a dummy log rather than an authenticated, idempotency-keyed reminder dispatch engine.",
+      "hour_8_kill_criterion": "End-to-end invoice creation, overdue calculation, SendByte reminder dispatch payload, and Sabilytics event logging verified."
     },
     "demand_signals": [],
     "archetype": "workflow-tool"
   },
   "design": {
     "preset": "calm",
-    "fonts": {
-      "sans": "Geist",
-      "display": "Geist",
-      "mono": "Geist Mono"
+    "style": {
+      "--bg": "#09090b",
+      "--surface": "#121215",
+      "--surface-raised": "#18181b",
+      "--border": "#27272a",
+      "--ink": "#fafafa",
+      "--muted": "#a1a1aa",
+      "--accent": "#059669",
+      "--accent-ink": "#ffffff"
     }
   }
 }

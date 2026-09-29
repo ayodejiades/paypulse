@@ -45,9 +45,12 @@ flowchart TD
 
 Next.js and TypeScript, with Drizzle for data. The product's rules live in `lib/kernel.ts` as plain functions, so the same input always gives the same result and the tests call them directly. Recorded runs live in `evidence/campaign-report.json`.
 
-## Bounties targeted
+## Bounties & Sponsors targeted
 
-- Main track. Sponsor bounties are chosen in `docs/BOUNTIES.md`.
+Built using the Africa Is Building ecosystem stack:
+- **SendByte**: Automated transactional SMS and WhatsApp invoice payment reminder dispatch with carrier delivery receipts.
+- **Sabilytics**: Insight-first telemetry tracking invoice viewing events, view durations, and payment link conversions.
+- **Pxxl**: Africa-first cloud deployment configuration, container runtime, and low-latency Lagos edge routing.
 
 ## Run it
 

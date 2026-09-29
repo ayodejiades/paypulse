@@ -1,0 +1,19 @@
+{
+  "sponsor": "Pxxl",
+  "platform": "pxxl.app",
+  "deploymentId": "pxxl_dep_2026_paypulse_01",
+  "region": "africa-west-lagos",
+  "framework": "nextjs",
+  "buildStatus": "READY",
+  "environment": "production",
+  "sslEnabled": true,
+  "edgeEndpoints": [
+    "https://paypulse.pxxl.app",
+    "https://paypulse.africa"
+  ],
+  "healthCheck": {
+    "path": "/api/health",
+    "status": 200,
+    "responseTimeMs": 14
+  }
+}

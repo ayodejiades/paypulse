@@ -1,0 +1,18 @@
+{
+  "sponsor": "SendByte",
+  "endpoint": "https://api.sendbyte.africa/v1/messages",
+  "status": "delivered",
+  "messageId": "msg_sb_2026_0929_8910",
+  "recipient": "+2348012345678",
+  "channel": "sms",
+  "template": "payment_reminder_overdue",
+  "payload": {
+    "invoiceNumber": "INV-2026-8910",
+    "merchantName": "Kazi Logistics Ltd",
+    "amountDue": "NGN 200,000.00",
+    "dueDate": "2026-09-15",
+    "paymentLink": "https://paypulse.africa/pay/INV-2026-8910"
+  },
+  "deliveredAt": "2026-09-29T21:45:00.000Z",
+  "carrierReceipt": "MTN-NG-ACK-90214"
+}

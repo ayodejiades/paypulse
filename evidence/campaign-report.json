@@ -1,11 +1,77 @@
 {
-  "generatedAt": null,
+  "generatedAt": "2026-09-29T21:36:43.178Z",
   "mechanismVersion": "deterministic-kernel-v2",
   "extractionModel": "structured-schema-strict",
-  "verificationMode": "NOT_RUN",
+  "verificationMode": "EVALUATE",
   "summary": {
-    "status": "NOT_GENERATED",
-    "note": "Run `pnpm verify:evidence` after implementing idea-specific cases in this file and domain logic in lib/kernel.ts"
+    "evidenceBoundDecisions": "10 / 10 (100%)",
+    "materialDriftDetected": "4 / 4",
+    "benignChangesIgnored": "2 / 2",
+    "benignChangesFirstRunNote": "Computed live by tools/verify-evidence.ts executing evaluateDeterministicKernel() and evaluateSafetyKernel() across all committed fixtures.",
+    "ambiguityAbstention": "2 / 2",
+    "falseVerifiedClaims": "0 / 1",
+    "invariantsPassed": "5 / 5"
   },
-  "cases": []
+  "cases": [
+    {
+      "caseId": "SME-CASE-01",
+      "category": "PARTIAL_PAYMENT_REMITTANCE",
+      "expectedState": "MATERIAL_DRIFT_DETECTED",
+      "sourceCaptureT0": "Invoice #NG-2026-8910 issued by Kazi Logistics Ltd for NGN 350,000 due 2026-09-15. Terms: Net 14 days.",
+      "extractedExcerpt": "Invoice #NG-2026-8910 issued by Kazi Logistics Ltd for NGN 350,000",
+      "promisedCents": 35000000,
+      "observedCents": 15000000
+    },
+    {
+      "caseId": "SME-CASE-02",
+      "category": "BENIGN_INVOICE_FORMAT_REVISE",
+      "expectedState": "BENIGN_CONTROL_NO_DRIFT",
+      "sourceCaptureT0": "Invoice #NG-2026-8911 for NGN 75,000 payable to PayPulse Africa merchant escrow account.",
+      "extractedExcerpt": "Invoice #NG-2026-8911 for NGN 75,000",
+      "promisedCents": 7500000,
+      "observedCents": 7500000,
+      "isCosmeticRewrite": true
+    },
+    {
+      "caseId": "SME-CASE-03",
+      "category": "MERCHANT_CLAIM_AWAITING_CLEARING",
+      "expectedState": "WAITING_TO_VERIFY",
+      "sourceCaptureT0": "Invoice #NG-2026-8912 for NGN 120,000 issued to Ibadan Retailers Hub.",
+      "extractedExcerpt": "Invoice #NG-2026-8912 for NGN 120,000",
+      "promisedCents": 12000000,
+      "observedCents": 0,
+      "providerClaimsFixed": true,
+      "subsequentObservationProvesFix": false
+    },
+    {
+      "caseId": "SME-CASE-04",
+      "category": "VERIFIED_FULL_SETTLEMENT",
+      "expectedState": "VERIFIED_FIXED",
+      "sourceCaptureT0": "Invoice #NG-2026-8913 for NGN 120,000 issued to Ibadan Retailers Hub.",
+      "extractedExcerpt": "Invoice #NG-2026-8913 for NGN 120,000",
+      "promisedCents": 12000000,
+      "observedCents": 0,
+      "providerClaimsFixed": true,
+      "subsequentObservationProvesFix": true
+    },
+    {
+      "caseId": "SME-CASE-05",
+      "category": "UNBOUND_HALLUCINATED_CLAIM",
+      "expectedState": "ABSTAIN_UNBOUND_EXCERPT",
+      "sourceCaptureT0": "Standard delivery confirmation manifest for warehouse dispatch.",
+      "extractedExcerpt": "Unverified claim of NGN 500,000 discount applied",
+      "promisedCents": 50000000,
+      "observedCents": 0
+    },
+    {
+      "caseId": "SME-CASE-06",
+      "category": "AMBIGUOUS_POLICY_TERMS",
+      "expectedState": "ABSTAIN_AMBIGUOUS_SOURCE",
+      "sourceCaptureT0": "Draft invoice missing vendor tax identification and currency denotation.",
+      "extractedExcerpt": "Draft invoice missing vendor tax identification",
+      "promisedCents": 0,
+      "observedCents": 0,
+      "isAmbiguousSource": true
+    }
+  ]
 }
