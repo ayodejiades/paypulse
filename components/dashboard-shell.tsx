@@ -53,14 +53,8 @@ export function DashboardShell({
             </nav>
           </div>
 
-          {/* Right Status Indicator */}
+          {/* Right Action */}
           <div className="flex items-center gap-2.5">
-            <div className="hidden lg:flex items-center gap-2 rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] px-2.5 py-1 font-mono text-[11px] text-[var(--fg-muted,#8aa39a)]">
-              <span>KERNEL: DETERMINISTIC</span>
-              <span className="text-[var(--border,#232b29)]">|</span>
-              <span className="text-emerald-400">DEMO_MODE</span>
-            </div>
-
             <Link
               href="/"
               className="rounded-[var(--radius-sm,4px)] border border-[var(--border,#232b29)] bg-[var(--surface,#121615)] px-3 py-1 text-[12px] font-medium text-[var(--fg-muted,#8aa39a)] hover:text-[var(--fg,#e7f3ef)] hover:bg-[var(--surface-raised,#171c1b)] transition-colors"

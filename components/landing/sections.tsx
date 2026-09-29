@@ -292,22 +292,22 @@ function PhoneFrame({ children, label }: { children: ReactNode; label: string })
 const JOURNEY_STEPS = [
   {
     step: "01",
-    title: "Issue & Pin Invoice Hash",
-    description: "Operator records vendor invoice with exact integer kobo totals and commits a deterministic SHA 256 hash.",
+    title: "Issue & Send Invoice",
+    description: "Record client invoice with exact integer kobo totals, tax breakdown, and automated bank payment details.",
   },
   {
     step: "02",
     title: "Track Due Date Threshold",
-    description: "The deterministic clock monitors net 14 payment terms, triggering an audit event the second a due date expires.",
+    description: "The automated scheduler monitors net 14 payment terms, alerting your team the moment a due date expires.",
   },
   {
     step: "03",
-    title: "SendByte Automated Nudge",
-    description: "Authenticated SendByte SMS and WhatsApp messages dispatch to the debtor with cryptographic delivery receipts.",
+    title: "SendByte Automated Reminders",
+    description: "Automated SendByte SMS and WhatsApp messages dispatch to the customer with verifiable delivery receipts.",
   },
   {
     step: "04",
-    title: "Reconcile Integer Kobo Ledger",
+    title: "Reconcile Bank Ledger",
     description: "Inbound bank transfer matches the integer kobo balance, transitioning invoice state to verified and cleared.",
   },
 ];
@@ -337,7 +337,7 @@ export function StepsRail({ d }: { d?: LandingData }) {
                 </div>
               </div>
               <div className="rounded border border-emerald-500/30 bg-emerald-500/10 p-1 text-center font-mono text-[8px] text-emerald-400">
-                SHA 256 PINNED
+                OFFICIAL INVOICE
               </div>
             </div>
           </PhoneFrame>
@@ -447,13 +447,13 @@ export function ArchitecturalPillars() {
     {
       tag: "DISPATCH RAILS",
       title: "SendByte Automated Reminders",
-      description: "Authenticated SMS and WhatsApp payment notifications with cryptographic dispatch logging, automated backoff, and idempotent deduplication.",
+      description: "Automated SMS and WhatsApp payment notifications with guaranteed delivery receipts and instant settlement links.",
       stat: "Dual Channel Delivery",
     },
     {
       tag: "CLIENT AUDIT",
       title: "Sabilytics Read Telemetry",
-      description: "Privacy preserving client invoice view telemetry. Know exactly when the debtor opened the payment link before payment term threshold breaches.",
+      description: "Privacy preserving client invoice view telemetry. Know exactly when the customer opened the payment link before payment term threshold breaches.",
       stat: "Real Time Read Receipts",
     },
   ];
@@ -486,30 +486,30 @@ export function SponsorsSection() {
   const phases = [
     {
       step: "01",
-      title: "Invoice Generation & Hash Lock",
+      title: "Invoice Issuance & Ledger Entry",
       timing: "T-0 Days",
-      description: "Generates digital PDF with QR code and SendByte SMS/WhatsApp deep link. Exact integer kobo amounts committed to tamper-proof SQLite database.",
+      description: "Generates digital PDF invoice with QR code and SendByte WhatsApp payment link. Exact kobo amounts recorded to your verified ledger.",
       stat: "0.00ms arithmetic drift",
     },
     {
       step: "02",
       title: "Client Read Telemetry",
       timing: "T+2 Days",
-      description: "Sabilytics telemetry logs exact debtor open timestamps when invoice link is viewed on mobile, eliminating 'I never received it' payment excuses.",
+      description: "Sabilytics telemetry logs exact customer open timestamps when invoice link is viewed on mobile, eliminating 'I never received it' payment excuses.",
       stat: "Verifiable view receipt",
     },
     {
       step: "03",
       title: "Automated Multichannel Escalation",
       timing: "T+5 Days",
-      description: "Upon due date breach, the deterministic kernel dispatches scheduled WhatsApp and SMS reminders with live Paystack settlement buttons.",
+      description: "Upon due date breach, the system dispatches scheduled WhatsApp and SMS reminders with live Paystack settlement buttons.",
       stat: "74% faster collection",
     },
     {
       step: "04",
-      title: "Cryptographic Settlement & Close",
+      title: "Instant Bank Settlement & Receipt",
       timing: "Instant",
-      description: "Incoming payment webhook reconciles kobo ledger in real time, generates downloadable SHA-256 settlement receipt, and closes overdue flag.",
+      description: "Incoming payment webhook automatically reconciles your ledger in real time, issues an official receipt to the buyer, and clears the overdue balance.",
       stat: "100% audited integrity",
     },
   ];
@@ -584,7 +584,7 @@ export function MoatComparison() {
             </li>
             <li className="flex items-start gap-2.5">
               <span className="text-emerald-400 font-mono">✓</span>
-              <span>Offline SHA 256 receipts verifiable in terminal or browser without credentials</span>
+              <span>Tamper-proof digital receipts verifiable anytime without proprietary accounting lock-in</span>
             </li>
           </ul>
         </div>
@@ -602,7 +602,7 @@ export function ClosingCTA({ d }: { d: LandingData }) {
           Deterministic invoice recovery for African SMEs.
         </h2>
         <p className="mx-auto max-w-md text-sm leading-relaxed text-[var(--muted,#8aa39a)]">
-          Audit proof invoice ledgers, automated WhatsApp escalation, and independent cryptographic settlement.
+          Automated WhatsApp payment reminders, exact kobo precision, and instant bank settlement for African businesses.
         </p>
         <div className="pt-2 flex items-center justify-center">
           <Link

@@ -449,7 +449,24 @@ The complaints centered around six distinct failure categories:
   > "remove unneeded routes. remember production-ready."  
   > *(Uploaded screenshot of 'Overview   Invoices & Ledger   Dispatch New   Operator   Proof   Verifier   Chaos Lab')*
 - **Critique / Grievance:** Exposing developer testbeds (`Operator`, `Proof`, `Verifier`, `Chaos Lab`) in the primary dashboard navigation completely destroys the authentic production posture of the product.
-- **Remediation:** Pruned `PRIMARY_LINKS` in `components/dashboard-shell.tsx` down strictly to production SME surfaces: `Overview`, `Invoices & Ledger`, and `New Invoice`. Removed the engineering architecture `<PipelineFlow />` from the dashboard and relocated it to `/proof`. Removed the "Interactive Step 3" label from the dispatch panel.
+---
+
+### Prompt 47 · Header Flag Removal & Zero-Config Demo Mode Fallback
+- **Timestamp:** `2026-09-29T22:26:59Z` (23:26 WAT)
+- **Prompt:**
+  > "remove the header badge and apply the automatic zero-config demo fallback"  
+  > *(Uploaded screenshot of 'KERNEL: DETERMINISTIC | DEMO_MODE')*
+- **Critique / Grievance:** Displaying raw runtime flags in the top navigation looks like an unfinished developer test harness. Judges testing preview links or cloning without setting `DEMO_MODE=1` in their terminal need demo fixtures to auto-activate without manual setup.
+- **Remediation:** Removed the `KERNEL: DETERMINISTIC | DEMO_MODE` badge from `DashboardShell`. Updated `lib/env.ts` so `demoModeEnabled()` automatically defaults to `true` whenever `process.env.DATABASE_URL` is missing, providing seamless zero-configuration demo evaluation for judges and hosted previews.
+
+---
+
+### Prompt 48 · Web3 Lingo Purge & SME Trader Alignment
+- **Timestamp:** `2026-09-29T22:26:29Z` (23:26 WAT)
+- **Prompt:**
+  > "This is tailored to traders if not mistaken why the web3 lingo?"
+- **Critique / Grievance:** The presence of blockchain/crypto jargon ("cryptographic settlement", "hash lock", "immutable T0 source capture", "SHA-256 pinned", "tamper-proof SQLite") alienates African traders, SME suppliers, and logistics merchants who require standard commercial invoicing, exact kobo precision, and verified bank receipts.
+- **Remediation:** Swept the landing page and core surfaces to replace all crypto jargon with authentic trade language: "Official Invoice" (instead of "SHA 256 PINNED"), "Invoice Issuance & Ledger Entry" (instead of "Hash Lock"), "Instant Bank Settlement & Receipt" (instead of "Cryptographic Settlement"), and "Tamper-proof digital receipts" without proprietary accounting lock-in.
 
 ---
 
@@ -457,7 +474,8 @@ The complaints centered around six distinct failure categories:
 
 To avoid repeating any mistakes, the following hard rules govern all subsequent work:
 - [x] **Brand Rule:** Product is named **PayPulse** (never "AIB Ship", never "PayPulse Africa").
-- [x] **Wordmark Rule:** Pure, elegant typography for **PayPulse** (no generic letter-in-a-box icons, no decorative dots, no archetype badges like 'LEDGER').
+- [x] **Trader Persona Rule:** Language MUST speak to African SMEs, merchants, and traders. STRICTLY BAN all web3/crypto jargon ("cryptographic settlement", "hash lock", "immutable capture", "SHA-256 pinned"). Use authentic commercial accounting and banking terms.
+- [x] **Wordmark Rule:** Pure, elegant typography for **PayPulse** (no generic letter-in-a-box icons, no decorative dots, no archetype badges like 'LEDGER', no debug flags like 'DEMO_MODE').
 - [x] **Currency Rule:** ALL currency figures must use the Nigerian Naira sign (`₦`), NEVER `$`.
 - [x] **Naira Symbol Optical Alignment Rule:** The `₦` sign MUST be scaled (`text-[0.72em]`) and baseline-aligned so it never towers over numeric digits in monospace contexts.
 - [x] **Typography & Sizing Rule:** Proportional financial numbers (`text-[15px]`), never bloated overflowing text sizes.
@@ -468,6 +486,7 @@ To avoid repeating any mistakes, the following hard rules govern all subsequent 
 - [x] **CTA Tone Rule:** Canonical, production-ready copy: **"Get started"**, NEVER demo toy labels like "Start live demo" or corporate jargon like "Launch Workspace".
 - [x] **Production Navigation Rule:** The main navigation MUST ONLY show commercial production routes (`Overview`, `Invoices & Ledger`, `New Invoice`). Never surface test harnesses (`Operator`, `Proof`, `Verifier`, `Chaos Lab`) in primary navigation.
 - [x] **Sponsor Surface Seclusion Rule:** Never surface raw sponsor administration links or 'Sponsors' nav tabs to users/judges; maintain sponsor tests and contracts under the hood.
+- [x] **Zero-Config Demo Mode Rule:** Default to demo mode whenever `DATABASE_URL` is unconfigured so judges and clones run fixtures immediately without manual terminal setup.
 - [x] **Iconography Rule:** NO generic shadcn/lucide UI icons. Rely on characterful typography, hairline borders, and SVG northeast vectors.
 - [x] **Copywriting Rule:** ZERO em-dashes (`—`). Zero hyphens in body text or headings ("due date", "integer kobo", "kill switch"). No AI superlatives.
 - [x] **Badge Cluster Rule:** No colored status pills ('VERIFIED ACTIVE'), fake check dates, or badge clusters cluttering cards.
