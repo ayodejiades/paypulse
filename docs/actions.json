@@ -1,0 +1,33 @@
+{
+  "recordedAt": "2026-09-29T21:48:13.028+00:00",
+  "baseUrl": "http://localhost:3000",
+  "demoMode": true,
+  "durationSeconds": 24.833333,
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "steps": [
+    {
+      "index": 0,
+      "atSeconds": 0,
+      "say": "Explore verified solution"
+    },
+    {
+      "index": 1,
+      "atSeconds": 0.76,
+      "say": "Launch the live workspace"
+    },
+    {
+      "index": 2,
+      "atSeconds": 7.98,
+      "say": "Schedule a new item with a title and due time"
+    },
+    {
+      "index": 3,
+      "atSeconds": 11.523,
+      "say": "Submit, and it appears in the list"
+    }
+  ],
+  "clicks": []
+}
