@@ -433,7 +433,15 @@ The complaints centered around six distinct failure categories:
   > "shouldn't it be get started? the plan is to have something production ready on default but it has demo mode that can be activated with demo_mode"  
   > *(Uploaded screenshot of 'Start live demo' button)*
 - **Critique / Grievance:** "Start live demo" downgraded the perceived authority and commercial readiness of PayPulse to an artificial testbed. The product is fundamentally built as an operational, production-ready system on default, with `DEMO_MODE=1` functioning as an offline/evaluation switch.
-- **Remediation:** Updated `d.cta` to **"Get started"** in `brief.json` and across all call-to-action buttons.
+---
+
+### Prompt 45 · Sponsor Surface Seclusion
+- **Timestamp:** `2026-09-29T22:22:11Z` (23:22 WAT)
+- **Prompt:**
+  > "remove. we don't need the sponsors page showing to judges and users."  
+  > *(Uploaded screenshot of 'Inspect Sponsor Telemetry →')*
+- **Critique / Grievance:** Exposing internal sponsor telemetry links and navigation tabs breaks the authentic SME product experience for users and judges.
+- **Remediation:** Removed the `Inspect Sponsor Telemetry →` ribbon from `components/landing/sections.tsx` and removed the `Sponsors` tab from `PRIMARY_LINKS` in `components/dashboard-shell.tsx`. Sponsor fixtures and test assertions remain strictly maintained under the hood for preflight validation without polluting user-facing surfaces.
 
 ---
 
@@ -450,11 +458,12 @@ To avoid repeating any mistakes, the following hard rules govern all subsequent 
 - [x] **Palette Rule:** Dark ledger theme only (`#0a0d0c`, `#121615`, `#232b29`, `#e7f3ef`, `#059669`). Never use pink, pastel neobrutalism, or unrequested accent colors.
 - [x] **Button Rule:** Oculupi-styled pill geometry (`rounded-full`, asymmetrical padding, circular badge housing a northeast `↗` arrow). Green buttons MUST ALWAYS have pure white text (`#ffffff` / `text-white`), NEVER black.
 - [x] **CTA Tone Rule:** Canonical, production-ready copy: **"Get started"**, NEVER demo toy labels like "Start live demo" or corporate jargon like "Launch Workspace".
+- [x] **Sponsor Surface Seclusion Rule:** Never surface raw sponsor administration links or 'Sponsors' nav tabs to users/judges; maintain sponsor tests and contracts under the hood.
 - [x] **Iconography Rule:** NO generic shadcn/lucide UI icons. Rely on characterful typography, hairline borders, and SVG northeast vectors.
 - [x] **Copywriting Rule:** ZERO em-dashes (`—`). Zero hyphens in body text or headings ("due date", "integer kobo", "kill switch"). No AI superlatives.
 - [x] **Badge Cluster Rule:** No colored status pills ('VERIFIED ACTIVE'), fake check dates, or badge clusters cluttering cards.
 - [x] **Landing Page Rule:** Focus on SME product value and operational lifecycles; do NOT clutter the landing page with sponsor billboards or raw debug desks.
 - [x] **Device Mockup Rule:** Use crisp, hand-coded device chrome (`.phone`) with SVG status bars as established in `team3`.
-- [x] **Navigation Rule:** Every inner route (`/dashboard/*`, `/proof`, `/verify`, `/demo`, `/lab`) MUST share the unified `DashboardShell` navigation bar without distracting dots or tags.
+- [x] **Navigation Rule:** Every inner route (`/dashboard/*`, `/proof`, `/verify`, `/demo`, `/lab`) MUST share the unified `DashboardShell` navigation bar without distracting dots, tags, or sponsor tabs.
 - [x] **Footer Rule:** Strictly standard, quiet one-liner footer (`py-5`) with wordmark on the left and copyright on the right. No duplicate nav links.
 

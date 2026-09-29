@@ -536,12 +536,6 @@ export function SponsorsSection() {
           </div>
         ))}
       </div>
-      <div className="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-lg border border-[var(--line,#232b29)] bg-[var(--surface,#121615)]/60 px-5 py-3 text-xs text-[var(--muted,#8aa39a)] font-mono">
-        <span>VERIFIED INFRASTRUCTURE: SendByte SMS/WhatsApp • Sabilytics Telemetry • Pxxl Lagos Edge</span>
-        <Link href="/dashboard/sponsors" className="text-emerald-400 hover:text-emerald-300 transition-colors">
-          Inspect Sponsor Telemetry &rarr;
-        </Link>
-      </div>
     </Section>
   );
 }
