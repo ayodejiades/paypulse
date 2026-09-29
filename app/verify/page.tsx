@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { DashboardShell } from "@/components/dashboard-shell";
 import { BENCHMARK_CASES, evaluateSafetyKernel } from "@/lib/kernel";
 
 function fnv1aHex(text: string): string {

@@ -42,9 +42,6 @@ export function FaqSection() {
       <div className="mx-auto w-full max-w-4xl px-4 sm:px-6">
         {/* Section Header */}
         <div className="flex flex-col items-center text-center space-y-3 mb-12">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[var(--line,#232b29)] bg-[#0a0d0c] px-3.5 py-1 font-mono text-[11px] text-[#52665f]">
-            <span>05 / QUESTIONS &amp; RECONCILIATION</span>
-          </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-[var(--ink,#e7f3ef)]">
             Frequently asked questions.
           </h2>

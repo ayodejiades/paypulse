@@ -35,3 +35,48 @@ export async function submitReminder(formData: FormData): Promise<{ ok: boolean;
   revalidatePath("/dashboard");
   return { ok: true, overdueFlag: row.overdueFlag };
 }
+
+export async function createCustomerInvoiceAction(formData: FormData): Promise<{
+  ok: boolean;
+  error?: string;
+  invoiceId?: number;
+}> {
+  const customerName = String(formData.get("customerName") ?? "").trim();
+  const phone = String(formData.get("customerPhone") ?? "").trim() || "+234 800 000 0000";
+  const location = String(formData.get("customerLocation") ?? "").trim() || "Lagos Commercial District";
+  const commodity = String(formData.get("commodity") ?? "").trim() || "Merchandise Batch";
+  const amountKobo = Number(formData.get("amountKobo")) || 0;
+  const dueDateRaw = String(formData.get("dueDate") ?? "").trim();
+  const channel = formData.get("channel") === "SMS" ? "SMS" : "WhatsApp";
+
+  if (!customerName) return { ok: false, error: "Customer name is required" };
+  if (amountKobo <= 0) return { ok: false, error: "Amount must be greater than zero kobo" };
+
+  const dueAt = dueDateRaw ? new Date(dueDateRaw) : new Date(Date.now() + 86400000 * 14);
+  if (Number.isNaN(dueAt.getTime())) return { ok: false, error: "Valid due date is required" };
+
+  const invoicePayload = JSON.stringify({
+    customerName,
+    customerPhone: phone,
+    customerLocation: location,
+    commodity,
+    amountKobo,
+    totalKobo: amountKobo,
+    dueDate: dueAt.toISOString().slice(0, 10),
+    channel,
+  });
+
+  try {
+    const record = await createRecord(invoicePayload);
+    await createReminder(customerName, dueAt);
+
+    revalidatePath("/");
+    revalidatePath("/dashboard");
+    revalidatePath("/dashboard/items");
+    return { ok: true, invoiceId: record.id };
+  } catch (err) {
+    console.error("createCustomerInvoiceAction error:", err);
+    return { ok: false, error: "Could not persist invoice to database" };
+  }
+}
+

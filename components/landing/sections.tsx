@@ -336,108 +336,118 @@ export function StepsRail({ d }: { d?: LandingData }) {
   return (
     <Section id="how" label="How it works">
       <div className="space-y-6">
-        {/* Row of 4 Phones */}
-        <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
-          {/* Phone 1: Issue & Pin */}
-          <PhoneFrame label="Invoice Created and Pinned">
-            <div className="flex flex-col justify-between h-full">
-              <div className="space-y-1.5">
-                <div className="flex items-center justify-between border-b border-[var(--line,#232b29)] pb-1">
-                  <span className="font-mono text-[9px] font-bold text-emerald-400">PAYPULSE</span>
-                  <span className="font-mono text-[8px] text-[var(--muted,#8aa39a)]">INV #8910</span>
-                </div>
-                <div className="rounded border border-[var(--line,#232b29)] bg-[var(--surface-raised,#171c1b)] p-1.5">
-                  <p className="text-[9px] text-[var(--muted,#8aa39a)]">Debtor</p>
-                  <p className="font-medium text-[var(--ink,#e7f3ef)]">Kazi Logistics Ltd</p>
-                  <p className="font-mono text-[8px] text-[var(--muted,#8aa39a)]">Net 14 · Sep 15, 2026</p>
-                </div>
-                <div className="rounded border border-[var(--line,#232b29)] bg-[var(--surface-raised,#171c1b)] p-1.5">
-                  <p className="text-[9px] text-[var(--muted,#8aa39a)]">Total Payable</p>
-                  <p className="font-mono text-xs font-semibold text-[var(--ink,#e7f3ef)]">₦350,000.00</p>
-                </div>
-              </div>
-              <div className="rounded border border-emerald-500/30 bg-emerald-500/10 p-1 text-center font-mono text-[8px] text-emerald-400">
-                OFFICIAL INVOICE
-              </div>
-            </div>
-          </PhoneFrame>
-
-          {/* Phone 2: Threshold Breach */}
-          <PhoneFrame label="Due Date Exceeded and Audit Trigger">
-            <div className="flex flex-col justify-between h-full">
-              <div className="space-y-1.5">
-                <div className="flex items-center justify-between border-b border-[var(--line,#232b29)] pb-1">
-                  <span className="font-mono text-[9px] font-bold text-amber-400">CLOCK AUDIT</span>
-                  <span className="font-mono text-[8px] text-amber-400">T+15 DAYS</span>
-                </div>
-                <div className="rounded border border-amber-500/30 bg-amber-500/10 p-1.5">
-                  <p className="font-mono text-[8px] text-amber-400">DUE DATE BREACH</p>
-                  <p className="text-[9px] text-[var(--ink,#e7f3ef)]">Payment overdue by 24h</p>
-                </div>
-                <div className="rounded border border-[var(--line,#232b29)] bg-[var(--surface-raised,#171c1b)] p-1.5 space-y-1">
-                  <div className="flex justify-between font-mono text-[8px]">
-                    <span className="text-[var(--muted,#8aa39a)]">Promised:</span>
-                    <span className="text-[var(--ink,#e7f3ef)]">₦350,000.00</span>
+        {/* Row of 4 Floating Motion Phones in 3D Perspective (Slush-grade device motion) */}
+        <div className="phones-perspective-stage py-4 sm:py-8">
+          <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-4">
+            {/* Phone 1: Issue & Pin */}
+            <div className="phone-card-wrap phone-motion-1">
+              <PhoneFrame label="Invoice Created and Pinned">
+                <div className="flex flex-col justify-between h-full">
+                  <div className="space-y-1.5">
+                    <div className="flex items-center justify-between border-b border-[var(--line,#232b29)] pb-1">
+                      <span className="font-mono text-[9px] font-bold text-emerald-400">PAYPULSE</span>
+                      <span className="font-mono text-[8px] text-[var(--muted,#8aa39a)]">INV #8910</span>
+                    </div>
+                    <div className="rounded border border-[var(--line,#232b29)] bg-[var(--surface-raised,#171c1b)] p-1.5">
+                      <p className="text-[9px] text-[var(--muted,#8aa39a)]">Debtor</p>
+                      <p className="font-medium text-[var(--ink,#e7f3ef)]">Kazi Logistics Ltd</p>
+                      <p className="font-mono text-[8px] text-[var(--muted,#8aa39a)]">Net 14 · Sep 15, 2026</p>
+                    </div>
+                    <div className="rounded border border-[var(--line,#232b29)] bg-[var(--surface-raised,#171c1b)] p-1.5">
+                      <p className="text-[9px] text-[var(--muted,#8aa39a)]">Total Payable</p>
+                      <p className="font-mono text-xs font-semibold text-[var(--ink,#e7f3ef)]">₦350,000.00</p>
+                    </div>
                   </div>
-                  <div className="flex justify-between font-mono text-[8px]">
-                    <span className="text-[var(--muted,#8aa39a)]">Observed:</span>
-                    <span className="text-amber-400">₦0.00</span>
+                  <div className="rounded border border-emerald-500/30 bg-emerald-500/10 p-1 text-center font-mono text-[8px] text-emerald-400">
+                    OFFICIAL INVOICE
                   </div>
                 </div>
-              </div>
-              <div className="rounded border border-amber-500/30 bg-amber-500/10 p-1 text-center font-mono text-[8px] text-amber-400">
-                DISPATCH QUEUED
-              </div>
+              </PhoneFrame>
             </div>
-          </PhoneFrame>
 
-          {/* Phone 3: SendByte SMS & WhatsApp */}
-          <PhoneFrame label="SendByte SMS and WhatsApp Reminder">
-            <div className="flex flex-col justify-between h-full">
-              <div className="space-y-1.5">
-                <div className="flex items-center justify-between border-b border-[var(--line,#232b29)] pb-1">
-                  <span className="font-mono text-[9px] font-bold text-emerald-400">SENDBYTE</span>
-                  <span className="font-mono text-[8px] text-emerald-400">SMS / WHATSAPP</span>
+            {/* Phone 2: Threshold Breach */}
+            <div className="phone-card-wrap phone-motion-2">
+              <PhoneFrame label="Due Date Exceeded and Audit Trigger">
+                <div className="flex flex-col justify-between h-full">
+                  <div className="space-y-1.5">
+                    <div className="flex items-center justify-between border-b border-[var(--line,#232b29)] pb-1">
+                      <span className="font-mono text-[9px] font-bold text-amber-400">CLOCK AUDIT</span>
+                      <span className="font-mono text-[8px] text-amber-400">T+15 DAYS</span>
+                    </div>
+                    <div className="rounded border border-amber-500/30 bg-amber-500/10 p-1.5">
+                      <p className="font-mono text-[8px] text-amber-400">DUE DATE BREACH</p>
+                      <p className="text-[9px] text-[var(--ink,#e7f3ef)]">Payment overdue by 24h</p>
+                    </div>
+                    <div className="rounded border border-[var(--line,#232b29)] bg-[var(--surface-raised,#171c1b)] p-1.5 space-y-1">
+                      <div className="flex justify-between font-mono text-[8px]">
+                        <span className="text-[var(--muted,#8aa39a)]">Promised:</span>
+                        <span className="text-[var(--ink,#e7f3ef)]">₦350,000.00</span>
+                      </div>
+                      <div className="flex justify-between font-mono text-[8px]">
+                        <span className="text-[var(--muted,#8aa39a)]">Observed:</span>
+                        <span className="text-amber-400">₦0.00</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="rounded border border-amber-500/30 bg-amber-500/10 p-1 text-center font-mono text-[8px] text-amber-400">
+                    DISPATCH QUEUED
+                  </div>
                 </div>
-                <div className="rounded-lg border border-[var(--line,#232b29)] bg-[var(--surface-raised,#171c1b)] p-2 space-y-1 text-[8px] leading-tight">
-                  <p className="font-semibold text-emerald-400">PayPulse Reminder</p>
-                  <p className="text-[var(--ink,#e7f3ef)]">
-                    Payment of ₦350,000.00 for Inv #8910 is due to Kazi Logistics.
-                  </p>
-                  <p className="font-mono text-[7px] text-emerald-400">paypulse.ng/8910</p>
-                </div>
-                <div className="rounded border border-[var(--line,#232b29)] bg-[var(--surface-raised,#171c1b)] p-1 text-[8px] text-[var(--muted,#8aa39a)]">
-                  Sabilytics telemetry: Client opened link
-                </div>
-              </div>
-              <div className="rounded border border-emerald-500/30 bg-emerald-500/10 p-1 text-center font-mono text-[8px] text-emerald-400">
-                DELIVERED 09:41 · VERIFIED
-              </div>
+              </PhoneFrame>
             </div>
-          </PhoneFrame>
 
-          {/* Phone 4: Instant Settlement & Reconcile */}
-          <PhoneFrame label="Instant Reconciliation">
-            <div className="flex flex-col justify-between h-full">
-              <div className="space-y-1.5">
-                <div className="flex items-center justify-between border-b border-[var(--line,#232b29)] pb-1">
-                  <span className="font-mono text-[9px] font-bold text-emerald-400">SETTLED</span>
-                  <span className="font-mono text-[8px] text-emerald-400">0 KOBO DRIFT</span>
+            {/* Phone 3: SendByte SMS & WhatsApp */}
+            <div className="phone-card-wrap phone-motion-3">
+              <PhoneFrame label="SendByte SMS and WhatsApp Reminder">
+                <div className="flex flex-col justify-between h-full">
+                  <div className="space-y-1.5">
+                    <div className="flex items-center justify-between border-b border-[var(--line,#232b29)] pb-1">
+                      <span className="font-mono text-[9px] font-bold text-emerald-400">SENDBYTE</span>
+                      <span className="font-mono text-[8px] text-emerald-400">SMS / WHATSAPP</span>
+                    </div>
+                    <div className="rounded-lg border border-[var(--line,#232b29)] bg-[var(--surface-raised,#171c1b)] p-2 space-y-1 text-[8px] leading-tight">
+                      <p className="font-semibold text-emerald-400">PayPulse Reminder</p>
+                      <p className="text-[var(--ink,#e7f3ef)]">
+                        Payment of ₦350,000.00 for Inv #8910 is due to Kazi Logistics.
+                      </p>
+                      <p className="font-mono text-[7px] text-emerald-400">paypulse.ng/8910</p>
+                    </div>
+                    <div className="rounded border border-[var(--line,#232b29)] bg-[var(--surface-raised,#171c1b)] p-1 text-[8px] text-[var(--muted,#8aa39a)]">
+                      Sabilytics telemetry: Client opened link
+                    </div>
+                  </div>
+                  <div className="rounded border border-emerald-500/30 bg-emerald-500/10 p-1 text-center font-mono text-[8px] text-emerald-400">
+                    DELIVERED 09:41 · VERIFIED
+                  </div>
                 </div>
-                <div className="rounded border border-emerald-500/30 bg-emerald-500/10 p-1.5 text-center">
-                  <p className="font-mono text-[8px] text-emerald-400">FULL SETTLEMENT</p>
-                  <p className="font-mono text-xs font-bold text-white">₦350,000.00</p>
-                </div>
-                <div className="rounded border border-[var(--line,#232b29)] bg-[var(--surface-raised,#171c1b)] p-1.5 font-mono text-[8px] space-y-0.5">
-                  <p className="text-[var(--muted,#8aa39a)]">Ref: NIP 2026 8910</p>
-                  <p className="text-emerald-400">Balance: ₦0.00</p>
-                </div>
-              </div>
-              <div className="rounded border border-emerald-500/30 bg-emerald-500/10 p-1 text-center font-mono text-[8px] text-emerald-400">
-                RECONCILED IN KERNEL
-              </div>
+              </PhoneFrame>
             </div>
-          </PhoneFrame>
+
+            {/* Phone 4: Instant Settlement & Reconcile */}
+            <div className="phone-card-wrap phone-motion-4">
+              <PhoneFrame label="Instant Reconciliation">
+                <div className="flex flex-col justify-between h-full">
+                  <div className="space-y-1.5">
+                    <div className="flex items-center justify-between border-b border-[var(--line,#232b29)] pb-1">
+                      <span className="font-mono text-[9px] font-bold text-emerald-400">SETTLED</span>
+                      <span className="font-mono text-[8px] text-emerald-400">0 KOBO DRIFT</span>
+                    </div>
+                    <div className="rounded border border-emerald-500/30 bg-emerald-500/10 p-1.5 text-center">
+                      <p className="font-mono text-[8px] text-emerald-400">FULL SETTLEMENT</p>
+                      <p className="font-mono text-xs font-bold text-white">₦350,000.00</p>
+                    </div>
+                    <div className="rounded border border-[var(--line,#232b29)] bg-[var(--surface-raised,#171c1b)] p-1.5 font-mono text-[8px] space-y-0.5">
+                      <p className="text-[var(--muted,#8aa39a)]">Ref: NIP 2026 8910</p>
+                      <p className="text-emerald-400">Balance: ₦0.00</p>
+                    </div>
+                  </div>
+                  <div className="rounded border border-emerald-500/30 bg-emerald-500/10 p-1 text-center font-mono text-[8px] text-emerald-400">
+                    RECONCILED IN KERNEL
+                  </div>
+                </div>
+              </PhoneFrame>
+            </div>
+          </div>
         </div>
 
         {/* Captions Under the Phones */}

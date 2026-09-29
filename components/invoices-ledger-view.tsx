@@ -159,22 +159,52 @@ export function InvoicesLedgerView({
 
   // Combine commercial seed invoices with dynamic database rows
   const dynamicInvoices: InvoiceItem[] = dbRecords.map((r, i) => {
-    const isOverdue = i % 2 === 0;
+    let parsed: {
+      customerName?: string;
+      customerPhone?: string;
+      customerLocation?: string;
+      commodity?: string;
+      totalKobo?: number;
+      amountKobo?: number;
+      dueDate?: string;
+      channel?: "WhatsApp" | "SMS" | "Multichannel";
+    } | null = null;
+
+    if (typeof r.title === "string" && r.title.startsWith("{")) {
+      try {
+        parsed = JSON.parse(r.title);
+      } catch {
+        parsed = null;
+      }
+    }
+
+    const customerName = parsed?.customerName ?? r.title;
+    const customerPhone = parsed?.customerPhone ?? "+234 800 000 0000";
+    const customerLocation = parsed?.customerLocation ?? "Commercial Hub, Nigeria";
+    const commodity = parsed?.commodity ?? "Custom Order Line Item";
+    const totalKobo = Number(parsed?.totalKobo ?? parsed?.amountKobo) || 12000000;
+    const dueDate = parsed?.dueDate ?? r.createdAt.toISOString().slice(0, 10);
+    const channel = parsed?.channel === "SMS" ? "SMS" : "WhatsApp";
+
+    const dueDateObj = new Date(dueDate);
+    const now = new Date();
+    const isOverdue = !Number.isNaN(dueDateObj.getTime()) ? dueDateObj < now : i % 2 === 0;
+
     return {
       id: `REC-${r.id}`,
       invoiceNumber: `INV-2026-D${String(r.id).padStart(3, "0")}`,
-      customerName: r.title,
-      customerPhone: "+234 800 000 0000",
-      customerLocation: "Commercial Hub, Nigeria",
-      commodity: "Custom Order Line Item",
-      quantity: "1 batch",
-      unitPriceKobo: 12000000,
-      totalKobo: 12000000,
-      dueDate: r.createdAt.toISOString().slice(0, 10),
+      customerName,
+      customerPhone,
+      customerLocation,
+      commodity,
+      quantity: "1 consignment",
+      unitPriceKobo: totalKobo,
+      totalKobo,
+      dueDate,
       isOverdue,
       daysOverdue: isOverdue ? 3 : undefined,
       daysUntilDue: !isOverdue ? 5 : undefined,
-      channel: "WhatsApp",
+      channel,
       deliveryStatus: "Delivered",
       reconciliationState: isOverdue ? "OVERDUE_FLAGGED" : "AWAITING_DUE_DATE",
       receiptRef: `REC-2026-D${String(r.id).padStart(4, "0")}`,

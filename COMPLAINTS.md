@@ -585,7 +585,21 @@ The complaints centered around six distinct failure categories:
   2. Health diagnostic endpoint (`GET /api/health?deep=1`) actively probes table presence and reports round-trip latency.
   3. SendByte API client (`lib/sponsors/sendbyte.ts`) is configured for carrier dispatch with idempotency keys.
   4. Gaps identified: The dev server runs in `DEMO_MODE=1` without an active external `DATABASE_URL`; `/dashboard/create` lacked direct persistence from the rich line-item draft form into the database; and dedicated REST route handlers (`/api/invoices`) were not yet exposed alongside Server Actions.
-- **Remediation Plan:** Document existing backend architecture, offer live Postgres wiring instructions, and provide dedicated REST API routes for direct invoice generation and SendByte dispatch.
+### Prompt 61 · FAQ Pill Badge Removal, 3D Floating Mobile Phones & Backend Integration
+- **Timestamp:** `2026-09-29T23:48:09Z` (23:48 WAT)
+- **Prompt:**
+  > "remove."  
+  > *(Uploaded screenshot highlighting '05 / QUESTIONS & RECONCILIATION' pill badge)*  
+  > "don't forget the mobile syuff?"
+- **Critique / Grievance:**
+  1. The FAQ section had an unnecessary top badge pill `05 / QUESTIONS & RECONCILIATION` that cluttered the header.
+  2. The mobile phones in `StepsRail` needed Slush-grade dynamic 3D perspective and continuous floating keyframe motion.
+  3. The backend needed full REST routes and DB persistence from `/dashboard/create`.
+- **Remediation:**
+  1. Removed the `05 / QUESTIONS & RECONCILIATION` badge from `components/landing/faq-section.tsx`.
+  2. Implemented `.phones-perspective-stage` with 4 distinct organic floating keyframe trajectories (`phone-float-1` through `4`), perspective tilts, deep ambient drop shadows, and hover elevation in `landing.css` and `sections.tsx`.
+  3. Created REST API routes `GET /api/invoices`, `POST /api/invoices`, and `POST /api/reminders/dispatch`.
+  4. Created `createCustomerInvoiceAction` and wired the full line-item invoice form on `/dashboard/create` to persist directly to the database layer, with immediate visibility in `/dashboard/items`.
 
 ---
 

@@ -1,19 +1,37 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
+import Link from "next/link";
 import { DashboardShell } from "@/components/dashboard-shell";
-import { NewRecordForm } from "@/components/new-record-form";
+import { createCustomerInvoiceAction } from "@/app/actions";
 import { evaluateDeterministicKernel } from "@/lib/kernel";
 
 export default function CreateInvoicePage() {
-  const [sourceCaptureT0, setSourceCaptureT0] = useState(
-    "Invoice #NG-2026-9042: Dangote Retail Depot owes NGN 4,850,000.00 due on 2026-09-20 via PayPulse payment rail."
-  );
-  const [extractedExcerpt, setExtractedExcerpt] = useState(
-    "Dangote Retail Depot owes NGN 4,850,000.00 due on 2026-09-20"
-  );
-  const [promisedCents, setPromisedCents] = useState(485000000);
-  const [observedCents, setObservedCents] = useState(150000000);
+  const [customerName, setCustomerName] = useState("Dangote Retail Depot");
+  const [customerPhone, setCustomerPhone] = useState("+234 803 492 1102");
+  const [customerLocation, setCustomerLocation] = useState("Ikeja Industrial Estate, Lagos");
+  const [commodity, setCommodity] = useState("50kg Portland Grade Limestone Cement");
+  const [totalNaira, setTotalNaira] = useState("4,850,000.00");
+  const [amountReceivedNaira, setAmountReceivedNaira] = useState("1,500,000.00");
+  const [dueDate, setDueDate] = useState("2026-10-14");
+  const [channel, setChannel] = useState<"WhatsApp" | "SMS">("WhatsApp");
+
+  const [isPending, startTransition] = useTransition();
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  // Parse kobo integers
+  const parseNairaToKobo = (val: string) => {
+    const clean = val.replace(/,/g, "").trim();
+    const num = parseFloat(clean);
+    return isNaN(num) ? 0 : Math.round(num * 100);
+  };
+
+  const promisedCents = parseNairaToKobo(totalNaira);
+  const observedCents = parseNairaToKobo(amountReceivedNaira);
+
+  const sourceCaptureT0 = `Invoice #${customerName.slice(0, 3).toUpperCase()}-2026: ${customerName} owes NGN ${totalNaira} due on ${dueDate} for ${commodity}.`;
+  const extractedExcerpt = `${customerName} owes NGN ${totalNaira} due on ${dueDate}`;
 
   const liveDecision = evaluateDeterministicKernel({
     caseId: "live-draft",
@@ -40,9 +58,34 @@ export default function CreateInvoicePage() {
     }
   };
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setErrorMessage(null);
+    setSuccessMessage(null);
+
+    const formData = new FormData();
+    formData.set("customerName", customerName);
+    formData.set("customerPhone", customerPhone);
+    formData.set("customerLocation", customerLocation);
+    formData.set("commodity", commodity);
+    formData.set("amountKobo", String(promisedCents));
+    formData.set("dueDate", dueDate);
+    formData.set("channel", channel);
+
+    startTransition(async () => {
+      const res = await createCustomerInvoiceAction(formData);
+      if (res.ok) {
+        setSuccessMessage(`Invoice for ${customerName} (₦${totalNaira}) created and committed to database!`);
+      } else {
+        setErrorMessage(res.error ?? "Failed to save invoice");
+      }
+    });
+  };
+
   return (
     <DashboardShell project="PayPulse">
       <div className="flex flex-col gap-6">
+        {/* Header */}
         <div className="border-b border-[var(--border,#232b29)] pb-5">
           <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--accent,#059669)] font-semibold">
             Invoices &amp; Billing
@@ -55,66 +98,154 @@ export default function CreateInvoicePage() {
           </p>
         </div>
 
-        <section className="rounded-lg border border-[var(--border,#232b29)] bg-[var(--surface,#121615)] p-6 shadow-sm">
-          <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.12em] text-[var(--accent,#059669)] font-semibold">
-            1. Issue New Customer Invoice
+        {/* Notifications */}
+        {successMessage ? (
+          <div className="flex items-center justify-between rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-4 text-sm text-emerald-400">
+            <div className="flex items-center gap-2">
+              <svg className="w-5 h-5 text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span>{successMessage}</span>
+            </div>
+            <Link
+              href="/dashboard/items"
+              className="inline-flex items-center gap-1 font-mono text-xs font-semibold text-white underline hover:text-emerald-300"
+            >
+              View in Invoices &amp; Ledger →
+            </Link>
           </div>
-          <NewRecordForm />
-        </section>
+        ) : null}
 
-        <section className="grid grid-cols-1 gap-6 lg:grid-cols-12">
+        {errorMessage ? (
+          <div className="rounded-lg border border-red-500/30 bg-red-500/10 p-4 text-sm text-red-400">
+            {errorMessage}
+          </div>
+        ) : null}
+
+        {/* Main Grid: Form on Left, Kernel Verification on Right */}
+        <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-6 lg:grid-cols-12">
+          {/* Left Column: Form Fields */}
           <div className="flex flex-col gap-4 rounded-lg border border-[var(--border,#232b29)] bg-[var(--surface,#121615)] p-6 lg:col-span-7 shadow-sm">
             <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-[var(--fg-muted,#8aa39a)]">
-              2. Line Item Verification &amp; Amount Calculation
+              1. Customer &amp; Order Details
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <label className="flex flex-col gap-1.5 text-xs">
+                <span className="font-medium text-[var(--fg,#e7f3ef)]">Customer / Merchant Name</span>
+                <input
+                  type="text"
+                  required
+                  value={customerName}
+                  onChange={(e) => setCustomerName(e.target.value)}
+                  className="rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] p-2.5 font-medium text-xs text-[var(--fg,#e7f3ef)] focus:outline-none focus:border-[var(--accent,#059669)]"
+                  placeholder="e.g. Dangote Retail Depot"
+                />
+              </label>
+
+              <label className="flex flex-col gap-1.5 text-xs">
+                <span className="font-medium text-[var(--fg,#e7f3ef)]">Recipient Mobile Number</span>
+                <input
+                  type="text"
+                  required
+                  value={customerPhone}
+                  onChange={(e) => setCustomerPhone(e.target.value)}
+                  className="rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] p-2.5 font-mono text-xs text-[var(--fg,#e7f3ef)] focus:outline-none focus:border-[var(--accent,#059669)]"
+                  placeholder="+234 803 000 0000"
+                />
+              </label>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <label className="flex flex-col gap-1.5 text-xs">
+                <span className="font-medium text-[var(--fg,#e7f3ef)]">Trading Market / Location</span>
+                <input
+                  type="text"
+                  value={customerLocation}
+                  onChange={(e) => setCustomerLocation(e.target.value)}
+                  className="rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] p-2.5 text-xs text-[var(--fg,#e7f3ef)] focus:outline-none focus:border-[var(--accent,#059669)]"
+                  placeholder="e.g. Ikeja Industrial Estate, Lagos"
+                />
+              </label>
+
+              <label className="flex flex-col gap-1.5 text-xs">
+                <span className="font-medium text-[var(--fg,#e7f3ef)]">Reminder Channel</span>
+                <select
+                  value={channel}
+                  onChange={(e) => setChannel(e.target.value as "WhatsApp" | "SMS")}
+                  className="rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] p-2.5 text-xs text-[var(--fg,#e7f3ef)] focus:outline-none focus:border-[var(--accent,#059669)]"
+                >
+                  <option value="WhatsApp">SendByte WhatsApp</option>
+                  <option value="SMS">SendByte SMS</option>
+                </select>
+              </label>
             </div>
 
             <label className="flex flex-col gap-1.5 text-xs">
-              <span className="font-medium text-[var(--fg,#e7f3ef)]">Invoice Description &amp; Customer Order Record</span>
-              <textarea
-                rows={3}
-                value={sourceCaptureT0}
-                onChange={(e) => setSourceCaptureT0(e.target.value)}
-                className="rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] p-2.5 font-mono text-xs text-[var(--fg,#e7f3ef)] focus:outline-none focus:border-[var(--accent,#059669)]"
-              />
-            </label>
-
-            <label className="flex flex-col gap-1.5 text-xs">
-              <span className="font-medium text-[var(--fg,#e7f3ef)]">Verified Line Item Text (Verbatim match from invoice)</span>
+              <span className="font-medium text-[var(--fg,#e7f3ef)]">Commodity / Consignment Line Item</span>
               <input
                 type="text"
-                value={extractedExcerpt}
-                onChange={(e) => setExtractedExcerpt(e.target.value)}
-                className="rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] p-2.5 font-mono text-xs text-[var(--fg,#e7f3ef)] focus:outline-none focus:border-[var(--accent,#059669)]"
+                required
+                value={commodity}
+                onChange={(e) => setCommodity(e.target.value)}
+                className="rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] p-2.5 text-xs text-[var(--fg,#e7f3ef)] focus:outline-none focus:border-[var(--accent,#059669)]"
+                placeholder="e.g. 50kg Portland Grade Limestone Cement"
               />
             </label>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-1">
               <label className="flex flex-col gap-1.5 text-xs">
-                <span className="font-medium text-[var(--fg,#e7f3ef)]">Invoice Total (Integer Kobo)</span>
+                <span className="font-medium text-[var(--fg,#e7f3ef)]">Total Amount (₦)</span>
                 <input
-                  type="number"
-                  value={promisedCents}
-                  onChange={(e) => setPromisedCents(Number(e.target.value) || 0)}
+                  type="text"
+                  required
+                  value={totalNaira}
+                  onChange={(e) => setTotalNaira(e.target.value)}
                   className="rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] p-2.5 font-mono text-xs text-[var(--fg,#e7f3ef)] tabular-nums focus:outline-none focus:border-[var(--accent,#059669)]"
+                  placeholder="4,850,000.00"
                 />
               </label>
+
               <label className="flex flex-col gap-1.5 text-xs">
-                <span className="font-medium text-[var(--fg,#e7f3ef)]">Amount Received (Integer Kobo)</span>
+                <span className="font-medium text-[var(--fg,#e7f3ef)]">Initial Payment Received (₦)</span>
                 <input
-                  type="number"
-                  value={observedCents}
-                  onChange={(e) => setObservedCents(Number(e.target.value) || 0)}
+                  type="text"
+                  value={amountReceivedNaira}
+                  onChange={(e) => setAmountReceivedNaira(e.target.value)}
                   className="rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] p-2.5 font-mono text-xs text-[var(--fg,#e7f3ef)] tabular-nums focus:outline-none focus:border-[var(--accent,#059669)]"
+                  placeholder="0.00"
                 />
               </label>
+
+              <label className="flex flex-col gap-1.5 text-xs">
+                <span className="font-medium text-[var(--fg,#e7f3ef)]">Payment Due Date</span>
+                <input
+                  type="date"
+                  required
+                  value={dueDate}
+                  onChange={(e) => setDueDate(e.target.value)}
+                  className="rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] p-2.5 font-mono text-xs text-[var(--fg,#e7f3ef)] focus:outline-none focus:border-[var(--accent,#059669)]"
+                />
+              </label>
+            </div>
+
+            <div className="pt-3 border-t border-[var(--border,#232b29)]">
+              <button
+                type="submit"
+                disabled={isPending}
+                className="w-full inline-flex items-center justify-center gap-2 py-3 px-6 rounded-lg bg-[var(--accent,#059669)] hover:bg-[#047857] text-white font-medium text-sm transition-all duration-150 active:scale-[0.98] disabled:opacity-50 cursor-pointer shadow-sm"
+              >
+                {isPending ? "Persisting to Database..." : "Save & Issue Invoice"}
+              </button>
             </div>
           </div>
 
+          {/* Right Column: Deterministic Kernel Audit Preview */}
           <div className="flex flex-col justify-between gap-4 rounded-lg border border-[var(--border,#232b29)] bg-[var(--surface,#121615)] p-6 lg:col-span-5 shadow-sm">
             <div>
               <div className="flex items-center justify-between">
                 <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-[var(--accent,#059669)] font-semibold">
-                  Payment Status
+                  Payment Status Preview
                 </span>
                 <span
                   className={`rounded px-2 py-0.5 font-mono text-[11px] font-medium ${
@@ -145,11 +276,24 @@ export default function CreateInvoicePage() {
               </div>
             </div>
 
-            <div className="rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] px-3 py-2 font-mono text-[11px] text-[var(--fg-muted,#8aa39a)]">
-              <span>Outstanding Balance: ₦{((promisedCents - observedCents) / 100).toLocaleString("en-NG", { minimumFractionDigits: 2 })}</span>
+            <div className="space-y-2 pt-4 border-t border-[var(--border,#232b29)]">
+              <div className="flex justify-between font-mono text-xs">
+                <span className="text-[var(--fg-muted,#8aa39a)]">Total Invoice Kobo:</span>
+                <span className="text-[var(--fg,#e7f3ef)] tabular-nums">{promisedCents.toLocaleString()} kobo</span>
+              </div>
+              <div className="flex justify-between font-mono text-xs">
+                <span className="text-[var(--fg-muted,#8aa39a)]">Received Kobo:</span>
+                <span className="text-emerald-400 tabular-nums">{observedCents.toLocaleString()} kobo</span>
+              </div>
+              <div className="flex justify-between font-mono text-xs font-semibold pt-1 border-t border-[var(--border,#232b29)]">
+                <span className="text-[var(--fg,#e7f3ef)]">Outstanding Balance:</span>
+                <span className="text-amber-400 tabular-nums">
+                  ₦{((promisedCents - observedCents) / 100).toLocaleString("en-NG", { minimumFractionDigits: 2 })}
+                </span>
+              </div>
             </div>
           </div>
-        </section>
+        </form>
       </div>
     </DashboardShell>
   );
