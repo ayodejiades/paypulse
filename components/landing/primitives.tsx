@@ -42,15 +42,15 @@ export function SyntheticBadge() {
   );
 }
 
-export function FactGrid({ facts, size = "md" }: { facts: Fact[]; size?: "md" | "lg" }) {
+export function FactGrid({ facts }: { facts: Fact[]; size?: "md" | "lg" }) {
   if (!facts.length) return null;
   const cols = facts.length === 1 ? "grid-cols-1" : facts.length === 3 ? "grid-cols-1 sm:grid-cols-3" : "grid-cols-2";
   return (
     <dl className={`grid w-full gap-px overflow-hidden rounded-[var(--radius-sm)] border lp-hair bg-[var(--line)] ${cols}`}>
       {facts.map((f) => (
-        <div key={f.label + f.value} className="bg-[var(--surface)] px-4 py-3">
-          <dt className="text-sm text-[var(--muted)]">{f.label}</dt>
-          <dd className={`lp-mono mt-1 font-medium text-[var(--ink)] ${size === "lg" ? "text-xl sm:text-2xl" : "text-base"} break-words`}>{f.value}</dd>
+        <div key={f.label + f.value} className="bg-[var(--surface)] px-3.5 py-2.5">
+          <dt className="font-mono text-[10px] uppercase tracking-wider text-[var(--muted)]">{f.label}</dt>
+          <dd className="lp-mono mt-0.5 text-sm sm:text-[15px] font-medium text-[var(--ink)] break-words">{f.value}</dd>
         </div>
       ))}
     </dl>
@@ -110,10 +110,7 @@ export function FindingCard({
 }) {
   const Heading = headingLevel;
   return (
-    <article className="flex flex-col gap-5">
-      <div className="flex items-center justify-between gap-2">
-        <span className="lp-mono text-sm text-[var(--muted)]">{c.id}</span>
-      </div>
+    <article className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
         <Heading className={`lp-display text-[var(--ink)] ${size === "lg" ? "text-2xl sm:text-[1.75rem]" : "text-lg"}`}>{c.title}</Heading>
         {c.reason ? <p className="lp-pretty text-sm leading-relaxed text-[var(--muted)]">{c.reason}</p> : null}

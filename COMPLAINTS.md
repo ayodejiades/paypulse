@@ -289,17 +289,60 @@ The complaints centered around six distinct failure categories:
 
 ---
 
+### Prompt 30 · Section Tone Monotony
+- **Timestamp:** `2026-09-29T22:12:32Z` (23:12 WAT)
+- **Prompt:**
+  > "something to indicate different sections. they have the same colour."  
+  > *(Uploaded screenshot showing 'Deterministic Architecture' and 'How it works' blending into the same pitch-black background)*
+- **Critique / Grievance:** All landing page sections shared an identical flat black background without hairline dividers or visual pacing.
+- **Remediation:** Added top hairline dividers (`border-t border-[#232b29]`) to all sections, alternated backgrounds between base black (`#0a0d0c`) and raised surface (`#121615`), and added monospace eyebrow section tags (`SECTION 01`, `SECTION 02`, etc.).
+
+---
+
+### Prompt 31 · Duplicate Case ID Header
+- **Timestamp:** `2026-09-29T22:13:07Z` (23:13 WAT)
+- **Prompt:**
+  > "leave one of these."  
+  > *(Uploaded screenshot of 'SME-CASE-01' in small monospace stacked directly over 'SME-CASE-01' in large bold font)*
+- **Critique / Grievance:** Redundant, stuttering display of the case ID twice in the same card.
+- **Remediation:** Removed the duplicate small case ID label from `FindingCard` in `components/landing/primitives.tsx`, leaving a single clean title.
+
+---
+
+### Prompt 32 · Number Text Size Overflow
+- **Timestamp:** `2026-09-29T22:13:23Z` (23:13 WAT)
+- **Prompt:**
+  > "fix text sizes of numbers."  
+  > *(Uploaded screenshot of giant, overflowing '₦350,000.00' and '₦150,000.00')*
+- **Critique / Grievance:** Disproportionately huge typography (`text-2xl`) in `FactGrid` numbers made financial amounts look bloated and ungainly.
+- **Remediation:** Scaled number sizes down to a refined, proportional `text-sm sm:text-[15px] font-medium` with crisp `text-[10px]` uppercase tracking for labels.
+
+---
+
+### Prompt 33 · Checked Date Badge Removal
+- **Timestamp:** `2026-09-29T22:13:41Z` (23:13 WAT)
+- **Prompt:**
+  > "remove."  
+  > *(Uploaded screenshot of '● Checked Sep 29, 2026')*
+- **Critique / Grievance:** Unwanted date pill / check stamp in the hero trust row.
+- **Remediation:** Stripped `checkedAt` link and dot from `TrustRow` in `components/landing/sections.tsx`, leaving only core architectural trust statements.
+
+---
+
 ## 3. Active Rule Invariants Deduced from Complaints
 
 To avoid repeating any mistakes, the following hard rules govern all subsequent work:
 - [x] **Brand Rule:** Product is named **PayPulse** (never "AIB Ship", never "PayPulse Africa").
 - [x] **Wordmark Rule:** Pure, elegant typography for **PayPulse** (no generic letter-in-a-box icons).
 - [x] **Currency Rule:** ALL currency figures must use the Nigerian Naira sign (`₦`), NEVER `$`.
+- [x] **Typography & Sizing Rule:** Proportional financial numbers (`text-[15px]`), never bloated overflowing text sizes.
+- [x] **Section Delineation Rule:** Every section MUST have hairline dividing borders (`border-t border-[#232b29]`), alternating surface tones (`#0a0d0c` vs `#121615`), and clear monospace section indicators.
+- [x] **No Duplicate Headers:** Never stack identical IDs or titles on top of each other.
 - [x] **Palette Rule:** Dark ledger theme only (`#0a0d0c`, `#121615`, `#232b29`, `#e7f3ef`, `#059669`). Never use pink, pastel neobrutalism, or unrequested accent colors.
 - [x] **Button Rule:** Green buttons MUST ALWAYS have pure white text (`#ffffff` / `text-white`), NEVER black.
 - [x] **Iconography Rule:** NO generic shadcn/lucide UI icons. Rely on characterful typography, hairline borders, and subtle ledger status dots.
 - [x] **Copywriting Rule:** ZERO em-dashes (`—`). Zero hyphens in body text or headings ("due date", "integer kobo", "kill switch"). No AI superlatives.
-- [x] **Badge Cluster Rule:** No colored status pills or badge clusters cluttering result cards.
+- [x] **Badge Cluster Rule:** No colored status pills, fake check dates, or badge clusters cluttering result cards.
 - [x] **Landing Page Rule:** No raw synthetic debug desks (`<SampleDesk />`) or artificial pre-footer CTA bars on the landing page.
 - [x] **Device Mockup Rule:** Use crisp, hand-coded device chrome (`.phone`) with SVG status bars as established in `team3`.
 - [x] **Navigation Rule:** Every inner route (`/dashboard/*`, `/proof`, `/verify`, `/demo`, `/lab`) MUST share the unified `DashboardShell` navigation bar.

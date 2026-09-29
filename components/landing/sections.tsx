@@ -44,7 +44,7 @@ export function Nav({ d }: { d: LandingData }) {
 
 /** Statements from brief.json landing.trust, plus the fixture check date when it ran. */
 export function TrustRow({ d, className = "" }: { d: LandingData; className?: string }) {
-  if (!d.trust.length && !d.checkedAt) return null;
+  if (!d.trust.length) return null;
   return (
     <ul className={`flex flex-wrap gap-x-5 gap-y-2 text-sm text-[var(--muted)] ${className}`}>
       {d.trust.map((t) => (
@@ -53,14 +53,6 @@ export function TrustRow({ d, className = "" }: { d: LandingData; className?: st
           <span>{t}</span>
         </li>
       ))}
-      {d.checkedAt ? (
-        <li>
-          <Link href="/proof" className="lp-focus flex items-center gap-2 rounded hover:text-[var(--ink)]">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" aria-hidden="true" />
-            <span>Checked <span className="lp-mono">{d.checkedAt}</span></span>
-          </Link>
-        </li>
-      ) : null}
     </ul>
   );
 }
@@ -141,22 +133,42 @@ export function Hero({ d, layout = "split" }: { d: LandingData; layout?: "split"
 export function Section({
   id,
   label,
+  eyebrow,
   aside,
   children,
   tone = "plain",
 }: {
   id?: string;
   label?: string;
+  eyebrow?: string;
   aside?: ReactNode;
   children: ReactNode;
   tone?: "plain" | "raised";
 }) {
   return (
-    <section id={id} className={`scroll-mt-20 ${tone === "raised" ? "border-y lp-hair bg-[var(--raised)]" : ""}`}>
+    <section
+      id={id}
+      className={`scroll-mt-20 border-t border-[var(--line,#232b29)] ${
+        tone === "raised"
+          ? "bg-[var(--surface,#121615)] border-b border-[var(--line,#232b29)]"
+          : "bg-[var(--bg,#0a0d0c)]"
+      }`}
+    >
       <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
         {label || aside ? (
           <div className="mb-8 flex flex-wrap items-end justify-between gap-4 sm:mb-10">
-            {label ? <h2 className="lp-display text-3xl text-[var(--ink)] sm:text-4xl">{label}</h2> : <span />}
+            <div>
+              {eyebrow ? (
+                <p className="mb-1 font-mono text-[11px] uppercase tracking-[0.14em] text-emerald-400">
+                  {eyebrow}
+                </p>
+              ) : null}
+              {label ? (
+                <h2 className="lp-display text-2xl text-[var(--ink,#e7f3ef)] [text-wrap:balance] sm:text-3xl font-medium tracking-tight">
+                  {label}
+                </h2>
+              ) : null}
+            </div>
             {aside}
           </div>
         ) : null}
