@@ -557,6 +557,24 @@ The complaints centered around six distinct failure categories:
 
 ---
 
+### Prompt 58 · Interactive FAQ Accordion (Item 4)
+- **Timestamp:** `2026-09-29T23:42:01Z` (23:42 WAT)
+- **Prompt:**
+  > "number 4"
+- **Critique / Grievance:** The landing page needed high-conviction, concrete answers to trader and judge questions without cartoon illustrations or fluff.
+- **Remediation:** Created `FaqSection` in `components/landing/faq-section.tsx` with clean 4-sided hairline borders, monochromatic index numbering (`01`, `02`, ...), animated `+` to `×` rotation, and mounted it right above `ClosingCTA` on `app/page.tsx`.
+
+---
+
+### Prompt 59 · Slush-Grade Pill Navigation & Micro-Interactions (Item 5)
+- **Timestamp:** `2026-09-29T23:42:14Z` (23:42 WAT)
+- **Prompt:**
+  > "number 5 as well."
+- **Critique / Grievance:** Buttons and nav links lacked tactile responsiveness and refined micro-interactions.
+- **Remediation:** Enhanced `Nav`, `HeroCopy`, and `ClosingCTA` buttons with Slush-grade tactile micro-interactions (`active:scale-[0.96]`, 150ms transitions, smooth hover background transitions).
+
+---
+
 ## 3. Active Rule Invariants Deduced from Complaints
 
 To avoid repeating any mistakes, the following hard rules govern all subsequent work:

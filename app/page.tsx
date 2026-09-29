@@ -13,6 +13,7 @@ import {
   SponsorsSection,
   StepsRail,
 } from "@/components/landing/sections";
+import { FaqSection } from "@/components/landing/faq-section";
 
 export default function Landing() {
   const d = loadLanding();
@@ -25,6 +26,7 @@ export default function Landing() {
         <StepsRail d={d} />
         <SponsorsSection />
         <MoatComparison />
+        <FaqSection />
         <ClosingCTA d={d} />
       </main>
       <Footer d={d} />

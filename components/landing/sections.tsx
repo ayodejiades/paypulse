@@ -24,22 +24,39 @@ export function Wordmark({ name }: { name: string }) {
 
 export function Nav({ d }: { d: LandingData }) {
   return (
-    <header className="sticky top-0 z-30 border-b lp-hair bg-[color-mix(in_oklab,var(--bg)_78%,transparent)] backdrop-blur-xl">
+    <header className="sticky top-0 z-30 border-b border-[var(--line,#232b29)] bg-[#0a0d0c]/85 backdrop-blur-xl transition-all">
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
-        <Link href="/" className="lp-focus rounded-md">
+        <Link href="/" className="inline-flex items-center gap-2 rounded-full px-2 py-1 transition-transform active:scale-[0.96]">
           <Wordmark name={d.name} />
         </Link>
-        <nav aria-label="Primary" className="flex items-center gap-1 text-sm text-[var(--muted)]">
-          {d.steps.length ? <a href="#how" className="lp-focus hidden rounded-[var(--pill)] px-3 py-2 hover:text-[var(--ink)] sm:inline-flex">How it works</a> : null}
-          <Link href="/demo" className="lp-focus hidden rounded-[var(--pill)] px-3 py-2 hover:text-[var(--ink)] sm:inline-flex">Walkthrough</Link>
-          <Link href="/proof" className="lp-focus hidden rounded-[var(--pill)] px-3 py-2 hover:text-[var(--ink)] md:inline-flex">Proof</Link>
+        <nav aria-label="Primary" className="flex items-center gap-1.5 text-xs sm:text-[13px] text-[var(--muted,#8aa39a)]">
+          {d.steps.length ? (
+            <a
+              href="#how"
+              className="rounded-full px-3.5 py-1.5 font-medium transition-all duration-150 hover:bg-[#171c1b] hover:text-[var(--ink,#e7f3ef)] active:scale-[0.96] hidden sm:inline-flex"
+            >
+              How it works
+            </a>
+          ) : null}
+          <Link
+            href="/demo"
+            className="rounded-full px-3.5 py-1.5 font-medium transition-all duration-150 hover:bg-[#171c1b] hover:text-[var(--ink,#e7f3ef)] active:scale-[0.96] hidden sm:inline-flex"
+          >
+            Walkthrough
+          </Link>
+          <Link
+            href="/proof"
+            className="rounded-full px-3.5 py-1.5 font-medium transition-all duration-150 hover:bg-[#171c1b] hover:text-[var(--ink,#e7f3ef)] active:scale-[0.96] hidden md:inline-flex"
+          >
+            Proof
+          </Link>
           <Link
             href="/dashboard"
             data-demo="launch-demo"
-            className="group inline-flex items-center gap-2 pl-3.5 pr-1.5 py-1.5 rounded-full bg-[var(--accent,#059669)] hover:bg-[#047857] text-white text-xs font-medium tracking-tight transition-all active:scale-[0.98] shadow-sm ml-2 cursor-pointer"
+            className="group inline-flex items-center gap-2.5 pl-4 pr-1.5 py-1.5 rounded-full bg-[var(--accent,#059669)] hover:bg-[#047857] text-white text-xs font-medium tracking-tight transition-all duration-150 active:scale-[0.96] shadow-sm ml-2 cursor-pointer"
           >
             <span>{d.cta}</span>
-            <span className="w-5 h-5 rounded-full bg-[#033b2a] text-white flex items-center justify-center group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0">
+            <span className="w-5 h-5 rounded-full bg-[#033b2a] text-white flex items-center justify-center text-[10px] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0">
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
@@ -94,7 +111,7 @@ function HeroCopy({ d, align = "left" }: { d: LandingData; align?: "left" | "cen
         <Link
           href="/dashboard"
           data-demo="launch-demo"
-          className="group inline-flex items-center justify-center gap-3 pl-5 sm:pl-6 pr-2 py-2 rounded-full bg-[var(--accent,#059669)] hover:bg-[#047857] text-white font-medium text-sm tracking-tight transition-all active:scale-[0.98] shadow-sm cursor-pointer"
+          className="group inline-flex items-center justify-center gap-3 pl-5 sm:pl-6 pr-2 py-2 rounded-full bg-[var(--accent,#059669)] hover:bg-[#047857] text-white font-medium text-sm tracking-tight transition-all duration-150 active:scale-[0.96] shadow-sm cursor-pointer"
         >
           <span>{d.cta}</span>
           <span className="w-7 h-7 rounded-full bg-[#033b2a] text-white flex items-center justify-center text-xs group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0">
@@ -114,7 +131,7 @@ function HeroCopy({ d, align = "left" }: { d: LandingData; align?: "left" | "cen
         </Link>
         <Link
           href="/demo"
-          className="group inline-flex items-center justify-center gap-3 pl-5 pr-2 py-2 rounded-full bg-[var(--surface,#121615)] hover:bg-[#181f1c] text-[var(--ink,#e7f3ef)] border border-[var(--line,#232b29)] hover:border-[#34423e] font-medium text-sm tracking-tight transition-all active:scale-[0.98] cursor-pointer"
+          className="group inline-flex items-center justify-center gap-3 pl-5 pr-2 py-2 rounded-full bg-[var(--surface,#121615)] hover:bg-[#181f1c] text-[var(--ink,#e7f3ef)] border border-[var(--line,#232b29)] hover:border-[#34423e] font-medium text-sm tracking-tight transition-all duration-150 active:scale-[0.96] cursor-pointer"
         >
           <span>Guided Walkthrough</span>
           <span className="w-7 h-7 rounded-full bg-[#1c2321] border border-[#2d3733] text-[#8aa39a] group-hover:text-white group-hover:border-[#3d4d47] flex items-center justify-center text-xs group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0">
@@ -612,7 +629,7 @@ export function ClosingCTA({ d }: { d: LandingData }) {
           <Link
             href="/dashboard"
             data-demo="launch-demo"
-            className="group inline-flex items-center justify-center gap-3.5 pl-6 pr-2 py-2.5 rounded-full bg-[var(--accent,#059669)] hover:bg-[#047857] text-white font-medium text-sm tracking-tight transition-all active:scale-[0.98] shadow-sm cursor-pointer"
+            className="group inline-flex items-center justify-center gap-3.5 pl-6 pr-2 py-2.5 rounded-full bg-[var(--accent,#059669)] hover:bg-[#047857] text-white font-medium text-sm tracking-tight transition-all duration-150 active:scale-[0.96] shadow-sm cursor-pointer"
           >
             <span>{d.cta}</span>
             <span className="w-7 h-7 rounded-full bg-[#033b2a] text-white flex items-center justify-center text-xs group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0">
@@ -632,7 +649,7 @@ export function ClosingCTA({ d }: { d: LandingData }) {
           </Link>
           <Link
             href="/demo"
-            className="group inline-flex items-center justify-center gap-3 pl-5 pr-2 py-2.5 rounded-full bg-[var(--surface,#121615)] hover:bg-[#181f1c] text-[var(--ink,#e7f3ef)] border border-[var(--line,#232b29)] hover:border-[#34423e] font-medium text-sm tracking-tight transition-all active:scale-[0.98] cursor-pointer"
+            className="group inline-flex items-center justify-center gap-3 pl-5 pr-2 py-2.5 rounded-full bg-[var(--surface,#121615)] hover:bg-[#181f1c] text-[var(--ink,#e7f3ef)] border border-[var(--line,#232b29)] hover:border-[#34423e] font-medium text-sm tracking-tight transition-all duration-150 active:scale-[0.96] cursor-pointer"
           >
             <span>Guided Walkthrough</span>
             <span className="w-7 h-7 rounded-full bg-[#1c2321] border border-[#2d3733] text-[#8aa39a] group-hover:text-white group-hover:border-[#3d4d47] flex items-center justify-center text-xs group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0">
