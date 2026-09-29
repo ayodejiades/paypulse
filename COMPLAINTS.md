@@ -230,15 +230,77 @@ The complaints centered around six distinct failure categories:
 
 ---
 
+### Prompt 24 · Landing Page Content Too Sparse
+- **Timestamp:** `2026-09-29T22:08:50Z` (23:08 WAT)
+- **Prompt:**
+  > "landing page content too short."
+- **Critique / Grievance:** After stripping out the raw debug table (`<SampleDesk />`), the landing page became too brief, lacking depth, substance, architectural storytelling, and sponsor infrastructure details.
+- **Remediation:** Expanded the landing page into a comprehensive, high-craft fintech product showcase: added a 3-pillar architectural guarantee grid, the 3 real sponsors infrastructure matrix (`SendByte`, `Sabilytics`, `Pxxl`), the technical moat comparison, and expanded product context.
+
+---
+
+### Prompt 25 · Mobile Screens Suggestion (team3 Inspiration)
+- **Timestamp:** `2026-09-29T22:09:50Z` (23:09 WAT)
+- **Prompt:**
+  > "mobile screens like i did in documents/team3 landing page might be a good idea here."  
+  > *(Uploaded screenshot of 3-step 'How it works' rail)*
+- **Critique / Grievance:** The text-only step rail looked dry and failed to showcase the actual PayPulse mobile user journey.
+- **Remediation:** Inspected `/Users/mac/Documents/team3/src/components/UserJourney.jsx` and replicated its hand-drawn SVG status bar icons and device hardware chrome (`.phone`, `.phone-screen`, `.ph-notch`, `.ph-home`), creating a 4-screen responsive device walkthrough displaying real PayPulse invoice lifecycles (Issue & Pin, Threshold Breach, SendByte Dispatch, Instant Settlement).
+
+---
+
+### Prompt 26 · Naira Sign Currency Transgression
+- **Timestamp:** `2026-09-29T22:10:11Z` (23:10 WAT)
+- **Prompt:**
+  > "naira sign here as well."  
+  > *(Uploaded screenshot of `$350,000.00` and `$150,000.00`)*
+- **Critique / Grievance:** The landing page was formatting Nigerian kobo amounts with dollar signs (`$`) instead of the Nigerian Naira symbol (`₦`).
+- **Remediation:** Updated `formatValue` in `lib/landing.ts` to strictly prefix integer kobo, cents, naira, and NGN amounts with `₦`.
+
+---
+
+### Prompt 27 · Pre-Footer Banner Rejection
+- **Timestamp:** `2026-09-29T22:11:04Z` (23:11 WAT)
+- **Prompt:**
+  > "feels off"  
+  > *(Uploaded screenshot of large horizontal pre-footer conversion bar with monospace buttons)*
+- **Critique / Grievance:** An artificial, clunky banner tacked on right above the footer created visual discordance and felt like an unwanted marketing template addition.
+- **Remediation:** Completely removed `PreFooterCTA` from `app/page.tsx` and returned `null` from `components/landing/sections.tsx`, restoring an uncluttered transition to the footer.
+
+---
+
+### Prompt 28 · Redundant Footer Link Cleanup
+- **Timestamp:** `2026-09-29T22:11:19Z` (23:11 WAT)
+- **Prompt:**
+  > "remove from footer."  
+  > *(Uploaded screenshot of `Proof   Verify   Launch Workspace →` in the footer)*
+- **Critique / Grievance:** Redundant action links in the footer cluttered what should be a clean, minimal one-liner footer.
+- **Remediation:** Removed the right-hand link cluster from `Footer`, leaving only the PayPulse wordmark on the left and the copyright notice on the right on a single clean hairline bar.
+
+---
+
+### Prompt 29 · Generic 'P' Square App Icon Removal
+- **Timestamp:** `2026-09-29T22:11:46Z` (23:11 WAT)
+- **Prompt:**
+  > "remove."  
+  > *(Uploaded screenshot of green rounded square icon containing the letter 'P')*
+- **Critique / Grievance:** The wordmark featured a generic, fake app-icon style green square with a letter "P", which looked like a cookie-cutter template badge rather than refined fintech typography.
+- **Remediation:** Stripped the green icon box from `Wordmark` in `components/landing/sections.tsx`, rendering pure, elegant, bold typography (`PayPulse`) in both the header and footer.
+
+---
+
 ## 3. Active Rule Invariants Deduced from Complaints
 
 To avoid repeating any mistakes, the following hard rules govern all subsequent work:
 - [x] **Brand Rule:** Product is named **PayPulse** (never "AIB Ship", never "PayPulse Africa").
+- [x] **Wordmark Rule:** Pure, elegant typography for **PayPulse** (no generic letter-in-a-box icons).
+- [x] **Currency Rule:** ALL currency figures must use the Nigerian Naira sign (`₦`), NEVER `$`.
 - [x] **Palette Rule:** Dark ledger theme only (`#0a0d0c`, `#121615`, `#232b29`, `#e7f3ef`, `#059669`). Never use pink, pastel neobrutalism, or unrequested accent colors.
 - [x] **Button Rule:** Green buttons MUST ALWAYS have pure white text (`#ffffff` / `text-white`), NEVER black.
 - [x] **Iconography Rule:** NO generic shadcn/lucide UI icons. Rely on characterful typography, hairline borders, and subtle ledger status dots.
 - [x] **Copywriting Rule:** ZERO em-dashes (`—`). Zero hyphens in body text or headings ("due date", "integer kobo", "kill switch"). No AI superlatives.
 - [x] **Badge Cluster Rule:** No colored status pills or badge clusters cluttering result cards.
-- [x] **Landing Page Rule:** No raw synthetic debug desks (`<SampleDesk />`) on the landing page. Keep landing page focused purely on product overview, pipeline stages, why it matters, and direct workspace launch.
+- [x] **Landing Page Rule:** No raw synthetic debug desks (`<SampleDesk />`) or artificial pre-footer CTA bars on the landing page.
+- [x] **Device Mockup Rule:** Use crisp, hand-coded device chrome (`.phone`) with SVG status bars as established in `team3`.
 - [x] **Navigation Rule:** Every inner route (`/dashboard/*`, `/proof`, `/verify`, `/demo`, `/lab`) MUST share the unified `DashboardShell` navigation bar.
-- [x] **Footer Rule:** Single-line, compact standard footer (`py-4`) with clean copyright on the left and navigation links on the right.
+- [x] **Footer Rule:** Strictly standard, quiet one-liner footer (`py-5`) with wordmark on the left and copyright on the right. No duplicate nav links.

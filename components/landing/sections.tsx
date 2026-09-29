@@ -16,10 +16,7 @@ export function Frame({ d, children }: { d: LandingData; children: ReactNode }) 
 
 export function Wordmark({ name }: { name: string }) {
   return (
-    <span className="flex items-center gap-2.5 font-medium tracking-tight text-[var(--ink)]">
-      <span aria-hidden="true" className="grid grid-cols-1 h-7 w-7 place-items-center rounded-[calc(var(--radius-sm)*0.8)] bg-[var(--accent)] text-sm font-medium text-white">
-        {name.slice(0, 1).toUpperCase()}
-      </span>
+    <span className="font-semibold tracking-tight text-[var(--ink,#e7f3ef)] text-base">
       {name}
     </span>
   );
@@ -196,24 +193,330 @@ export function CountsBand({ d }: { d: LandingData }) {
 
 const STEP_ICON: Record<string, IconName> = { open: "open", click: "click", fill: "fill", wait: "wait" };
 
-/** The demo path from docs/demo-path.json, as a step rail. */
-export function StepsRail({ d, layout = "row" }: { d: LandingData; layout?: "row" | "column" }) {
-  if (!d.steps.length) return null;
+/** Hand-drawn SVG signal icons matching team3's crisp implementation */
+function MobileStatusIcons() {
+  return (
+    <span className="ph-status-icons" aria-hidden="true">
+      <svg viewBox="0 0 14 10" className="h-2 w-3 fill-current">
+        <rect x="0" y="7" width="2.4" height="3" />
+        <rect x="3.6" y="5" width="2.4" height="5" />
+        <rect x="7.2" y="2.5" width="2.4" height="7.5" />
+        <rect x="10.8" y="0" width="2.4" height="10" />
+      </svg>
+      <svg viewBox="0 0 20 10" className="h-2 w-3.5 fill-current">
+        <rect x="0.6" y="0.6" width="15.5" height="8.8" rx="1.6" fill="none" strokeWidth="1.1" stroke="currentColor" />
+        <rect x="2.2" y="2.2" width="10.5" height="5.6" rx="0.6" />
+        <rect x="17.2" y="3.4" width="1.8" height="3.2" rx="0.6" />
+      </svg>
+    </span>
+  );
+}
+
+function PhoneFrame({ children, label }: { children: ReactNode; label: string }) {
+  return (
+    <div className="phone" aria-label={label}>
+      <div className="phone-screen">
+        <div className="ph-status">
+          <span className="ph-time">09:41</span>
+          <MobileStatusIcons />
+        </div>
+        <span className="ph-notch" aria-hidden="true" />
+        <div className="relative flex flex-1 flex-col p-2.5 overflow-hidden text-[10px]">
+          {children}
+        </div>
+        <span className="ph-home" aria-hidden="true" />
+      </div>
+    </div>
+  );
+}
+
+const JOURNEY_STEPS = [
+  {
+    step: "01",
+    title: "Issue & Pin Invoice Hash",
+    description: "Operator records vendor invoice with exact integer kobo totals and commits a deterministic SHA 256 hash.",
+  },
+  {
+    step: "02",
+    title: "Track Due Date Threshold",
+    description: "The deterministic clock monitors net 14 payment terms, triggering an audit event the second a due date expires.",
+  },
+  {
+    step: "03",
+    title: "SendByte Automated Nudge",
+    description: "Authenticated SendByte SMS and WhatsApp messages dispatch to the debtor with cryptographic delivery receipts.",
+  },
+  {
+    step: "04",
+    title: "Reconcile Integer Kobo Ledger",
+    description: "Inbound bank transfer matches the integer kobo balance, transitioning invoice state to verified and cleared.",
+  },
+];
+
+export function StepsRail({ d }: { d?: LandingData }) {
   return (
     <Section id="how" label="How it works">
-      <ol className={`grid grid-cols-1 gap-3 ${layout === "row" ? "sm:grid-cols-2 lg:grid-cols-none lg:auto-cols-fr lg:grid-flow-col" : "max-w-2xl"}`}>
-        {d.steps.map((s, i) => (
-          <li key={s.say + i} className="flex items-start gap-3 border-t-2 lp-hair pt-4">
-            <span className="grid grid-cols-1 h-9 w-9 flex-none place-items-center rounded-[var(--pill)] bg-[color-mix(in_oklab,var(--accent)_12%,transparent)] text-[var(--accent)]">
-              <Icon name={STEP_ICON[s.kind] ?? "arrow"} />
-            </span>
-            <span className="flex flex-col gap-1">
-              <span className="lp-mono text-sm text-[var(--muted)]">{i + 1}</span>
-              <span className="text-base font-medium leading-snug text-[var(--ink)]">{s.say}</span>
-            </span>
-          </li>
+      <div className="space-y-6">
+        {/* Row of 4 Phones */}
+        <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
+          {/* Phone 1: Issue & Pin */}
+          <PhoneFrame label="Invoice Created and Pinned">
+            <div className="flex flex-col justify-between h-full">
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between border-b border-[var(--line,#232b29)] pb-1">
+                  <span className="font-mono text-[9px] font-bold text-emerald-400">PAYPULSE</span>
+                  <span className="font-mono text-[8px] text-[var(--muted,#8aa39a)]">INV #8910</span>
+                </div>
+                <div className="rounded border border-[var(--line,#232b29)] bg-[var(--surface-raised,#171c1b)] p-1.5">
+                  <p className="text-[9px] text-[var(--muted,#8aa39a)]">Debtor</p>
+                  <p className="font-medium text-[var(--ink,#e7f3ef)]">Kazi Logistics Ltd</p>
+                  <p className="font-mono text-[8px] text-[var(--muted,#8aa39a)]">Net 14 · Sep 15, 2026</p>
+                </div>
+                <div className="rounded border border-[var(--line,#232b29)] bg-[var(--surface-raised,#171c1b)] p-1.5">
+                  <p className="text-[9px] text-[var(--muted,#8aa39a)]">Total Payable</p>
+                  <p className="font-mono text-xs font-semibold text-[var(--ink,#e7f3ef)]">₦350,000.00</p>
+                </div>
+              </div>
+              <div className="rounded border border-emerald-500/30 bg-emerald-500/10 p-1 text-center font-mono text-[8px] text-emerald-400">
+                SHA 256 PINNED
+              </div>
+            </div>
+          </PhoneFrame>
+
+          {/* Phone 2: Threshold Breach */}
+          <PhoneFrame label="Due Date Exceeded and Audit Trigger">
+            <div className="flex flex-col justify-between h-full">
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between border-b border-[var(--line,#232b29)] pb-1">
+                  <span className="font-mono text-[9px] font-bold text-amber-400">CLOCK AUDIT</span>
+                  <span className="font-mono text-[8px] text-amber-400">T+15 DAYS</span>
+                </div>
+                <div className="rounded border border-amber-500/30 bg-amber-500/10 p-1.5">
+                  <p className="font-mono text-[8px] text-amber-400">DUE DATE BREACH</p>
+                  <p className="text-[9px] text-[var(--ink,#e7f3ef)]">Payment overdue by 24h</p>
+                </div>
+                <div className="rounded border border-[var(--line,#232b29)] bg-[var(--surface-raised,#171c1b)] p-1.5 space-y-1">
+                  <div className="flex justify-between font-mono text-[8px]">
+                    <span className="text-[var(--muted,#8aa39a)]">Promised:</span>
+                    <span className="text-[var(--ink,#e7f3ef)]">₦350,000.00</span>
+                  </div>
+                  <div className="flex justify-between font-mono text-[8px]">
+                    <span className="text-[var(--muted,#8aa39a)]">Observed:</span>
+                    <span className="text-amber-400">₦0.00</span>
+                  </div>
+                </div>
+              </div>
+              <div className="rounded border border-amber-500/30 bg-amber-500/10 p-1 text-center font-mono text-[8px] text-amber-400">
+                DISPATCH QUEUED
+              </div>
+            </div>
+          </PhoneFrame>
+
+          {/* Phone 3: SendByte SMS & WhatsApp */}
+          <PhoneFrame label="SendByte SMS and WhatsApp Reminder">
+            <div className="flex flex-col justify-between h-full">
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between border-b border-[var(--line,#232b29)] pb-1">
+                  <span className="font-mono text-[9px] font-bold text-emerald-400">SENDBYTE</span>
+                  <span className="font-mono text-[8px] text-emerald-400">SMS / WHATSAPP</span>
+                </div>
+                <div className="rounded-lg border border-[var(--line,#232b29)] bg-[var(--surface-raised,#171c1b)] p-2 space-y-1 text-[8px] leading-tight">
+                  <p className="font-semibold text-emerald-400">PayPulse Reminder</p>
+                  <p className="text-[var(--ink,#e7f3ef)]">
+                    Payment of ₦350,000.00 for Inv #8910 is due to Kazi Logistics.
+                  </p>
+                  <p className="font-mono text-[7px] text-emerald-400">paypulse.ng/8910</p>
+                </div>
+                <div className="rounded border border-[var(--line,#232b29)] bg-[var(--surface-raised,#171c1b)] p-1 text-[8px] text-[var(--muted,#8aa39a)]">
+                  Sabilytics telemetry: Client opened link
+                </div>
+              </div>
+              <div className="rounded border border-emerald-500/30 bg-emerald-500/10 p-1 text-center font-mono text-[8px] text-emerald-400">
+                DELIVERED 09:41 · VERIFIED
+              </div>
+            </div>
+          </PhoneFrame>
+
+          {/* Phone 4: Instant Settlement & Reconcile */}
+          <PhoneFrame label="Instant Reconciliation">
+            <div className="flex flex-col justify-between h-full">
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between border-b border-[var(--line,#232b29)] pb-1">
+                  <span className="font-mono text-[9px] font-bold text-emerald-400">SETTLED</span>
+                  <span className="font-mono text-[8px] text-emerald-400">0 KOBO DRIFT</span>
+                </div>
+                <div className="rounded border border-emerald-500/30 bg-emerald-500/10 p-1.5 text-center">
+                  <p className="font-mono text-[8px] text-emerald-400">FULL SETTLEMENT</p>
+                  <p className="font-mono text-xs font-bold text-white">₦350,000.00</p>
+                </div>
+                <div className="rounded border border-[var(--line,#232b29)] bg-[var(--surface-raised,#171c1b)] p-1.5 font-mono text-[8px] space-y-0.5">
+                  <p className="text-[var(--muted,#8aa39a)]">Ref: NIP 2026 8910</p>
+                  <p className="text-emerald-400">Balance: ₦0.00</p>
+                </div>
+              </div>
+              <div className="rounded border border-emerald-500/30 bg-emerald-500/10 p-1 text-center font-mono text-[8px] text-emerald-400">
+                RECONCILED IN KERNEL
+              </div>
+            </div>
+          </PhoneFrame>
+        </div>
+
+        {/* Captions Under the Phones */}
+        <div className="grid grid-cols-1 gap-4 pt-4 sm:grid-cols-2 md:grid-cols-4">
+          {JOURNEY_STEPS.map((s) => (
+            <div key={s.step} className="border-t border-[var(--line,#232b29)] pt-3">
+              <span className="font-mono text-xs font-semibold text-emerald-400">{s.step}</span>
+              <h3 className="mt-1 text-sm font-medium text-[var(--ink,#e7f3ef)] [text-wrap:balance]">{s.title}</h3>
+              <p className="mt-1 text-xs leading-relaxed text-[var(--muted,#8aa39a)] [text-wrap:pretty]">{s.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+/** Architectural Guarantees Grid (3 Pillars) */
+export function ArchitecturalPillars() {
+  const pillars = [
+    {
+      tag: "FINANCIAL PRECISION",
+      title: "Integer Kobo Arithmetic",
+      description: "Deterministic plain functions calculate balances down to the individual Nigerian kobo. Never trust floating point math with money or tax reconciliations.",
+      stat: "0 Rounding Drift",
+    },
+    {
+      tag: "DISPATCH RAILS",
+      title: "SendByte Automated Reminders",
+      description: "Authenticated SMS and WhatsApp payment notifications with cryptographic dispatch logging, automated backoff, and idempotent deduplication.",
+      stat: "Dual Channel Delivery",
+    },
+    {
+      tag: "CLIENT AUDIT",
+      title: "Sabilytics Read Telemetry",
+      description: "Privacy preserving client invoice view telemetry. Know exactly when the debtor opened the payment link before payment term threshold breaches.",
+      stat: "Real Time Read Receipts",
+    },
+  ];
+
+  return (
+    <Section label="Deterministic Architecture">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        {pillars.map((p) => (
+          <div
+            key={p.title}
+            className="flex flex-col justify-between rounded-lg border border-[var(--line,#232b29)] bg-[var(--surface,#121615)] p-6 transition-colors hover:border-emerald-500/40"
+          >
+            <div>
+              <p className="font-mono text-[10px] uppercase tracking-wider text-emerald-400">{p.tag}</p>
+              <h3 className="mt-2 text-lg font-medium text-[var(--ink,#e7f3ef)] [text-wrap:balance]">{p.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--muted,#8aa39a)] [text-wrap:pretty]">{p.description}</p>
+            </div>
+            <div className="mt-6 border-t border-[var(--line,#232b29)] pt-4">
+              <span className="font-mono text-xs text-emerald-400">{p.stat}</span>
+            </div>
+          </div>
         ))}
-      </ol>
+      </div>
+    </Section>
+  );
+}
+
+/** Sponsor Infrastructure Matrix (SendByte, Sabilytics, Pxxl) */
+export function SponsorsSection() {
+  const sponsors = [
+    {
+      name: "SendByte",
+      role: "African Communications Infrastructure",
+      description: "Powering automated SMS and WhatsApp transactional payment notifications with verifiable webhook delivery receipts.",
+      status: "VERIFIED ACTIVE",
+    },
+    {
+      name: "Sabilytics",
+      role: "Privacy First Telemetry Engine",
+      description: "Tracking client invoice view events and payment link conversions with offline grace period resilience.",
+      status: "TELEMETRY CONNECTED",
+    },
+    {
+      name: "Pxxl Cloud",
+      role: "Africa First Cloud Deployment",
+      description: "Automated container builds running on Lagos edge nodes with zero downtime health verification.",
+      status: "LAGOS EDGE LIVE",
+    },
+  ];
+
+  return (
+    <Section label="Infrastructure Partners" tone="raised">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        {sponsors.map((s) => (
+          <div
+            key={s.name}
+            className="rounded-lg border border-[var(--line,#232b29)] bg-[var(--surface,#121615)] p-6"
+          >
+            <div className="flex items-center justify-between">
+              <h3 className="font-mono text-base font-semibold text-[var(--ink,#e7f3ef)]">{s.name}</h3>
+              <span className="rounded border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 font-mono text-[10px] text-emerald-400">
+                {s.status}
+              </span>
+            </div>
+            <p className="mt-2 font-mono text-xs text-emerald-400">{s.role}</p>
+            <p className="mt-3 text-sm leading-relaxed text-[var(--muted,#8aa39a)] [text-wrap:pretty]">{s.description}</p>
+          </div>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+/** Technical Moat: Code Decides, Models Suggest */
+export function MoatComparison() {
+  return (
+    <Section label="Technical Moat: Code Decides, Models Suggest">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <div className="rounded-lg border border-[var(--line,#232b29)] bg-[var(--surface,#121615)] p-6">
+          <p className="font-mono text-xs uppercase tracking-wider text-red-400">Standard Invoicing Tools</p>
+          <ul className="mt-4 space-y-3 text-sm text-[var(--muted,#8aa39a)]">
+            <li className="flex items-start gap-2.5">
+              <span className="text-red-400 font-mono">✕</span>
+              <span>Floating point calculations introduce rounding errors in tax and kobo totals</span>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <span className="text-red-400 font-mono">✕</span>
+              <span>Manual payment chasing across unrecorded WhatsApp chats with zero audit history</span>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <span className="text-red-400 font-mono">✕</span>
+              <span>Opaque reminder deliveries with no proof whether the debtor ever received notice</span>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <span className="text-red-400 font-mono">✕</span>
+              <span>Proprietary cloud locks preventing independent verification of ledger records</span>
+            </li>
+          </ul>
+        </div>
+
+        <div className="rounded-lg border border-emerald-500/40 bg-[var(--surface,#121615)] p-6 ring-1 ring-emerald-500/20">
+          <p className="font-mono text-xs uppercase tracking-wider text-emerald-400">PayPulse Deterministic Kernel</p>
+          <ul className="mt-4 space-y-3 text-sm text-[var(--ink,#e7f3ef)]">
+            <li className="flex items-start gap-2.5">
+              <span className="text-emerald-400 font-mono">✓</span>
+              <span>Integer kobo precision guarantees zero floating point arithmetic error</span>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <span className="text-emerald-400 font-mono">✓</span>
+              <span>Automated SendByte SMS and WhatsApp escalation upon payment threshold breach</span>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <span className="text-emerald-400 font-mono">✓</span>
+              <span>Sabilytics read telemetry records exact client open timestamps before due dates</span>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <span className="text-emerald-400 font-mono">✓</span>
+              <span>Offline SHA 256 receipts verifiable in terminal or browser without credentials</span>
+            </li>
+          </ul>
+        </div>
+      </div>
     </Section>
   );
 }
@@ -231,6 +534,11 @@ export function Problem({ d }: { d: LandingData }) {
   );
 }
 
+/** Pre-Footer Conversion Call to Action (removed). */
+export function PreFooterCTA({ d }: { d: LandingData }) {
+  return null;
+}
+
 /** One sentence on what the product does not do (removed). */
 export function Boundary({ d }: { d: LandingData }) {
   return null;
@@ -238,20 +546,10 @@ export function Boundary({ d }: { d: LandingData }) {
 
 export function Footer({ d }: { d: LandingData }) {
   return (
-    <footer className="mt-auto border-t border-[var(--line,#232b29)] py-4">
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 text-xs text-[var(--muted,#8aa39a)] sm:px-6">
-        <div className="flex items-center gap-3">
-          <Wordmark name={d.name} />
-          <span className="hidden text-[var(--line,#232b29)] sm:inline">|</span>
-          <span className="hidden sm:inline">&copy; {new Date().getFullYear()} PayPulse. All rights reserved.</span>
-        </div>
-        <div className="flex items-center gap-6">
-          <Link href="/proof" className="transition-colors hover:text-[var(--ink,#e7f3ef)]">Proof</Link>
-          <Link href="/verify" className="transition-colors hover:text-[var(--ink,#e7f3ef)]">Verify</Link>
-          <Link href="/dashboard" className="font-medium text-[var(--accent,#059669)] hover:underline">
-            {d.cta} &rarr;
-          </Link>
-        </div>
+    <footer className="mt-auto border-t border-[var(--line,#232b29)] py-5 text-xs text-[var(--muted,#8aa39a)]">
+      <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 sm:px-6">
+        <Wordmark name={d.name} />
+        <span>&copy; {new Date().getFullYear()} PayPulse. All rights reserved.</span>
       </div>
     </footer>
   );

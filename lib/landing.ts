@@ -324,8 +324,8 @@ const shortHash = (h: string) => (h.length > 18 ? `${h.slice(0, 10)}…${h.slice
 
 function formatValue(key: string, value: number | string): string {
   if (typeof value === "string") return value;
-  if (/cents$/i.test(key)) return `$${(value / 100).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-  if (/usd$/i.test(key)) return `$${value.toLocaleString("en-US")}`;
+  if (/cents$/i.test(key) || /kobo$/i.test(key)) return `₦${(value / 100).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  if (/usd$/i.test(key) || /naira$/i.test(key) || /ngn$/i.test(key)) return `₦${value.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
   if (/bps$/i.test(key)) return `${value.toLocaleString("en-US")} bps`;
   if (/Ms$/.test(key)) return `${value.toLocaleString("en-US")} ms`;
   return value.toLocaleString("en-US");

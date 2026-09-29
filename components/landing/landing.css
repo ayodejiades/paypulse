@@ -243,3 +243,63 @@
   .lp-rise { animation: none; }
   .lp-btn { transition: none; }
 }
+
+/* Mobile Screens (inspired by team3 UserJourney) */
+.phone {
+  width: 100%;
+  aspect-ratio: 10 / 19.5;
+  padding: 7px;
+  background: #070a09;
+  border: 1px solid var(--line, #232b29);
+  border-radius: 18px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05), 0 8px 24px -10px rgba(0, 0, 0, 0.6);
+}
+
+.phone-screen {
+  position: relative;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--surface, #121615);
+  display: flex;
+  flex-direction: column;
+}
+
+.ph-notch {
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 32%;
+  height: 10px;
+  background: #070a09;
+  border-radius: 0 0 6px 6px;
+  z-index: 10;
+}
+
+.ph-status {
+  position: relative;
+  z-index: 11;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3px 8px 2px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.5rem;
+  color: var(--muted, #8aa39a);
+  flex-shrink: 0;
+}
+
+.ph-time { font-weight: 700; letter-spacing: 0.02em; }
+.ph-status-icons { display: inline-flex; align-items: center; gap: 3px; }
+
+.ph-home {
+  position: absolute;
+  bottom: 3px; left: 50%;
+  transform: translateX(-50%);
+  width: 30%;
+  height: 2px;
+  background: currentColor;
+  opacity: 0.35;
+  border-radius: 2px;
+  z-index: 10;
+}
