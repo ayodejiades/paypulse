@@ -26,7 +26,7 @@
       "caseId": "SME-CASE-02",
       "category": "BENIGN_INVOICE_FORMAT_REVISE",
       "expectedState": "BENIGN_CONTROL_NO_DRIFT",
-      "sourceCaptureT0": "Invoice #NG-2026-8911 for NGN 75,000 payable to PayPulse Africa merchant escrow account.",
+      "sourceCaptureT0": "Invoice #NG-2026-8911 for NGN 75,000 payable to PayPulse merchant escrow account.",
       "extractedExcerpt": "Invoice #NG-2026-8911 for NGN 75,000",
       "promisedCents": 7500000,
       "observedCents": 7500000,

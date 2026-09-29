@@ -13,6 +13,7 @@ import { useState } from "react";
 import Link from "next/link";
 import campaignData from "../../evidence/campaign-report.json";
 import { evaluateDeterministicKernel, type ReconciliationInput } from "@/lib/kernel";
+import { DashboardShell } from "@/components/dashboard-shell";
 
 type ProofCase = ReconciliationInput & {
   title: string;
@@ -31,118 +32,82 @@ export default function Web2ProofPage() {
 
   if (!generated || !decision) {
     return (
-      <div className="min-h-screen bg-[var(--bg,#0a0a0a)] text-[var(--fg,#ededed)]">
-        <main className="mx-auto flex max-w-3xl flex-col gap-6 px-6 py-16">
+      <DashboardShell project="PayPulse">
+        <div className="mx-auto flex max-w-3xl flex-col gap-6 py-12">
           <div className="flex flex-col gap-2">
-            <span className="font-mono text-xs uppercase tracking-wider text-[var(--fg-muted,#888)]">
+            <span className="font-mono text-xs uppercase tracking-wider text-[var(--fg-muted,#8aa39a)]">
               /proof · EVIDENCE &amp; SAFETY KERNEL
             </span>
-            <h1 className="text-2xl font-semibold tracking-tight">
+            <h1 className="text-2xl font-semibold tracking-tight text-[var(--fg,#e7f3ef)]">
               No evidence cases generated yet
             </h1>
-            <p className="text-sm text-[var(--fg-muted,#888)]">
+            <p className="text-sm text-[var(--fg-muted,#8aa39a)]">
               This page inspects the verification cases committed to{" "}
-              <code className="font-mono">evidence/campaign-report.json</code>. The file
-              ships empty because the cases are specific to this product and can only be
-              written once the domain logic exists.
+              <code className="font-mono">evidence/campaign-report.json</code>.
             </p>
           </div>
 
-          <div className="flex flex-col gap-2 rounded-lg border border-[var(--border,#262626)] bg-[var(--surface,#121212)] p-5 font-mono text-xs text-[var(--fg-muted,#888)]">
+          <div className="flex flex-col gap-2 rounded-lg border border-[var(--border,#232b29)] bg-[var(--surface,#121615)] p-5 font-mono text-xs text-[var(--fg-muted,#8aa39a)]">
             <span>
-              status: <span className="text-[var(--fg)]">{summary.status ?? "NOT_GENERATED"}</span>
+              status: <span className="text-[var(--fg,#e7f3ef)]">{summary.status ?? "NOT_GENERATED"}</span>
             </span>
             <span>{summary.note}</span>
           </div>
-
-          <div className="flex gap-3">
-            <Link
-              href="/demo"
-              className="rounded bg-[var(--accent)] px-4 py-2 text-sm font-medium text-[var(--accent-contrast)]"
-            >
-              See the guided demo
-            </Link>
-            <Link
-              href="/"
-              className="rounded border border-[var(--border,#262626)] px-4 py-2 text-sm"
-            >
-              Back to the overview
-            </Link>
-          </div>
-        </main>
-      </div>
+        </div>
+      </DashboardShell>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[var(--bg,#0a0a0a)] text-[var(--fg,#ededed)]">
-      <header className="flex h-16 items-center justify-between border-b border-[var(--border,#262626)] px-6 max-w-6xl mx-auto w-full">
-        <div className="flex items-center gap-3">
-          <Link href="/" className="text-lg font-bold tracking-tight text-[var(--fg)]">
-            PayPulse Africa
-          </Link>
-          <span className="rounded border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-xs text-emerald-400 font-mono">
-            /proof · EVIDENCE & SAFETY KERNEL
-          </span>
-        </div>
-        <nav className="flex items-center gap-4 text-sm">
-          <Link href="/" className="text-[var(--fg-muted,#888)] hover:text-[var(--fg)]">
-            Overview
-          </Link>
-          <Link href="/dashboard" className="text-[var(--fg-muted,#888)] hover:text-[var(--fg)]">
-            Live Workspace
-          </Link>
-        </nav>
-      </header>
-
-      <main className="max-w-6xl mx-auto px-6 py-12 flex flex-col gap-12">
+    <DashboardShell project="PayPulse">
+      <div className="flex flex-col gap-8">
         {/* Headline Measured Proof Banner */}
-        <section className="flex flex-col gap-4 border border-[var(--border,#262626)] bg-[var(--surface,#121212)] p-6 rounded-lg">
+        <section className="flex flex-col gap-6 border border-[var(--border,#232b29)] bg-[var(--surface,#121615)] p-6 rounded-lg shadow-sm">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
-              <span className="text-xs font-mono uppercase tracking-wider text-emerald-400">
-                Inspectable Production & Campaign Proof (No Signup Required)
+              <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-semibold">
+                Inspectable Production &amp; Campaign Proof (No Signup Required)
               </span>
-              <h1 className="text-2xl font-semibold tracking-tight mt-1">
-                AI Extracts; Deterministic Code Decides.
+              <h1 className="text-2xl font-semibold tracking-tight text-[var(--fg,#e7f3ef)] mt-1">
+                Deterministic Due-Date &amp; Integer-Kobo Safety Kernel
               </h1>
-              <p className="text-sm text-[var(--fg-muted,#888)] mt-1 max-w-3xl">
+              <p className="text-sm text-[var(--fg-muted,#8aa39a)] mt-1 max-w-3xl">
                 Every extracted commitment requires a verbatim substring in the immutable T0 source capture. Unbound claims fail closed, benign rewrites are ignored, and provider claims are held in <code className="text-amber-300">WAITING_TO_VERIFY</code> until a later observation reconciles.
               </p>
             </div>
-            <div className="flex flex-col items-end font-mono text-xs gap-1">
-              <span className="rounded bg-emerald-500/15 text-emerald-400 px-2.5 py-1 border border-emerald-500/30">
+            <div className="flex flex-col items-end font-mono text-xs gap-1.5">
+              <span className="rounded bg-emerald-500/15 text-emerald-400 px-3 py-1 border border-emerald-500/30 font-semibold">
                 verify:evidence {summary.invariantsPassed} PASS
               </span>
-              <span className="text-[var(--fg-muted,#888)]">
+              <span className="text-[var(--fg-muted,#8aa39a)]">
                 Mechanism: {campaignData.mechanismVersion}
               </span>
             </div>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 pt-4 border-t border-[var(--border,#262626)] font-mono text-xs">
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 pt-4 border-t border-[var(--border,#232b29)] font-mono text-xs">
             <div className="flex flex-col gap-1">
-              <span className="text-[var(--fg-muted,#888)]">EXCERPT-BOUND</span>
-              <span className="text-base font-semibold text-emerald-400">{summary.evidenceBoundDecisions}</span>
+              <span className="text-[var(--fg-muted,#8aa39a)]">EXCERPT-BOUND</span>
+              <span className="text-base font-semibold text-emerald-400 tabular-nums">{summary.evidenceBoundDecisions}</span>
             </div>
             <div className="flex flex-col gap-1">
-              <span className="text-[var(--fg-muted,#888)]">MATERIAL DRIFT</span>
-              <span className="text-base font-semibold text-[var(--fg)]">{summary.materialDriftDetected}</span>
+              <span className="text-[var(--fg-muted,#8aa39a)]">MATERIAL DRIFT</span>
+              <span className="text-base font-semibold text-[var(--fg,#e7f3ef)] tabular-nums">{summary.materialDriftDetected}</span>
             </div>
             <div className="flex flex-col gap-1">
-              <span className="text-[var(--fg-muted,#888)]">BENIGN CONTROL</span>
-              <span className="text-base font-semibold text-[var(--fg)]">{summary.benignChangesIgnored}</span>
+              <span className="text-[var(--fg-muted,#8aa39a)]">BENIGN CONTROL</span>
+              <span className="text-base font-semibold text-[var(--fg,#e7f3ef)] tabular-nums">{summary.benignChangesIgnored}</span>
             </div>
             <div className="flex flex-col gap-1">
-              <span className="text-[var(--fg-muted,#888)]">AMBIGUITY ABSTAIN</span>
-              <span className="text-base font-semibold text-[var(--fg)]">{summary.ambiguityAbstention}</span>
+              <span className="text-[var(--fg-muted,#8aa39a)]">AMBIGUITY ABSTAIN</span>
+              <span className="text-base font-semibold text-[var(--fg,#e7f3ef)] tabular-nums">{summary.ambiguityAbstention}</span>
             </div>
             <div className="flex flex-col gap-1">
-              <span className="text-[var(--fg-muted,#888)]">FALSE VERIFIED</span>
-              <span className="text-base font-semibold text-emerald-400">{summary.falseVerifiedClaims}</span>
+              <span className="text-[var(--fg-muted,#8aa39a)]">FALSE VERIFIED</span>
+              <span className="text-base font-semibold text-emerald-400 tabular-nums">{summary.falseVerifiedClaims}</span>
             </div>
           </div>
-          <p className="text-xs font-mono text-[var(--fg-muted,#888)] border-t border-[var(--border,#262626)] pt-3">
+          <p className="text-xs font-mono text-[var(--fg-muted,#8aa39a)] border-t border-[var(--border,#232b29)] pt-3">
             Disclosed calibration note: {summary.benignChangesFirstRunNote}
           </p>
         </section>
@@ -150,8 +115,8 @@ export default function Web2ProofPage() {
         {/* Interactive Case & Refusal Tester */}
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           <div className="lg:col-span-5 flex flex-col gap-3">
-            <h2 className="text-sm font-mono uppercase tracking-wider text-[var(--fg-muted,#888)]">
-              1. Select Verification Fixture (Happy, Control, Refusal)
+            <h2 className="text-sm font-mono uppercase tracking-wider text-[var(--fg-muted,#8aa39a)] font-semibold">
+              1. Select Verification Fixture
             </h2>
             {cases.map((c) => {
               const isSelected = c.caseId === activeCase.caseId;
@@ -161,27 +126,27 @@ export default function Web2ProofPage() {
                   type="button"
                   onClick={() => setSelectedCaseId(c.caseId)}
                   data-demo={`proof-case-${c.caseId}`}
-                  className={`text-left p-4 rounded-lg border transition-colors flex flex-col gap-1.5 ${
+                  className={`text-left p-4 rounded-lg border transition-colors flex flex-col gap-1.5 cursor-pointer ${
                     isSelected
-                      ? "border-emerald-500 bg-[var(--surface-raised,#1a1a1a)]"
-                      : "border-[var(--border,#262626)] bg-[var(--surface,#121212)] hover:border-neutral-600"
+                      ? "border-[var(--accent,#059669)] bg-[var(--surface-raised,#171c1b)]"
+                      : "border-[var(--border,#232b29)] bg-[var(--surface,#121615)] hover:border-[var(--fg-muted,#8aa39a)]/40"
                   }`}
                 >
                   <div className="flex items-center justify-between text-xs font-mono">
-                    <span className="text-emerald-400">{c.category}</span>
-                    <span className="text-[var(--fg-muted,#888)]">{c.expectedState}</span>
+                    <span className="text-emerald-400 font-semibold">{c.category}</span>
+                    <span className="text-[var(--fg-muted,#8aa39a)]">{c.expectedState}</span>
                   </div>
-                  <p className="text-sm font-medium text-[var(--fg)]">{c.title}</p>
+                  <p className="text-sm font-medium text-[var(--fg,#e7f3ef)]">{c.title || c.caseId}</p>
                 </button>
               );
             })}
           </div>
 
-          <div className="lg:col-span-7 flex flex-col gap-4 border border-[var(--border,#262626)] bg-[var(--surface,#121212)] p-6 rounded-lg">
-            <div className="flex items-center justify-between border-b border-[var(--border,#262626)] pb-4">
+          <div className="lg:col-span-7 flex flex-col gap-4 border border-[var(--border,#232b29)] bg-[var(--surface,#121615)] p-6 rounded-lg shadow-sm">
+            <div className="flex items-center justify-between border-b border-[var(--border,#232b29)] pb-4">
               <div>
-                <span className="text-xs font-mono text-emerald-400">DETERMINISTIC KERNEL VERDICT</span>
-                <h3 className="text-lg font-semibold mt-0.5">{decision.state}</h3>
+                <span className="text-xs font-mono text-emerald-400 font-semibold">DETERMINISTIC KERNEL VERDICT</span>
+                <h3 className="text-lg font-semibold mt-0.5 text-[var(--fg,#e7f3ef)]">{decision.state}</h3>
               </div>
               <span
                 className={`px-2.5 py-1 rounded text-xs font-mono border ${
@@ -194,40 +159,40 @@ export default function Web2ProofPage() {
               </span>
             </div>
 
-            <p className="text-sm text-[var(--fg-muted,#888)]">{decision.summary}</p>
+            <p className="text-sm text-[var(--fg-muted,#8aa39a)]">{decision.summary}</p>
 
             <div className="grid grid-cols-1 gap-3 text-xs font-mono">
-              <div className="rounded border border-[var(--border,#262626)] bg-[var(--bg,#0a0a0a)] p-3">
-                <div className="text-[var(--fg-muted,#888)] mb-1">IMMUTABLE T0 SOURCE CAPTURE</div>
-                <div className="text-[var(--fg)]">{activeCase.sourceCaptureT0}</div>
+              <div className="rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] p-3">
+                <div className="text-[var(--fg-muted,#8aa39a)] mb-1 uppercase font-semibold">Immutable T0 Source Capture</div>
+                <div className="text-[var(--fg,#e7f3ef)]">{activeCase.sourceCaptureT0}</div>
               </div>
-              <div className="rounded border border-[var(--border,#262626)] bg-[var(--bg,#0a0a0a)] p-3">
-                <div className="text-[var(--fg-muted,#888)] mb-1">MODEL-EXTRACTED EXCERPT CANDIDATE</div>
-                <div className={decision.excerptBound ? "text-emerald-400" : "text-rose-400"}>
+              <div className="rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] p-3">
+                <div className="text-[var(--fg-muted,#8aa39a)] mb-1 uppercase font-semibold">Model-Extracted Excerpt Candidate</div>
+                <div className={decision.excerptBound ? "text-emerald-400" : "text-red-400"}>
                   &ldquo;{activeCase.extractedExcerpt}&rdquo;
                 </div>
               </div>
             </div>
 
             <div className="flex flex-col gap-2 pt-2">
-              <span className="text-xs font-mono uppercase text-[var(--fg-muted,#888)]">
+              <span className="text-xs font-mono uppercase text-[var(--fg-muted,#8aa39a)] font-semibold">
                 Invariant Checks (lib/kernel.ts)
               </span>
               {decision.invariants.map((inv) => (
                 <div
                   key={inv.id}
-                  className="flex items-center justify-between gap-4 rounded border border-[var(--border,#262626)] bg-[var(--bg,#0a0a0a)] px-3 py-2 text-xs font-mono"
+                  className="flex items-center justify-between gap-4 rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] px-3 py-2 text-xs font-mono"
                 >
                   <span>
                     <strong className="text-emerald-400">{inv.id}</strong> · {inv.name}
                   </span>
-                  <span className="text-[var(--fg-muted,#888)] truncate max-w-[320px]">{inv.detail}</span>
+                  <span className="text-[var(--fg-muted,#8aa39a)] truncate max-w-[320px]">{inv.detail}</span>
                 </div>
               ))}
             </div>
           </div>
         </section>
-      </main>
-    </div>
+      </div>
+    </DashboardShell>
   );
 }

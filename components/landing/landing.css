@@ -118,7 +118,7 @@
 
 .lp-btn-primary {
   background: var(--accent);
-  color: var(--accent-ink);
+  color: #ffffff;
   box-shadow: 0 0 0 var(--button-edge, 0px) var(--line), var(--button-shadow);
 }
 

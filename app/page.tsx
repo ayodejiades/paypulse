@@ -2,7 +2,7 @@
 // Every word and number comes from lib/landing.ts (brief.json, docs/demo-path.json and the
 // fixture). Reorder or swap the sections below to fit the product.
 import { loadLanding } from "@/lib/landing";
-import { Boundary, Footer, Frame, Hero, Nav, Problem, Section, StepsRail } from "@/components/landing/sections";
+import { Footer, Frame, Hero, Nav, Problem, Section, StepsRail } from "@/components/landing/sections";
 import { SampleDesk } from "@/components/landing/sample-desk";
 
 export default function Landing() {
@@ -17,7 +17,6 @@ export default function Landing() {
         </Section>
         <StepsRail d={d} />
         <Problem d={d} />
-        <Boundary d={d} />
       </main>
       <Footer d={d} />
     </Frame>

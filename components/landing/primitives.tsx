@@ -30,11 +30,7 @@ export function Icon({ name, className = "h-4 w-4" }: { name: IconName; classNam
 }
 
 export function StateChip({ state, label }: { state: DecisionState; label: string }) {
-  return (
-    <span className="lp-state" data-state={state}>
-      {label}
-    </span>
-  );
+  return null;
 }
 
 export function SyntheticBadge() {
@@ -115,8 +111,7 @@ export function FindingCard({
   const Heading = headingLevel;
   return (
     <article className="flex flex-col gap-5">
-      <div className="flex flex-wrap items-center justify-between gap-2">
-        <StateChip state={c.state} label={c.verdict} />
+      <div className="flex items-center justify-between gap-2">
         <span className="lp-mono text-sm text-[var(--muted)]">{c.id}</span>
       </div>
       <div className="flex flex-col gap-2">

@@ -167,7 +167,7 @@ function StepPills({ steps, step, setStep }: { steps: DemoStep[]; step: number; 
               aria-current={state === "now" ? "step" : undefined}
               className={`lp-focus flex items-center gap-2 rounded-[var(--pill)] border px-3 py-1.5 text-sm transition-colors ${
                 state === "now"
-                  ? "border-transparent bg-[var(--accent)] text-[var(--accent-ink)]"
+                  ? "border-transparent bg-[var(--accent)] text-white"
                   : state === "done"
                     ? "lp-hair bg-[var(--raised)] text-[var(--ink)]"
                     : "lp-hair text-[var(--muted)]"

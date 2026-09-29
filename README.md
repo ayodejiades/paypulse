@@ -1,6 +1,6 @@
-# PayPulse Africa
+# PayPulse
 
-PayPulse Africa: Automated SME Invoicing and SMS/WhatsApp Payment Reminders
+PayPulse: Automated SME Invoicing and SMS/WhatsApp Payment Reminders
 
 > **Engineered by Ayodeji Adesegun** ([@ayodejiades](https://github.com/ayodejiades))
 
@@ -16,7 +16,7 @@ PayPulse Africa: Automated SME Invoicing and SMS/WhatsApp Payment Reminders
 
 ## What it does
 
-PayPulse Africa: Automated SME Invoicing and SMS/WhatsApp Payment Reminders
+PayPulse: Automated SME Invoicing and SMS/WhatsApp Payment Reminders
 
 ## How it works
 

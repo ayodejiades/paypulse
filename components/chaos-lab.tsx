@@ -106,32 +106,32 @@ export function ChaosLab() {
   return (
     <div className="space-y-6">
       {/* Header Banner */}
-      <div className="rounded-lg border border-[var(--border,#262626)] bg-[var(--surface,#121212)] p-6">
+      <div className="rounded-lg border border-[var(--border,#232b29)] bg-[var(--surface,#121615)] p-6 shadow-sm">
         <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-mono text-xs uppercase tracking-widest text-emerald-400">
+              <span className="font-mono text-xs uppercase tracking-widest text-[var(--accent,#059669)] font-semibold">
                 System Hardening & Chaos Suite
               </span>
               <span className="rounded bg-emerald-950/60 px-2 py-0.5 text-[11px] font-mono text-emerald-300 border border-emerald-800/40">
                 Self-Healing Engine: Active
               </span>
             </div>
-            <h1 className="text-xl font-semibold text-[var(--fg,#ededed)] tracking-tight mt-1">
-              The Reliability & Chaos Lab
+            <h1 className="text-xl font-semibold text-[var(--fg,#e7f3ef)] tracking-tight mt-1">
+              The Reliability &amp; Chaos Lab
             </h1>
-            <p className="text-xs text-[var(--fg-muted,#888)] mt-1 max-w-2xl">
+            <p className="text-xs text-[var(--fg-muted,#8aa39a)] mt-1 max-w-2xl">
               Deterministic failure mode and stress testbench. Inject network partitions, schema corruption, burst traffic, and adversarial prompts to evaluate runtime recovery and fault tolerance.
             </p>
           </div>
           <div className="flex items-center gap-4 mt-4 md:mt-0 font-mono text-xs">
-            <div className="rounded border border-[var(--border,#262626)] bg-zinc-950 px-3 py-2 text-center">
-              <div className="text-[10px] uppercase text-zinc-500">Faults Injected</div>
-              <div className="text-base font-semibold text-zinc-200">{stats.simulationsRun}</div>
+            <div className="rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] px-3 py-2 text-center">
+              <div className="text-[10px] uppercase text-[var(--fg-muted,#8aa39a)]">Faults Injected</div>
+              <div className="text-base font-semibold text-[var(--fg,#e7f3ef)] tabular-nums">{stats.simulationsRun}</div>
             </div>
-            <div className="rounded border border-[var(--border,#262626)] bg-zinc-950 px-3 py-2 text-center">
-              <div className="text-[10px] uppercase text-zinc-500">Self-Heal Rate</div>
-              <div className="text-base font-semibold text-emerald-400">{stats.resilienceScore}%</div>
+            <div className="rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] px-3 py-2 text-center">
+              <div className="text-[10px] uppercase text-[var(--fg-muted,#8aa39a)]">Self-Heal Rate</div>
+              <div className="text-base font-semibold text-emerald-400 tabular-nums">{stats.resilienceScore}%</div>
             </div>
           </div>
         </div>

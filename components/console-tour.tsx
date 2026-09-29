@@ -428,7 +428,7 @@ export function ConsoleTour() {
                     Independent verification
                   </p>
                   <h3 className="mt-1 text-[18px] font-medium tracking-[-0.02em] text-[#171717]">
-                    Check the evidence without trusting us — recompute offline or flip a byte in `/verify`
+                    Check the evidence without trusting us: recompute offline or flip a byte in `/verify`
                   </h3>
                 </div>
                 <Link href="/verify" className="text-[13px] font-medium text-[#2563eb] hover:underline">
@@ -455,7 +455,7 @@ export function ConsoleTour() {
         </div>
       </div>
 
-      {/* Who This Is For — 3-Seat Hairline Grid */}
+      {/* Who This Is For: 3 Seat Hairline Grid */}
       <div className="space-y-3">
         <div>
           <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-[#2563eb]">

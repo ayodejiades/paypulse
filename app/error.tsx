@@ -16,7 +16,7 @@ export default function Error({
       <div className="max-w-md space-y-3">
         <h1 className="text-2xl font-semibold tracking-tight">Something went wrong</h1>
         <p className="text-sm text-[var(--fg-muted)]">
-          This request could not be completed. The app is still running — retrying often
+          This request could not be completed. The app is still running; retrying often
           works, and nothing was saved.
         </p>
         {error.digest && (

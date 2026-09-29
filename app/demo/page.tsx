@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { BENCHMARK_CASES, evaluateSafetyKernel } from "@/lib/kernel";
 import { isDemoMode } from "@/lib/demo-mode";
+import { DashboardShell } from "@/components/dashboard-shell";
 
 const STAGES = [
   {
@@ -11,7 +12,7 @@ const STAGES = [
     code: "01_RECORD",
     title: "01 · Record Baseline Commitment",
     seam: "KERNEL_DB (Drizzle / Postgres)",
-    summary: "Operator registers a watched vendor surface and pins the baseline snapshot SHA-256 hash.",
+    summary: "Operator registers a watched vendor surface and pins baseline snapshot SHA 256 hash.",
   },
   {
     step: 2,
@@ -23,23 +24,23 @@ const STAGES = [
   {
     step: 3,
     code: "03_DETECT",
-    title: "03 · Agent Extraction vs. Safety Kernel",
+    title: "03 · Extraction vs. Safety Kernel",
     seam: "EXTRACTION (Structured Schema) -> KERNEL",
-    summary: "Agent proposes structured diff; deterministic 5-invariant kernel verifies byte-substring grounding.",
+    summary: "Agent proposes structured diff; deterministic safety kernel verifies byte substring grounding.",
   },
   {
     step: 4,
     code: "04_RESOLVE",
     title: "04 · Deterministic State Transition",
     seam: "KERNEL_DB + DISPATCH (Signed Webhook)",
-    summary: "If all 5 invariants pass, state transitions to MATERIAL_DRIFT_DETECTED and dispatches operator packet.",
+    summary: "If all invariants pass, state transitions to MATERIAL_DRIFT_DETECTED and dispatches operator packet.",
   },
   {
     step: 5,
     code: "05_RECEIPT",
     title: "05 · Signed Evidence Packet & Hash",
     seam: "VERIFY (/verify CLI & Browser)",
-    summary: "Produces a canonical SHA-256 receipt packet verifiable offline without credentials.",
+    summary: "Produces a canonical SHA 256 receipt packet verifiable offline without credentials.",
   },
 ];
 
@@ -59,8 +60,8 @@ export default function GuidedDemoPage() {
       caseData: BENCHMARK_CASES[2],
     },
     {
-      label: "Scenario C · Adversarial Hallucination (Kernel Refusal)",
-      badge: "REFUSED BY INV-01",
+      label: "Scenario C · Adversarial Injection (Kernel Refusal)",
+      badge: "REFUSED BY INV 01",
       caseData: {
         ...BENCHMARK_CASES[0],
         id: "CASE-ADV-99",
@@ -79,56 +80,26 @@ export default function GuidedDemoPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[var(--bg,#f5f5f5)] text-[var(--fg,#171717)]">
-      {/* Top Judge Bar */}
-      <div className="border-b border-[var(--border,#e5e5e5)] bg-[var(--surface,#ffffff)] px-6 py-2.5">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2 font-mono text-xs">
-          <div className="flex items-center gap-2">
-            <span className="rounded border border-[#2563eb]/30 bg-[#2563eb]/10 px-2 py-0.5 text-[11px] font-medium text-[#2563eb]">
-              GUIDED WALKTHROUGH · NO SIGN-UP
-            </span>
-            <span className="hidden text-[var(--fg-muted,#737373)] md:inline">
-              Agents Propose · Deterministic Code Decides
-            </span>
-          </div>
-          <div className="flex items-center gap-3 text-[var(--fg-muted,#737373)]">
-            <Link href="/" className="hover:text-[var(--fg,#171717)]">01 Overview</Link>
-            <span>&rarr;</span>
-            <Link href="/onboarding" className="hover:text-[var(--fg,#171717)]">02 Onboarding</Link>
-            <span>&rarr;</span>
-            <Link href="/demo" className="font-semibold text-[#2563eb]">03 Guided Demo</Link>
-            <span>&rarr;</span>
-            <Link href="/dashboard" className="hover:text-[var(--fg,#171717)]">04 Console</Link>
-            <span>&rarr;</span>
-            <Link href="/proof" className="hover:text-[var(--fg,#171717)]">05 Proof</Link>
-            <span>&rarr;</span>
-            <Link href="/verify" className="hover:text-[var(--fg,#171717)]">06 Verify</Link>
-          </div>
-        </div>
-      </div>
-
-      <div className="mx-auto max-w-6xl space-y-8 px-6 py-10">
+    <DashboardShell project="PayPulse">
+      <div className="space-y-8">
         {/* Header */}
-        <div className="flex flex-col justify-between gap-4 border-b border-[var(--border,#e5e5e5)] pb-6 md:flex-row md:items-center">
+        <div className="flex flex-col justify-between gap-4 border-b border-[var(--border,#232b29)] pb-6 md:flex-row md:items-center">
           <div>
             <div className="mb-1 flex flex-wrap items-center gap-2">
-              <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-[#2563eb]">
+              <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-emerald-400">
                 Interactive State Machine Walkthrough
               </p>
-              {/* Say what is real before the judge has to ask. The kernel below runs
-                  for real in both modes; in DEMO_MODE the capture and extraction inputs
-                  are committed fixtures, not a live page fetch. */}
               {isDemoMode() && (
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--border,#e5e5e5)] bg-[var(--surface,#ffffff)] px-2.5 py-0.5 font-mono text-[10px] text-[var(--fg-muted,#737373)]">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]" aria-hidden />
-                  Demo data — not live
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--border,#232b29)] bg-[var(--surface,#121615)] px-2.5 py-0.5 font-mono text-[10px] text-[var(--fg-muted,#8aa39a)]">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" aria-hidden />
+                  Deterministic offline fixture mode
                 </span>
               )}
             </div>
-            <h1 className="text-2xl font-medium tracking-[-0.02em] text-[var(--fg,#171717)] md:text-3xl">
-              5-Stage Evidence Lifecycle (`Record &rarr; Watch &rarr; Detect &rarr; Resolve &rarr; Receipt`)
+            <h1 className="text-2xl font-medium tracking-[-0.02em] text-[var(--fg,#e7f3ef)] [text-wrap:balance] md:text-3xl">
+              Five Stage Evidence Lifecycle
             </h1>
-            <p className="mt-1 text-sm text-[var(--fg-muted,#737373)]">
+            <p className="mt-1 text-sm text-[var(--fg-muted,#8aa39a)] [text-wrap:pretty]">
               Step through a complete lifecycle or switch scenarios to watch the deterministic kernel refuse hallucinated excerpts.
             </p>
           </div>
@@ -137,13 +108,13 @@ export default function GuidedDemoPage() {
               type="button"
               data-demo="advance-stage"
               onClick={advanceStage}
-              className="rounded-md bg-[#171717] px-4 py-2.5 font-mono text-xs font-medium text-white transition-colors hover:bg-[#171717]/90"
+              className="rounded-md bg-[var(--accent,#059669)] px-4 py-2.5 font-mono text-xs font-semibold text-white transition-colors hover:bg-[#047857]"
             >
               Advance Lifecycle Stage ({stageIndex + 1}/5) &rarr;
             </button>
             <Link
               href="/dashboard"
-              className="rounded-md border border-[var(--border,#e5e5e5)] bg-[var(--surface,#ffffff)] px-4 py-2.5 font-mono text-xs text-[var(--fg,#171717)] hover:border-[#171717]"
+              className="rounded-md border border-[var(--border,#232b29)] bg-[var(--surface,#121615)] px-4 py-2.5 font-mono text-xs text-[var(--fg,#e7f3ef)] hover:border-emerald-500/50"
             >
               Open Full Console &rarr;
             </Link>
@@ -163,24 +134,24 @@ export default function GuidedDemoPage() {
               }}
               className={`rounded-lg border p-4 text-left transition-all ${
                 selectedCaseIndex === idx
-                  ? "border-[#2563eb] bg-[var(--surface,#ffffff)] ring-1 ring-inset ring-[#2563eb]"
-                  : "border-[var(--border,#e5e5e5)] bg-[var(--surface,#ffffff)] hover:border-[#171717]/40"
+                  ? "border-emerald-500 bg-[var(--surface,#121615)] ring-1 ring-inset ring-emerald-500"
+                  : "border-[var(--border,#232b29)] bg-[var(--surface,#121615)] hover:border-emerald-500/40"
               }`}
             >
               <div className="mb-1 flex items-center justify-between gap-2">
-                <span className="font-mono text-xs font-semibold text-[#2563eb]">{sc.caseData.id}</span>
-                <span className="rounded border border-[var(--border,#e5e5e5)] bg-[var(--bg,#f5f5f5)] px-2 py-0.5 font-mono text-[10px] text-[var(--fg-muted,#737373)]">
+                <span className="font-mono text-xs font-semibold text-emerald-400">{sc.caseData.id}</span>
+                <span className="rounded border border-[var(--border,#232b29)] bg-[var(--bg,#0a0d0c)] px-2 py-0.5 font-mono text-[10px] text-[var(--fg-muted,#8aa39a)]">
                   {sc.badge}
                 </span>
               </div>
-              <div className="text-sm font-medium text-[var(--fg,#171717)]">{sc.label}</div>
-              <p className="mt-1 truncate text-xs text-[var(--fg-muted,#737373)]">{sc.caseData.title}</p>
+              <div className="text-sm font-medium text-[var(--fg,#e7f3ef)]">{sc.label}</div>
+              <p className="mt-1 truncate text-xs text-[var(--fg-muted,#8aa39a)]">{sc.caseData.title}</p>
             </button>
           ))}
         </div>
 
         {/* 5-Stage Pipeline Stepper */}
-        <div className="grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-[var(--border,#e5e5e5)] bg-[var(--border,#e5e5e5)] md:grid-cols-5">
+        <div className="grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-[var(--border,#232b29)] bg-[var(--border,#232b29)] md:grid-cols-5">
           {STAGES.map((st, idx) => {
             const isCurrent = idx === stageIndex;
             const isPassed = idx < stageIndex;
@@ -191,18 +162,18 @@ export default function GuidedDemoPage() {
                 onClick={() => setStageIndex(idx)}
                 className={`p-3.5 text-left transition-all ${
                   isCurrent
-                    ? "bg-[var(--surface,#ffffff)] ring-1 ring-inset ring-[#2563eb]"
-                    : "bg-[var(--surface,#ffffff)] hover:bg-[var(--bg,#f5f5f5)]"
+                    ? "bg-[var(--surface,#121615)] ring-1 ring-inset ring-emerald-500"
+                    : "bg-[var(--surface,#121615)] hover:bg-[var(--bg,#0a0d0c)]"
                 }`}
               >
                 <div className="mb-1 flex items-center justify-between font-mono text-[10px]">
-                  <span className="text-[var(--fg-muted,#737373)]">STAGE 0{st.step}</span>
-                  <span className={isCurrent ? "font-semibold text-[#2563eb]" : isPassed ? "text-[#16a34a]" : "text-[var(--fg-muted,#737373)]"}>
+                  <span className="text-[var(--fg-muted,#8aa39a)]">STAGE 0{st.step}</span>
+                  <span className={isCurrent ? "font-semibold text-emerald-400" : isPassed ? "text-emerald-400" : "text-[var(--fg-muted,#8aa39a)]"}>
                     {isCurrent ? "ACTIVE" : isPassed ? "DONE" : "PENDING"}
                   </span>
                 </div>
-                <div className="mb-1 text-xs font-medium text-[var(--fg,#171717)]">{st.title}</div>
-                <div className="font-mono text-[10px] text-[var(--fg-muted,#737373)]">{st.seam}</div>
+                <div className="mb-1 text-xs font-medium text-[var(--fg,#e7f3ef)]">{st.title}</div>
+                <div className="font-mono text-[10px] text-[var(--fg-muted,#8aa39a)]">{st.seam}</div>
               </button>
             );
           })}
@@ -211,18 +182,18 @@ export default function GuidedDemoPage() {
         {/* Main Inspection Grid */}
         <div className="grid gap-6 lg:grid-cols-12">
           {/* Left 7 Cols: Live Stage Payload */}
-          <div className="space-y-5 rounded-lg border border-[var(--border,#e5e5e5)] bg-[var(--surface,#ffffff)] p-6 lg:col-span-7">
-            <div className="flex items-center justify-between border-b border-[var(--border,#e5e5e5)] pb-4">
+          <div className="space-y-5 rounded-lg border border-[var(--border,#232b29)] bg-[var(--surface,#121615)] p-6 lg:col-span-7">
+            <div className="flex items-center justify-between border-b border-[var(--border,#232b29)] pb-4">
               <div>
-                <span className="font-mono text-[11px] uppercase text-[#2563eb]">{currentStage.seam}</span>
-                <h2 className="mt-0.5 text-lg font-medium text-[var(--fg,#171717)]">{currentStage.title}</h2>
-                <p className="mt-0.5 text-xs text-[var(--fg-muted,#737373)]">{currentStage.summary}</p>
+                <span className="font-mono text-[11px] uppercase text-emerald-400">{currentStage.seam}</span>
+                <h2 className="mt-0.5 text-lg font-medium text-[var(--fg,#e7f3ef)]">{currentStage.title}</h2>
+                <p className="mt-0.5 text-xs text-[var(--fg-muted,#8aa39a)]">{currentStage.summary}</p>
               </div>
               <span
                 className={`rounded px-3 py-1 font-mono text-xs font-medium ${
                   evaluation.approved
-                    ? "border border-[#16a34a]/30 bg-[#16a34a]/10 text-[#16a34a]"
-                    : "border border-[#dc2626]/30 bg-[#dc2626]/10 text-[#dc2626]"
+                    ? "border border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
+                    : "border border-red-500/30 bg-red-500/10 text-red-400"
                 }`}
               >
                 {evaluation.verdict}
@@ -230,32 +201,32 @@ export default function GuidedDemoPage() {
             </div>
 
             <div className="space-y-3">
-              <div className="rounded-md border border-[var(--border,#e5e5e5)] bg-[var(--bg,#f5f5f5)] p-3.5">
-                <div className="mb-1 font-mono text-[10px] uppercase text-[var(--fg-muted,#737373)]">
-                  Baseline Snapshot (`beforeText`)
+              <div className="rounded-md border border-[var(--border,#232b29)] bg-[var(--bg,#0a0d0c)] p-3.5">
+                <div className="mb-1 font-mono text-[10px] uppercase text-[var(--fg-muted,#8aa39a)]">
+                  Baseline Snapshot (before text)
                 </div>
-                <p className="font-mono text-xs leading-relaxed text-[var(--fg,#171717)]">
+                <p className="font-mono text-xs leading-relaxed text-[var(--fg,#e7f3ef)]">
                   {activeScenario.caseData.beforeText}
                 </p>
               </div>
 
-              <div className="rounded-md border border-[var(--border,#e5e5e5)] bg-[var(--bg,#f5f5f5)] p-3.5">
-                <div className="mb-1 font-mono text-[10px] uppercase text-[var(--fg-muted,#737373)]">
-                  Captured Live DOM (`afterText`)
+              <div className="rounded-md border border-[var(--border,#232b29)] bg-[var(--bg,#0a0d0c)] p-3.5">
+                <div className="mb-1 font-mono text-[10px] uppercase text-[var(--fg-muted,#8aa39a)]">
+                  Captured Live DOM (after text)
                 </div>
-                <p className="font-mono text-xs leading-relaxed text-[var(--fg,#171717)]">
+                <p className="font-mono text-xs leading-relaxed text-[var(--fg,#e7f3ef)]">
                   {activeScenario.caseData.afterText}
                 </p>
               </div>
 
-              <div className="rounded-md border border-[var(--border,#e5e5e5)] bg-[var(--bg,#f5f5f5)] p-3.5">
+              <div className="rounded-md border border-[var(--border,#232b29)] bg-[var(--bg,#0a0d0c)] p-3.5">
                 <div className="mb-1 flex items-center justify-between font-mono text-[10px] uppercase">
-                  <span className="text-[#2563eb]">Agent Proposed Literal Excerpt (`proposedExcerpt`)</span>
+                  <span className="text-emerald-400">Agent Proposed Literal Excerpt</span>
                   <span
                     className={
                       activeScenario.caseData.afterText.includes(activeScenario.caseData.proposedExcerpt)
-                        ? "text-[#16a34a]"
-                        : "text-[#dc2626]"
+                        ? "text-emerald-400"
+                        : "text-red-400"
                     }
                   >
                     {activeScenario.caseData.afterText.includes(activeScenario.caseData.proposedExcerpt)
@@ -263,45 +234,45 @@ export default function GuidedDemoPage() {
                       : "SUBSTRING MISMATCH"}
                   </span>
                 </div>
-                <p className="font-mono text-xs text-[var(--fg,#171717)]">
+                <p className="font-mono text-xs text-[var(--fg,#e7f3ef)]">
                   &ldquo;{activeScenario.caseData.proposedExcerpt}&rdquo;
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center justify-between rounded-md border border-[var(--border,#e5e5e5)] bg-[var(--bg,#f5f5f5)] p-3.5 font-mono text-xs">
-              <span className="text-[var(--fg-muted,#737373)]">Deterministic Receipt SHA-256:</span>
-              <span className="max-w-[320px] truncate text-[var(--fg,#171717)]">{evaluation.evidenceHash}</span>
+            <div className="flex items-center justify-between rounded-md border border-[var(--border,#232b29)] bg-[var(--bg,#0a0d0c)] p-3.5 font-mono text-xs">
+              <span className="text-[var(--fg-muted,#8aa39a)]">Deterministic Receipt SHA 256:</span>
+              <span className="max-w-[320px] truncate text-emerald-400">{evaluation.evidenceHash}</span>
             </div>
           </div>
 
           {/* Right 5 Cols: 5-Invariant Kernel Verdict */}
           <div className="space-y-6 lg:col-span-5">
-            <div className="space-y-4 rounded-lg border border-[var(--border,#e5e5e5)] bg-[var(--surface,#ffffff)] p-6">
+            <div className="space-y-4 rounded-lg border border-[var(--border,#232b29)] bg-[var(--surface,#121615)] p-6">
               <div className="flex items-center justify-between">
-                <h3 className="font-mono text-xs font-semibold uppercase tracking-wider text-[var(--fg,#171717)]">
-                  5-Invariant Safety Kernel Gate
+                <h3 className="font-mono text-xs font-semibold uppercase tracking-wider text-[var(--fg,#e7f3ef)]">
+                  Five Invariant Safety Kernel Gate
                 </h3>
-                <span className="font-mono text-xs text-[var(--fg-muted,#737373)]">lib/kernel.ts</span>
+                <span className="font-mono text-xs text-[var(--fg-muted,#8aa39a)]">lib/kernel.ts</span>
               </div>
 
               <div className="space-y-2">
                 {evaluation.invariantResults.map((inv) => (
                   <div
                     key={inv.id}
-                    className="flex items-start justify-between gap-3 rounded-md border border-[var(--border,#e5e5e5)] bg-[var(--bg,#f5f5f5)] p-3"
+                    className="flex items-start justify-between gap-3 rounded-md border border-[var(--border,#232b29)] bg-[var(--bg,#0a0d0c)] p-3"
                   >
                     <div>
-                      <div className="font-mono text-xs font-semibold text-[var(--fg,#171717)]">
+                      <div className="font-mono text-xs font-semibold text-[var(--fg,#e7f3ef)]">
                         {inv.id} · {inv.name}
                       </div>
-                      <div className="mt-0.5 text-[11px] text-[var(--fg-muted,#737373)]">{inv.reason}</div>
+                      <div className="mt-0.5 text-[11px] text-[var(--fg-muted,#8aa39a)]">{inv.reason}</div>
                     </div>
                     <span
                       className={`shrink-0 rounded px-2 py-0.5 font-mono text-[10px] ${
                         inv.passed
-                          ? "border border-[#16a34a]/30 bg-[#16a34a]/10 text-[#16a34a]"
-                          : "border border-[#dc2626]/30 bg-[#dc2626]/10 text-[#dc2626]"
+                          ? "border border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
+                          : "border border-red-500/30 bg-red-500/10 text-red-400"
                       }`}
                     >
                       {inv.passed ? "PASS" : "REFUSED"}
@@ -311,34 +282,34 @@ export default function GuidedDemoPage() {
               </div>
             </div>
 
-            <div className="space-y-3 rounded-lg border border-[var(--border,#e5e5e5)] bg-[var(--surface,#ffffff)] p-5">
-              <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-[var(--fg-muted,#737373)]">
-                Continue Judge Evaluation Path
+            <div className="space-y-3 rounded-lg border border-[var(--border,#232b29)] bg-[var(--surface,#121615)] p-5">
+              <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-[var(--fg-muted,#8aa39a)]">
+                Continue Evaluation Path
               </div>
               <div className="grid grid-cols-2 gap-2.5 font-mono text-xs">
                 <Link
                   href="/dashboard/sponsors"
-                  className="rounded-md border border-[var(--border,#e5e5e5)] bg-[var(--bg,#f5f5f5)] p-3 text-[var(--fg,#171717)] hover:border-[#171717]"
+                  className="rounded-md border border-[var(--border,#232b29)] bg-[var(--bg,#0a0d0c)] p-3 text-[var(--fg,#e7f3ef)] hover:border-emerald-500/50"
                 >
-                  Sponsor Kill-Switch &rarr;
+                  Sponsor Controls &rarr;
                 </Link>
                 <Link
                   href="/proof"
-                  className="rounded-md border border-[var(--border,#e5e5e5)] bg-[var(--bg,#f5f5f5)] p-3 text-[var(--fg,#171717)] hover:border-[#171717]"
+                  className="rounded-md border border-[var(--border,#232b29)] bg-[var(--bg,#0a0d0c)] p-3 text-[var(--fg,#e7f3ef)] hover:border-emerald-500/50"
                 >
-                  Proof &amp; Ledger (/proof) &rarr;
+                  Ledger Proof (/proof) &rarr;
                 </Link>
                 <Link
                   href="/verify"
-                  className="col-span-2 rounded-md border border-[var(--border,#e5e5e5)] bg-[var(--bg,#f5f5f5)] p-3 text-[#2563eb] hover:border-[#2563eb]"
+                  className="col-span-2 rounded-md border border-[var(--border,#232b29)] bg-[var(--bg,#0a0d0c)] p-3 text-emerald-400 hover:border-emerald-500"
                 >
-                  1-Byte Tamper &amp; Receipt Verifier (/verify) &rarr;
+                  Receipt Verifier (/verify) &rarr;
                 </Link>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </main>
+    </DashboardShell>
   );
 }

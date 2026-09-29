@@ -18,7 +18,7 @@ export function Frame({ d, children }: { d: LandingData; children: ReactNode }) 
 export function Wordmark({ name }: { name: string }) {
   return (
     <span className="flex items-center gap-2.5 font-medium tracking-tight text-[var(--ink)]">
-      <span aria-hidden="true" className="grid grid-cols-1 h-7 w-7 place-items-center rounded-[calc(var(--radius-sm)*0.8)] bg-[var(--accent)] text-sm font-medium text-[var(--accent-ink)]">
+      <span aria-hidden="true" className="grid grid-cols-1 h-7 w-7 place-items-center rounded-[calc(var(--radius-sm)*0.8)] bg-[var(--accent)] text-sm font-medium text-white">
         {name.slice(0, 1).toUpperCase()}
       </span>
       {name}
@@ -52,16 +52,16 @@ export function TrustRow({ d, className = "" }: { d: LandingData; className?: st
   return (
     <ul className={`flex flex-wrap gap-x-5 gap-y-2 text-sm text-[var(--muted)] ${className}`}>
       {d.trust.map((t) => (
-        <li key={t} className="flex items-center gap-1.5">
-          <Icon name="shield" className="h-4 w-4 flex-none" />
-          {t}
+        <li key={t} className="flex items-center gap-2">
+          <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]" aria-hidden="true" />
+          <span>{t}</span>
         </li>
       ))}
       {d.checkedAt ? (
         <li>
-          <Link href="/proof" className="lp-focus flex items-center gap-1.5 rounded hover:text-[var(--ink)]">
-            <Icon name="check" className="h-4 w-4 flex-none" />
-            Checked <span className="lp-mono">{d.checkedAt}</span>
+          <Link href="/proof" className="lp-focus flex items-center gap-2 rounded hover:text-[var(--ink)]">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" aria-hidden="true" />
+            <span>Checked <span className="lp-mono">{d.checkedAt}</span></span>
           </Link>
         </li>
       ) : null}
@@ -73,12 +73,6 @@ function HeroCopy({ d, align = "left" }: { d: LandingData; align?: "left" | "cen
   const center = align === "center";
   return (
     <div className={`flex flex-col gap-6 ${center ? "items-center text-center" : "items-start"}`}>
-      {d.audience ? (
-        <p className="lp-rise flex items-center gap-2 text-sm text-[var(--muted)]" style={{ "--delay": "0ms" } as CSSProperties}>
-          <span className="lp-dot" style={{ "--tone": "var(--accent)" } as CSSProperties} />
-          {d.audience}
-        </p>
-      ) : null}
       <h1
         className={`lp-rise lp-display text-[clamp(3rem,7vw,5.75rem)] text-[var(--ink)] ${center ? "mx-auto" : ""}`}
         style={{ "--delay": "60ms" } as CSSProperties}
@@ -96,8 +90,7 @@ function HeroCopy({ d, align = "left" }: { d: LandingData; align?: "left" | "cen
       <div className={`lp-rise flex flex-wrap gap-3 ${center ? "justify-center" : ""}`} style={{ "--delay": "180ms" } as CSSProperties}>
         <TryButton disabled={!d.cases.length} />
         <Link href="/dashboard" data-demo="launch-demo" className="lp-btn lp-btn-quiet">
-          {d.cta}
-          <Icon name="arrow" />
+          {d.cta} &rarr;
         </Link>
       </div>
       <TrustRow d={d} className={`lp-rise ${center ? "justify-center" : ""}`} />
@@ -237,29 +230,26 @@ export function Problem({ d }: { d: LandingData }) {
   );
 }
 
-/** One sentence on what the product does not do. */
+/** One sentence on what the product does not do (removed). */
 export function Boundary({ d }: { d: LandingData }) {
-  if (!d.boundary) return null;
-  return (
-    <div className="mx-auto w-full max-w-6xl px-4 pb-16 sm:px-6 sm:pb-24">
-      <p className="flex max-w-[60ch] items-start gap-3 text-base leading-relaxed text-[var(--ink)]">
-        <Icon name="shield" className="mt-1 h-5 w-5 flex-none text-[var(--accent)]" />
-        <span>{d.boundary}</span>
-      </p>
-    </div>
-  );
+  return null;
 }
 
 export function Footer({ d }: { d: LandingData }) {
   return (
-    <footer className="mt-auto border-t lp-hair">
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 py-10 text-sm text-[var(--muted)] sm:flex-row sm:items-center sm:justify-between sm:px-6">
-        <Wordmark name={d.name} />
-        <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
-          {d.cases.length ? <span>Sample data is synthetic</span> : null}
-          <Link href="/proof" className="lp-focus rounded hover:text-[var(--ink)]">Proof</Link>
-          <Link href="/verify" className="lp-focus rounded hover:text-[var(--ink)]">Verify</Link>
-          <Link href="/dashboard" className="lp-focus rounded hover:text-[var(--ink)]">{d.cta}</Link>
+    <footer className="mt-auto border-t border-[var(--line,#232b29)] py-4">
+      <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 text-xs text-[var(--muted,#8aa39a)] sm:px-6">
+        <div className="flex items-center gap-3">
+          <Wordmark name={d.name} />
+          <span className="hidden text-[var(--line,#232b29)] sm:inline">|</span>
+          <span className="hidden sm:inline">&copy; {new Date().getFullYear()} PayPulse. All rights reserved.</span>
+        </div>
+        <div className="flex items-center gap-6">
+          <Link href="/proof" className="transition-colors hover:text-[var(--ink,#e7f3ef)]">Proof</Link>
+          <Link href="/verify" className="transition-colors hover:text-[var(--ink,#e7f3ef)]">Verify</Link>
+          <Link href="/dashboard" className="font-medium text-[var(--accent,#059669)] hover:underline">
+            {d.cta} &rarr;
+          </Link>
         </div>
       </div>
     </footer>

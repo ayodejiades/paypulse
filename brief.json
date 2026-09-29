@@ -1,7 +1,7 @@
 {
-  "project": "aib-ship",
-  "name": "PayPulse Africa",
-  "idea": "PayPulse Africa: Automated SME Invoicing and SMS/WhatsApp Payment Reminders",
+  "project": "paypulse",
+  "name": "PayPulse",
+  "idea": "PayPulse: Automated SME Invoicing and SMS/WhatsApp Payment Reminders",
   "track": "web2",
   "team": 1,
   "event": {
@@ -58,9 +58,8 @@
   "source": "rules",
   "unknown": [],
   "wedge": {
-    "title": "PayPulse Africa",
-    "sector": "Fintech & Payments · PayPulse Africa: Automated SME Invoicing",
-    "target_user": "African SME finance manager reconciling vendor invoices and recovering overdue receivables",
+    "title": "PayPulse",
+    "sector": "Fintech & Payments · PayPulse: Automated SME Invoicing",
     "painful_moment": "Chasing overdue invoice payments across disparate bank transfers and WhatsApp threads without automated reminders or audit trails.",
     "unusual_constraint": "Zero unhandled exceptions under upstream telco failure with deterministic local queuing and SendByte fallback.",
     "proof_metric": "Reconcile 100 sample payment records in under 2 seconds with integer-kobo precision and proof receipts",
@@ -76,17 +75,42 @@
     "demand_signals": [],
     "archetype": "workflow-tool"
   },
+  "landing": {
+    "promise": "Automated invoice recovery & verified payment telemetry",
+    "boundary": "Deterministic integer-kobo audit kernel with zero unhandled dispatch failures.",
+    "cta": "Launch Workspace",
+    "trust": [
+      "Deterministic integer-kobo arithmetic",
+      "SendByte verified SMS & WhatsApp delivery",
+      "Zero-downtime Lagos edge deployment via Pxxl"
+    ],
+    "stateLabels": {
+      "clear": "Reconciled",
+      "flagged": "Overdue Flagged",
+      "pending": "Awaiting Telemetry",
+      "refused": "Refused / Unbound"
+    }
+  },
   "design": {
-    "preset": "calm",
-    "style": {
-      "--bg": "#09090b",
-      "--surface": "#121215",
-      "--surface-raised": "#18181b",
-      "--border": "#27272a",
-      "--ink": "#fafafa",
-      "--muted": "#a1a1aa",
-      "--accent": "#059669",
-      "--accent-ink": "#ffffff"
+    "preset": "night",
+    "accent": "#059669",
+    "radius": 8,
+    "tokens": {
+      "mode": "dark",
+      "bg": "#0a0d0c",
+      "surface": "#121615",
+      "raised": "#171c1b",
+      "ink": "#e7f3ef",
+      "muted": "#8aa39a",
+      "line": "#232b29",
+      "accent": "#059669",
+      "accent-ink": "#021610",
+      "state-clear": "#059669",
+      "state-flagged": "#f59e0b",
+      "state-pending": "#eab308",
+      "state-refused": "#ef4444",
+      "edge": 1,
+      "shadow": "0 10px 24px -12px rgba(0, 0, 0, 0.7)"
     }
   }
 }

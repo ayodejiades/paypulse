@@ -15,7 +15,7 @@ export async function submitRecord(formData: FormData): Promise<{ ok: boolean; e
     await createRecord(title);
   } catch (err) {
     console.error("submitRecord failed:", err);
-    return { ok: false, error: "could not save — the database is unavailable right now" };
+    return { ok: false, error: "could not save; the database is unavailable right now" };
   }
   revalidatePath("/");
   revalidatePath("/dashboard");

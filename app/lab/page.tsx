@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function LabPage() {
   return (
-    <DashboardShell project="PayPulse Africa">
+    <DashboardShell project="PayPulse">
       <ChaosLab />
     </DashboardShell>
   );
