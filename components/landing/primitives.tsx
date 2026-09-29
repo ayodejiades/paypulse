@@ -42,6 +42,25 @@ export function SyntheticBadge() {
   );
 }
 
+function renderFactValue(val: string) {
+  if (typeof val !== "string" || !val.includes("₦")) return val;
+  const parts = val.split("₦");
+  return (
+    <>
+      {parts.map((part, i) => (
+        <span key={i}>
+          {i > 0 && (
+            <span className="text-[0.72em] font-sans font-medium text-[var(--muted,#8aa39a)] mr-0.5 inline-block align-baseline select-none">
+              ₦
+            </span>
+          )}
+          <span>{part}</span>
+        </span>
+      ))}
+    </>
+  );
+}
+
 export function FactGrid({ facts }: { facts: Fact[]; size?: "md" | "lg" }) {
   if (!facts.length) return null;
   const cols = facts.length === 1 ? "grid-cols-1" : facts.length === 3 ? "grid-cols-1 sm:grid-cols-3" : "grid-cols-2";
@@ -50,7 +69,9 @@ export function FactGrid({ facts }: { facts: Fact[]; size?: "md" | "lg" }) {
       {facts.map((f) => (
         <div key={f.label + f.value} className="bg-[var(--surface)] px-3.5 py-2.5">
           <dt className="font-mono text-[10px] uppercase tracking-wider text-[var(--muted)]">{f.label}</dt>
-          <dd className="lp-mono mt-0.5 text-sm sm:text-[15px] font-medium text-[var(--ink)] break-words">{f.value}</dd>
+          <dd className="lp-mono mt-0.5 text-sm sm:text-[15px] font-medium text-[var(--ink)] break-words">
+            {renderFactValue(f.value)}
+          </dd>
         </div>
       ))}
     </dl>

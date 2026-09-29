@@ -33,15 +33,8 @@ export function DashboardShell({
       <header className="sticky top-0 z-40 border-b border-[var(--border,#232b29)] bg-[var(--surface,#121615)]/95 backdrop-blur-md px-4 py-2.5">
         <div className="mx-auto flex max-w-[1480px] items-center justify-between gap-4">
           <div className="flex items-center gap-6">
-            <Link href="/" className="inline-flex items-center gap-2.5 text-[14px] font-semibold tracking-[-0.01em] text-[var(--fg,#e7f3ef)] hover:opacity-90 transition-opacity">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--accent,#059669)] opacity-75"></span>
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--accent,#059669)]"></span>
-              </span>
-              <span className="font-bold tracking-tight">PayPulse</span>
-              <span className="hidden sm:inline-block rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] px-1.5 py-0.5 font-mono text-[10px] uppercase text-[var(--fg-muted,#8aa39a)]">
-                Ledger
-              </span>
+            <Link href="/" className="inline-flex items-center text-[15px] font-bold tracking-tight text-[var(--fg,#e7f3ef)] hover:opacity-90 transition-opacity">
+              <span>PayPulse</span>
             </Link>
 
             {/* Main Navigation Links */}
@@ -68,7 +61,6 @@ export function DashboardShell({
           {/* Right Status Indicator */}
           <div className="flex items-center gap-2.5">
             <div className="hidden lg:flex items-center gap-2 rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] px-2.5 py-1 font-mono text-[11px] text-[var(--fg-muted,#8aa39a)]">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
               <span>KERNEL: DETERMINISTIC</span>
               <span className="text-[var(--border,#232b29)]">|</span>
               <span className="text-emerald-400">DEMO_MODE</span>

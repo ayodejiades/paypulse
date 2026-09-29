@@ -329,21 +329,132 @@ The complaints centered around six distinct failure categories:
 
 ---
 
+### Prompt 34 · Oculupi-Styled Button Paradigm & Northeast Forward Arrow
+- **Timestamp:** `2026-09-29T22:14:22Z` (23:14 WAT)
+- **Prompt:**
+  > "documents/oculupi styled buttons retain our colours but make changes to the forward arrow."
+- **Critique / Grievance:** Buttons lacked the distinctive tactile craft of `documents/oculupi` (asymmetrical pill padding, dark circular badge housing the forward arrow, smooth micro-translation hover, and active press scale).
+- **Remediation:** Refactored buttons in `Nav`, `HeroCopy`, and `ClosingCTA` to adopt Oculupi's signature rounded-full pill design while strictly retaining PayPulse's primary green (`#059669` / white text) and dark surface border palette. Enclosed forward arrow in a circular badge.
+
+---
+
+### Prompt 35 · Redundant Headline Subtitle Removal
+- **Timestamp:** `2026-09-29T22:15:24Z` (23:15 WAT)
+- **Prompt:**
+  > "remove."  
+  > *(Uploaded screenshot of 'PayPulse: Automated SME Invoicing and SMS/WhatsApp Payment Reminders')*
+- **Critique / Grievance:** Cluttered hero copy repeating the product description under the main heading.
+- **Remediation:** Removed `{d.idea ? <p>{d.idea}</p> : null}` from `HeroCopy` in `components/landing/sections.tsx`.
+
+---
+
+### Prompt 36 · Sponsor Status Badge Purge
+- **Timestamp:** `2026-09-29T22:15:50Z` (23:15 WAT)
+- **Prompt:**
+  > "remove and its brothers"  
+  > *(Uploaded screenshot of 'VERIFIED ACTIVE' badge)*
+- **Critique / Grievance:** Superficial badge clusters ('VERIFIED ACTIVE', 'TELEMETRY CONNECTED', 'LAGOS EDGE LIVE') pinned to sponsor cards violating anti-slop rules.
+- **Remediation:** Stripped all status pills and badges from the cards.
+
+---
+
+### Prompt 37 · Orphaned Problem Block & Bottom Padding Disconnect
+- **Timestamp:** `2026-09-29T22:16:15Z` (23:16 WAT)
+- **Prompt:**
+  > "too much space. is this the cta?"  
+  > *(Uploaded screenshot of 'Why it matters' block sitting alone in massive empty vertical padding above the footer)*
+- **Critique / Grievance:** A lonely sentence floating in `py-28` empty space looking like an accidental, broken pseudo-CTA.
+- **Remediation:** Removed `<Problem>` from the bottom of the page. Introduced a tight, purposeful `ClosingCTA` (`py-10 md:py-14`) modeled after Oculupi's concise Section 7 with a single Oculupi-styled action button.
+
+---
+
+### Prompt 38 · Overly Formal CTA Tone Grievance
+- **Timestamp:** `2026-09-29T22:17:00Z` (23:17 WAT)
+- **Prompt:**
+  > "too formal and not inviting. were mbolde skills used here?"  
+  > *(Uploaded screenshot of 'Launch Workspace' grey rectangular button)*
+- **Critique / Grievance:** Cold, sterile corporate jargon ("Launch Workspace") in an uninviting dark box lacking accessible, welcoming UX principles.
+- **Remediation:** Replaced "Launch Workspace" with the warm, active, and inviting "Start live demo" in `brief.json` and all CTA buttons.
+
+---
+
+### Prompt 39 · Stray Indicator Dots Purge
+- **Timestamp:** `2026-09-29T22:17:36Z` (23:17 WAT)
+- **Prompt:**
+  > "remove the dots."  
+  > *(Uploaded screenshot of pulsing green dot next to PayPulse and sub-header dot)*
+- **Critique / Grievance:** Gratuitous decorative dots cluttering header brand typography and page subtitles.
+- **Remediation:** Removed pulsing status dots from `DashboardShell` brand link, `dashboard/page.tsx` subtitle, and `TrustRow`.
+
+---
+
+### Prompt 40 · Header 'LEDGER' Badge Removal
+- **Timestamp:** `2026-09-29T22:17:55Z` (23:17 WAT)
+- **Prompt:**
+  > "remove."  
+  > *(Uploaded screenshot of 'LEDGER' tag in the top bar)*
+- **Critique / Grievance:** Redundant archetype badge tacked onto the brand wordmark in the dashboard shell.
+- **Remediation:** Deleted the `LEDGER` tag from `DashboardShell` in `components/dashboard-shell.tsx`.
+
+---
+
+### Prompt 41 · Landing Page Sponsor Billboard Replacement
+- **Timestamp:** `2026-09-29T22:18:37Z` (23:18 WAT)
+- **Prompt:**
+  > "do we really need this on the landing page? find better things to put here."  
+  > *(Uploaded screenshot of the 3 large Infrastructure Partner cards)*
+- **Critique / Grievance:** Irrelevant sponsor marketing cards consuming prime landing page real estate instead of delivering tangible SME value.
+- **Remediation:** Replaced the cards with the **Automated Cashflow Recovery Lifecycle**—a 4-stage operational timeline (`01 Invoice Generation`, `02 Read Telemetry`, `03 Multichannel Escalation`, `04 Cryptographic Settlement`) showcasing measurable metrics. Relocated sponsor verification to a quiet, high-trust single-line footer ribbon linking to `/dashboard/sponsors`.
+
+---
+
+### Prompt 42 · Monospace Naira Sign Optical Size Imbalance
+- **Timestamp:** `2026-09-29T22:19:37Z` (23:19 WAT)
+- **Prompt:**
+  > "you didn't fix oh. the naira sign is bigger than the rest of the numbers."  
+  > *(Uploaded screenshot showing oversized '₦' towering above '350,000.00')*
+- **Critique / Grievance:** Monospace font fallback rendered the Unicode `₦` (U+20A6) from a system font at a much larger em-height than the numeric digits, making the symbol awkwardly tall and thick.
+- **Remediation:** Implemented `renderFactValue()` in `components/landing/primitives.tsx` to isolate the `₦` glyph in a dedicated span scaled down (`text-[0.72em] font-sans font-medium`), perfectly aligning its cap-height and baseline to the monospace digits.
+
+---
+
+### Prompt 43 · Northeast Forward Arrow Direction
+- **Timestamp:** `2026-09-29T22:20:13Z` (23:20 WAT)
+- **Prompt:**
+  > "let the forward arrows be northeast."
+- **Critique / Grievance:** Horizontal arrows were flat and lacked Oculupi's signature diagonal propulsion.
+- **Remediation:** Replaced horizontal arrow SVGs with northeast (`↗`) vectors (`line x1="7" y1="17" x2="17" y2="7"` / `polyline points="7 7 17 7 17 17"`) paired with smooth northeast hover micro-translation (`group-hover:translate-x-0.5 group-hover:-translate-y-0.5`).
+
+---
+
+### Prompt 44 · Primary Action Copywriting Canonicalization
+- **Timestamp:** `2026-09-29T22:21:26Z` (23:21 WAT)
+- **Prompt:**
+  > "shouldn't it be get started? the plan is to have something production ready on default but it has demo mode that can be activated with demo_mode"  
+  > *(Uploaded screenshot of 'Start live demo' button)*
+- **Critique / Grievance:** "Start live demo" downgraded the perceived authority and commercial readiness of PayPulse to an artificial testbed. The product is fundamentally built as an operational, production-ready system on default, with `DEMO_MODE=1` functioning as an offline/evaluation switch.
+- **Remediation:** Updated `d.cta` to **"Get started"** in `brief.json` and across all call-to-action buttons.
+
+---
+
 ## 3. Active Rule Invariants Deduced from Complaints
 
 To avoid repeating any mistakes, the following hard rules govern all subsequent work:
 - [x] **Brand Rule:** Product is named **PayPulse** (never "AIB Ship", never "PayPulse Africa").
-- [x] **Wordmark Rule:** Pure, elegant typography for **PayPulse** (no generic letter-in-a-box icons).
+- [x] **Wordmark Rule:** Pure, elegant typography for **PayPulse** (no generic letter-in-a-box icons, no decorative dots, no archetype badges like 'LEDGER').
 - [x] **Currency Rule:** ALL currency figures must use the Nigerian Naira sign (`₦`), NEVER `$`.
+- [x] **Naira Symbol Optical Alignment Rule:** The `₦` sign MUST be scaled (`text-[0.72em]`) and baseline-aligned so it never towers over numeric digits in monospace contexts.
 - [x] **Typography & Sizing Rule:** Proportional financial numbers (`text-[15px]`), never bloated overflowing text sizes.
 - [x] **Section Delineation Rule:** Every section MUST have hairline dividing borders (`border-t border-[#232b29]`), alternating surface tones (`#0a0d0c` vs `#121615`), and clear monospace section indicators.
 - [x] **No Duplicate Headers:** Never stack identical IDs or titles on top of each other.
 - [x] **Palette Rule:** Dark ledger theme only (`#0a0d0c`, `#121615`, `#232b29`, `#e7f3ef`, `#059669`). Never use pink, pastel neobrutalism, or unrequested accent colors.
-- [x] **Button Rule:** Green buttons MUST ALWAYS have pure white text (`#ffffff` / `text-white`), NEVER black.
-- [x] **Iconography Rule:** NO generic shadcn/lucide UI icons. Rely on characterful typography, hairline borders, and subtle ledger status dots.
+- [x] **Button Rule:** Oculupi-styled pill geometry (`rounded-full`, asymmetrical padding, circular badge housing a northeast `↗` arrow). Green buttons MUST ALWAYS have pure white text (`#ffffff` / `text-white`), NEVER black.
+- [x] **CTA Tone Rule:** Canonical, production-ready copy: **"Get started"**, NEVER demo toy labels like "Start live demo" or corporate jargon like "Launch Workspace".
+- [x] **Iconography Rule:** NO generic shadcn/lucide UI icons. Rely on characterful typography, hairline borders, and SVG northeast vectors.
 - [x] **Copywriting Rule:** ZERO em-dashes (`—`). Zero hyphens in body text or headings ("due date", "integer kobo", "kill switch"). No AI superlatives.
-- [x] **Badge Cluster Rule:** No colored status pills, fake check dates, or badge clusters cluttering result cards.
-- [x] **Landing Page Rule:** No raw synthetic debug desks (`<SampleDesk />`) or artificial pre-footer CTA bars on the landing page.
+- [x] **Badge Cluster Rule:** No colored status pills ('VERIFIED ACTIVE'), fake check dates, or badge clusters cluttering cards.
+- [x] **Landing Page Rule:** Focus on SME product value and operational lifecycles; do NOT clutter the landing page with sponsor billboards or raw debug desks.
 - [x] **Device Mockup Rule:** Use crisp, hand-coded device chrome (`.phone`) with SVG status bars as established in `team3`.
-- [x] **Navigation Rule:** Every inner route (`/dashboard/*`, `/proof`, `/verify`, `/demo`, `/lab`) MUST share the unified `DashboardShell` navigation bar.
+- [x] **Navigation Rule:** Every inner route (`/dashboard/*`, `/proof`, `/verify`, `/demo`, `/lab`) MUST share the unified `DashboardShell` navigation bar without distracting dots or tags.
 - [x] **Footer Rule:** Strictly standard, quiet one-liner footer (`py-5`) with wordmark on the left and copyright on the right. No duplicate nav links.
+

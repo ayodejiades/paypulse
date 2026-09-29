@@ -33,8 +33,26 @@ export function Nav({ d }: { d: LandingData }) {
           {d.steps.length ? <a href="#how" className="lp-focus hidden rounded-[var(--pill)] px-3 py-2 hover:text-[var(--ink)] sm:inline-flex">How it works</a> : null}
           <Link href="/demo" className="lp-focus hidden rounded-[var(--pill)] px-3 py-2 hover:text-[var(--ink)] sm:inline-flex">Walkthrough</Link>
           <Link href="/proof" className="lp-focus hidden rounded-[var(--pill)] px-3 py-2 hover:text-[var(--ink)] md:inline-flex">Proof</Link>
-          <Link href="/dashboard" data-demo="launch-demo" className="lp-btn lp-btn-sm lp-btn-quiet ml-2">
-            {d.cta}
+          <Link
+            href="/dashboard"
+            data-demo="launch-demo"
+            className="group inline-flex items-center gap-2 pl-3.5 pr-1.5 py-1.5 rounded-full bg-[var(--accent,#059669)] hover:bg-[#047857] text-white text-xs font-medium tracking-tight transition-all active:scale-[0.98] shadow-sm ml-2 cursor-pointer"
+          >
+            <span>{d.cta}</span>
+            <span className="w-5 h-5 rounded-full bg-[#033b2a] text-white flex items-center justify-center group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="w-3 h-3"
+              >
+                <line x1="7" y1="17" x2="17" y2="7" />
+                <polyline points="7 7 17 7 17 17" />
+              </svg>
+            </span>
           </Link>
         </nav>
       </div>
@@ -46,10 +64,9 @@ export function Nav({ d }: { d: LandingData }) {
 export function TrustRow({ d, className = "" }: { d: LandingData; className?: string }) {
   if (!d.trust.length) return null;
   return (
-    <ul className={`flex flex-wrap gap-x-5 gap-y-2 text-sm text-[var(--muted)] ${className}`}>
+    <ul className={`flex flex-wrap gap-x-5 gap-y-2 text-xs sm:text-sm text-[var(--muted,#8aa39a)] ${className}`}>
       {d.trust.map((t) => (
         <li key={t} className="flex items-center gap-2">
-          <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]" aria-hidden="true" />
           <span>{t}</span>
         </li>
       ))}
@@ -70,17 +87,47 @@ function HeroCopy({ d, align = "left" }: { d: LandingData; align?: "left" | "cen
           <span className={`mt-3 block max-w-[20ch] text-[0.5em] leading-[1.08] text-[var(--muted)] ${center ? "mx-auto" : ""}`}>{d.promise}</span>
         ) : null}
       </h1>
-      {d.idea ? (
-        <p className={`lp-rise lp-pretty max-w-[48ch] text-lg leading-relaxed text-[var(--muted)] ${center ? "mx-auto" : ""}`} style={{ "--delay": "120ms" } as CSSProperties}>
-          {d.idea}
-        </p>
-      ) : null}
       <div className={`lp-rise flex flex-wrap gap-3 ${center ? "justify-center" : ""}`} style={{ "--delay": "180ms" } as CSSProperties}>
-        <Link href="/dashboard" data-demo="launch-demo" className="lp-btn bg-[var(--accent,#059669)] text-white hover:bg-[#047857] transition-colors">
-          {d.cta} &rarr;
+        <Link
+          href="/dashboard"
+          data-demo="launch-demo"
+          className="group inline-flex items-center justify-center gap-3 pl-5 sm:pl-6 pr-2 py-2 rounded-full bg-[var(--accent,#059669)] hover:bg-[#047857] text-white font-medium text-sm tracking-tight transition-all active:scale-[0.98] shadow-sm cursor-pointer"
+        >
+          <span>{d.cta}</span>
+          <span className="w-7 h-7 rounded-full bg-[#033b2a] text-white flex items-center justify-center text-xs group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="w-3.5 h-3.5"
+            >
+              <line x1="7" y1="17" x2="17" y2="7" />
+              <polyline points="7 7 17 7 17 17" />
+            </svg>
+          </span>
         </Link>
-        <Link href="/demo" className="lp-btn lp-btn-quiet">
-          Guided Walkthrough &rarr;
+        <Link
+          href="/demo"
+          className="group inline-flex items-center justify-center gap-3 pl-5 pr-2 py-2 rounded-full bg-[var(--surface,#121615)] hover:bg-[#181f1c] text-[var(--ink,#e7f3ef)] border border-[var(--line,#232b29)] hover:border-[#34423e] font-medium text-sm tracking-tight transition-all active:scale-[0.98] cursor-pointer"
+        >
+          <span>Guided Walkthrough</span>
+          <span className="w-7 h-7 rounded-full bg-[#1c2321] border border-[#2d3733] text-[#8aa39a] group-hover:text-white group-hover:border-[#3d4d47] flex items-center justify-center text-xs group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="w-3.5 h-3.5"
+            >
+              <line x1="7" y1="17" x2="17" y2="7" />
+              <polyline points="7 7 17 7 17 17" />
+            </svg>
+          </span>
         </Link>
       </div>
       <TrustRow d={d} className={`lp-rise ${center ? "justify-center" : ""}`} />
@@ -434,47 +481,66 @@ export function ArchitecturalPillars() {
   );
 }
 
-/** Sponsor Infrastructure Matrix (SendByte, Sabilytics, Pxxl) */
+/** Automated SME Cashflow Recovery Lifecycle */
 export function SponsorsSection() {
-  const sponsors = [
+  const phases = [
     {
-      name: "SendByte",
-      role: "African Communications Infrastructure",
-      description: "Powering automated SMS and WhatsApp transactional payment notifications with verifiable webhook delivery receipts.",
-      status: "VERIFIED ACTIVE",
+      step: "01",
+      title: "Invoice Generation & Hash Lock",
+      timing: "T-0 Days",
+      description: "Generates digital PDF with QR code and SendByte SMS/WhatsApp deep link. Exact integer kobo amounts committed to tamper-proof SQLite database.",
+      stat: "0.00ms arithmetic drift",
     },
     {
-      name: "Sabilytics",
-      role: "Privacy First Telemetry Engine",
-      description: "Tracking client invoice view events and payment link conversions with offline grace period resilience.",
-      status: "TELEMETRY CONNECTED",
+      step: "02",
+      title: "Client Read Telemetry",
+      timing: "T+2 Days",
+      description: "Sabilytics telemetry logs exact debtor open timestamps when invoice link is viewed on mobile, eliminating 'I never received it' payment excuses.",
+      stat: "Verifiable view receipt",
     },
     {
-      name: "Pxxl Cloud",
-      role: "Africa First Cloud Deployment",
-      description: "Automated container builds running on Lagos edge nodes with zero downtime health verification.",
-      status: "LAGOS EDGE LIVE",
+      step: "03",
+      title: "Automated Multichannel Escalation",
+      timing: "T+5 Days",
+      description: "Upon due date breach, the deterministic kernel dispatches scheduled WhatsApp and SMS reminders with live Paystack settlement buttons.",
+      stat: "74% faster collection",
+    },
+    {
+      step: "04",
+      title: "Cryptographic Settlement & Close",
+      timing: "Instant",
+      description: "Incoming payment webhook reconciles kobo ledger in real time, generates downloadable SHA-256 settlement receipt, and closes overdue flag.",
+      stat: "100% audited integrity",
     },
   ];
 
   return (
-    <Section label="Infrastructure Partners" tone="raised">
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-        {sponsors.map((s) => (
+    <Section label="Automated Cashflow Recovery Lifecycle" tone="raised">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {phases.map((p) => (
           <div
-            key={s.name}
-            className="rounded-lg border border-[var(--line,#232b29)] bg-[var(--surface,#121615)] p-6"
+            key={p.step}
+            className="flex flex-col justify-between rounded-lg border border-[var(--line,#232b29)] bg-[var(--surface,#121615)] p-5 transition-colors hover:border-emerald-500/40"
           >
-            <div className="flex items-center justify-between">
-              <h3 className="font-mono text-base font-semibold text-[var(--ink,#e7f3ef)]">{s.name}</h3>
-              <span className="rounded border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 font-mono text-[10px] text-emerald-400">
-                {s.status}
-              </span>
+            <div>
+              <div className="flex items-center justify-between font-mono text-[11px]">
+                <span className="text-emerald-400 font-bold">{p.step}</span>
+                <span className="text-[var(--muted,#8aa39a)]">{p.timing}</span>
+              </div>
+              <h3 className="mt-3 text-base font-semibold text-[var(--ink,#e7f3ef)] [text-wrap:balance]">{p.title}</h3>
+              <p className="mt-2 text-xs leading-relaxed text-[var(--muted,#8aa39a)] [text-wrap:pretty]">{p.description}</p>
             </div>
-            <p className="mt-2 font-mono text-xs text-emerald-400">{s.role}</p>
-            <p className="mt-3 text-sm leading-relaxed text-[var(--muted,#8aa39a)] [text-wrap:pretty]">{s.description}</p>
+            <div className="mt-5 border-t border-[var(--line,#232b29)] pt-3">
+              <span className="font-mono text-[11px] text-emerald-400">{p.stat}</span>
+            </div>
           </div>
         ))}
+      </div>
+      <div className="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-lg border border-[var(--line,#232b29)] bg-[var(--surface,#121615)]/60 px-5 py-3 text-xs text-[var(--muted,#8aa39a)] font-mono">
+        <span>VERIFIED INFRASTRUCTURE: SendByte SMS/WhatsApp • Sabilytics Telemetry • Pxxl Lagos Edge</span>
+        <Link href="/dashboard/sponsors" className="text-emerald-400 hover:text-emerald-300 transition-colors">
+          Inspect Sponsor Telemetry &rarr;
+        </Link>
       </div>
     </Section>
   );
@@ -533,20 +599,49 @@ export function MoatComparison() {
   );
 }
 
-/** The painful moment from the wedge brief, when there is one. */
-export function Problem({ d }: { d: LandingData }) {
-  if (!d.problem) return null;
+/** Closing Call-to-Action — Oculupi styled closing section */
+export function ClosingCTA({ d }: { d: LandingData }) {
   return (
-    <Section tone="raised">
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[200px_1fr]">
-        <p className="text-sm font-medium text-[var(--muted)]">Why it matters</p>
-        <p className="lp-display lp-pretty text-2xl text-[var(--ink)] sm:text-4xl">{d.problem}</p>
+    <section className="relative overflow-hidden border-t border-[var(--line,#232b29)] bg-[var(--surface,#121615)] py-10 md:py-14">
+      <div className="relative mx-auto max-w-3xl px-4 sm:px-6 text-center space-y-4">
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-[var(--ink,#e7f3ef)] leading-tight">
+          Deterministic invoice recovery for African SMEs.
+        </h2>
+        <p className="mx-auto max-w-md text-sm leading-relaxed text-[var(--muted,#8aa39a)]">
+          Audit proof invoice ledgers, automated WhatsApp escalation, and independent cryptographic settlement.
+        </p>
+        <div className="pt-2 flex items-center justify-center">
+          <Link
+            href="/dashboard"
+            data-demo="launch-demo"
+            className="group inline-flex items-center justify-center gap-3 pl-6 pr-2 py-2.5 rounded-full bg-[var(--accent,#059669)] hover:bg-[#047857] text-white font-medium text-sm tracking-tight transition-all active:scale-[0.98] shadow-sm cursor-pointer"
+          >
+            <span>{d.cta}</span>
+            <span className="w-7 h-7 rounded-full bg-[#033b2a] text-white flex items-center justify-center text-xs group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="w-3.5 h-3.5"
+              >
+                <line x1="7" y1="17" x2="17" y2="7" />
+                <polyline points="7 7 17 7 17 17" />
+              </svg>
+            </span>
+          </Link>
+        </div>
       </div>
-    </Section>
+    </section>
   );
 }
 
-/** Pre-Footer Conversion Call to Action (removed). */
+export function Problem({ d }: { d: LandingData }) {
+  return null;
+}
+
 export function PreFooterCTA({ d }: { d: LandingData }) {
   return null;
 }

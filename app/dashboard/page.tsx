@@ -18,7 +18,6 @@ export default async function ScheduleDashboardPage() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[var(--border,#232b29)] pb-6">
           <div>
             <div className="flex items-center gap-2 mb-2 font-mono text-[11px] uppercase tracking-wider text-[var(--fg-muted,#8aa39a)]">
-              <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent,#059669)]"></span>
               <span>SME Invoicing and Multichannel Recovery Rail</span>
             </div>
             <h1 className="text-3xl font-semibold tracking-tight text-[var(--fg,#e7f3ef)] [text-wrap:balance]">
