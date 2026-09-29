@@ -6,7 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const PRIMARY_LINKS = [
-  { href: "/dashboard", label: "Overview" },
+  { href: "/dashboard", label: "Dashboard" },
   { href: "/dashboard/items", label: "Invoices & Ledger" },
   { href: "/dashboard/create", label: "New Invoice" },
 ];

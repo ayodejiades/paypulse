@@ -64,10 +64,13 @@ export function Nav({ d }: { d: LandingData }) {
 export function TrustRow({ d, className = "" }: { d: LandingData; className?: string }) {
   if (!d.trust.length) return null;
   return (
-    <ul className={`flex flex-wrap gap-x-5 gap-y-2 text-xs sm:text-sm text-[var(--muted,#8aa39a)] ${className}`}>
-      {d.trust.map((t) => (
+    <ul className={`flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-[var(--muted,#8aa39a)] ${className}`}>
+      {d.trust.map((t, idx) => (
         <li key={t} className="flex items-center gap-2">
-          <span>{t}</span>
+          <span className="font-mono text-[10px] text-[#52665f] font-semibold select-none">
+            {String(idx + 1).padStart(2, "0")}
+          </span>
+          <span className="text-xs sm:text-[13px]">{t}</span>
         </li>
       ))}
     </ul>
@@ -596,22 +599,43 @@ export function MoatComparison() {
 /** Closing Call-to-Action — Oculupi styled closing section */
 export function ClosingCTA({ d }: { d: LandingData }) {
   return (
-    <section className="relative overflow-hidden border-t border-[var(--line,#232b29)] bg-[var(--surface,#121615)] py-10 md:py-14">
-      <div className="relative mx-auto max-w-3xl px-4 sm:px-6 text-center space-y-4">
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-[var(--ink,#e7f3ef)] leading-tight">
-          Deterministic invoice recovery for African SMEs.
+    <section className="relative overflow-hidden border-t border-[var(--line,#232b29)] bg-[#0e1211] py-16 sm:py-20">
+      <div aria-hidden="true" className="lp-bloom pointer-events-none absolute inset-0 opacity-40" />
+      <div className="relative mx-auto max-w-4xl px-4 sm:px-6 text-center space-y-5">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-[var(--ink,#e7f3ef)] sm:whitespace-nowrap">
+          Automate your invoice recovery today.
         </h2>
-        <p className="mx-auto max-w-md text-sm leading-relaxed text-[var(--muted,#8aa39a)]">
-          Automated WhatsApp payment reminders, exact kobo precision, and instant bank settlement for African businesses.
+        <p className="mx-auto max-w-xl text-sm sm:text-base leading-relaxed text-[var(--muted,#8aa39a)]">
+          Exact integer kobo arithmetic, verified WhatsApp payment reminders, and instant bank reconciliation for African SME traders.
         </p>
-        <div className="pt-2 flex items-center justify-center">
+        <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
           <Link
             href="/dashboard"
             data-demo="launch-demo"
-            className="group inline-flex items-center justify-center gap-3 pl-6 pr-2 py-2.5 rounded-full bg-[var(--accent,#059669)] hover:bg-[#047857] text-white font-medium text-sm tracking-tight transition-all active:scale-[0.98] shadow-sm cursor-pointer"
+            className="group inline-flex items-center justify-center gap-3.5 pl-6 pr-2 py-2.5 rounded-full bg-[var(--accent,#059669)] hover:bg-[#047857] text-white font-medium text-sm tracking-tight transition-all active:scale-[0.98] shadow-sm cursor-pointer"
           >
             <span>{d.cta}</span>
             <span className="w-7 h-7 rounded-full bg-[#033b2a] text-white flex items-center justify-center text-xs group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="w-3.5 h-3.5"
+              >
+                <line x1="7" y1="17" x2="17" y2="7" />
+                <polyline points="7 7 17 7 17 17" />
+              </svg>
+            </span>
+          </Link>
+          <Link
+            href="/demo"
+            className="group inline-flex items-center justify-center gap-3 pl-5 pr-2 py-2.5 rounded-full bg-[var(--surface,#121615)] hover:bg-[#181f1c] text-[var(--ink,#e7f3ef)] border border-[var(--line,#232b29)] hover:border-[#34423e] font-medium text-sm tracking-tight transition-all active:scale-[0.98] cursor-pointer"
+          >
+            <span>Guided Walkthrough</span>
+            <span className="w-7 h-7 rounded-full bg-[#1c2321] border border-[#2d3733] text-[#8aa39a] group-hover:text-white group-hover:border-[#3d4d47] flex items-center justify-center text-xs group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0">
               <svg
                 viewBox="0 0 24 24"
                 fill="none"

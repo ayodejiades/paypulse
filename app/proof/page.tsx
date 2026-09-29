@@ -73,7 +73,7 @@ export default function Web2ProofPage() {
                 Deterministic Due-Date &amp; Integer-Kobo Safety Kernel
               </h1>
               <p className="text-sm text-[var(--fg-muted,#8aa39a)] mt-1 max-w-3xl">
-                Every extracted commitment requires a verbatim substring in the immutable T0 source capture. Unbound claims fail closed, benign rewrites are ignored, and provider claims are held in <code className="text-amber-300">WAITING_TO_VERIFY</code> until a later observation reconciles.
+                Every extracted commitment requires a verbatim substring in the original invoice document. Unbound claims fail closed, benign rewrites are ignored, and provider claims are held in <code className="text-amber-300">WAITING_TO_VERIFY</code> until a later observation reconciles.
               </p>
             </div>
             <div className="flex flex-col items-end font-mono text-xs gap-1.5">
@@ -164,11 +164,11 @@ export default function Web2ProofPage() {
 
             <div className="grid grid-cols-1 gap-3 text-xs font-mono">
               <div className="rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] p-3">
-                <div className="text-[var(--fg-muted,#8aa39a)] mb-1 uppercase font-semibold">Immutable T0 Source Capture</div>
+                <div className="text-[var(--fg-muted,#8aa39a)] mb-1 uppercase font-semibold">Original Invoice Record</div>
                 <div className="text-[var(--fg,#e7f3ef)]">{activeCase.sourceCaptureT0}</div>
               </div>
               <div className="rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] p-3">
-                <div className="text-[var(--fg-muted,#8aa39a)] mb-1 uppercase font-semibold">Model-Extracted Excerpt Candidate</div>
+                <div className="text-[var(--fg-muted,#8aa39a)] mb-1 uppercase font-semibold">Extracted Line Item Commitment</div>
                 <div className={decision.excerptBound ? "text-emerald-400" : "text-red-400"}>
                   &ldquo;{activeCase.extractedExcerpt}&rdquo;
                 </div>
@@ -177,7 +177,7 @@ export default function Web2ProofPage() {
 
             <div className="flex flex-col gap-2 pt-2">
               <span className="text-xs font-mono uppercase text-[var(--fg-muted,#8aa39a)] font-semibold">
-                Invariant Checks (lib/kernel.ts)
+                Deterministic Invariant Checks
               </span>
               {decision.invariants.map((inv) => (
                 <div

@@ -4,12 +4,12 @@
 import { loadLanding } from "@/lib/landing";
 import {
   ArchitecturalPillars,
+  ClosingCTA,
   Footer,
   Frame,
   Hero,
   MoatComparison,
   Nav,
-  Problem,
   SponsorsSection,
   StepsRail,
 } from "@/components/landing/sections";
@@ -25,7 +25,7 @@ export default function Landing() {
         <StepsRail d={d} />
         <SponsorsSection />
         <MoatComparison />
-        <Problem d={d} />
+        <ClosingCTA d={d} />
       </main>
       <Footer d={d} />
     </Frame>

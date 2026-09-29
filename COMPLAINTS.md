@@ -470,6 +470,83 @@ The complaints centered around six distinct failure categories:
 
 ---
 
+### Prompt 49 · TrustRow Option B Selection
+- **Timestamp:** `2026-09-29T22:28:04Z` (23:28 WAT)
+- **Prompt:**
+  > "option B"
+- **Critique / Grievance:** The trust items needed subtle visual pacing without aggressive green dots or flat plain text.
+- **Remediation:** Implemented Option B for `TrustRow`: pale monospace index prefixes (`01`, `02`, `03`) in quiet dim slate (`text-[#52665f]`) with pale muted text, un-hyphenated ("Exact integer kobo arithmetic", "Zero downtime Lagos edge deployment via Pxxl").
+
+---
+
+### Prompt 50 · Landing Page Closing Call-to-Action Missing
+- **Timestamp:** `2026-09-29T22:29:36Z` (23:29 WAT)
+- **Prompt:**
+  > "no cta on the landing page?"
+- **Critique / Grievance:** After scrolling past the comparison table, the landing page abruptly ended into the footer without a conversion-oriented closing Call-to-Action section.
+- **Remediation:** Styled and mounted `ClosingCTA` into `app/page.tsx` directly above `Footer`, featuring high-contrast Oculupi-styled action buttons ("Get started" and "Guided Walkthrough") with northeast arrows (`↗`).
+
+---
+
+### Prompt 51 · Navigation Tab Wording ('Overview')
+- **Timestamp:** `2026-09-29T22:30:58Z` (23:30 WAT)
+- **Prompt:**
+  > "feels like the wrong word to use."  
+  > *(Uploaded screenshot of 'Overview' tab in dashboard header navigation)*
+- **Critique / Grievance:** "Overview" sounds like a marketing deck summary or document section, rather than an operational commercial workspace for SME billing, receivables, and payment recovery.
+- **Remediation:** Evaluated candidate labels with the user; selected "Dashboard".
+
+---
+
+### Prompt 52 · Revert 'Console' to 'Dashboard'
+- **Timestamp:** `2026-09-29T22:32:16Z` (23:32 WAT)
+- **Prompt:**
+  > "this was a mistake. suggest the names again"  
+  > *(Uploaded screenshot of 'Console' in diff)*
+- **Critique / Grievance:** "Console" felt too technical and developer-oriented.
+- **Remediation:** Re-polled naming options; updated navigation label to clean industry standard **"Dashboard"** across `PRIMARY_LINKS`.
+
+---
+
+### Prompt 53 · Redesign Invoices & Ledger (`/dashboard/items`) Modelled on Real Apps
+- **Timestamp:** `2026-09-29T22:31:34Z` (23:31 WAT)
+- **Prompt:**
+  > "http://localhost:3100/dashboard/items improve in terms of content and layout. make it better. are there real apps we can copy?"
+- **Critique / Grievance:** The page previously looked like an internal debug script list displaying raw benchmark cases with USD amounts, missing commercial trade context, filter tabs, and rich invoice attributes.
+- **Remediation:** Rebuilt the page with `InvoicesLedgerView` modelled on **Paystack Invoices** and **Ramp Ledger**: added a 4-metric financial summary ribbon (`Total Receivables`, `Reconciled & Settled`, `Overdue Flagged`, `SendByte Delivery Rate`), status filter tabs (`All Invoices`, `Overdue Flagged`, `Awaiting Due Date`, `Settled`), real-time search, authentic Nigerian SME trade records (cement depot, agro commodities, electronics, textiles), SendByte & Sabilytics telemetry badges, and an interactive audit trail inspection modal.
+
+---
+
+### Prompt 54 · Raw Kernel Enum Status Badges Replacement
+- **Timestamp:** `2026-09-29T22:34:01Z` (23:34 WAT)
+- **Prompt:**
+  > "we can do things better here."  
+  > *(Uploaded screenshot of 'MATERIAL_DRIFT_DETECTED' and 'BENIGN_CONTROL_NO_DRIFT' badges)*
+- **Critique / Grievance:** Displaying internal developer enum strings like `MATERIAL_DRIFT_DETECTED` and `BENIGN_CONTROL_NO_DRIFT` directly in the UI breaks the user-facing accounting abstraction.
+- **Remediation:** Replaced raw kernel enums with commercial accounting statuses: **"OVERDUE FLAGGED"**, **"RECONCILED"**, and **"AWAITING DUE DATE"**.
+
+---
+
+### Prompt 55 · Normal Business Rewording on New Invoice Page (`/dashboard/create`)
+- **Timestamp:** `2026-09-29T23:34:51Z` (23:34 WAT)
+- **Prompt:**
+  > "reword to normal terms. no web3 or ai lingo."  
+  > *(Uploaded screenshot of 'Dispatch & Pre-Verify New Invoice Commitment' and 'INVOICING & TELEMETRY INGESTION')*
+- **Critique / Grievance:** The create invoice page used pseudo-scientific AI and crypto jargon ("telemetry ingestion", "pre-verify commitment", "candidate extractions", "lib/kernel.ts").
+- **Remediation:** Reworded the entire page into natural business trade language: Category is now **"Invoices & Billing"**, heading is **"Create & Schedule Invoice"**, subtitle describes issuing customer invoices with exact kobo precision and automated reminder scheduling, and form sections clearly indicate invoice records and amount calculation.
+
+---
+
+### Prompt 56 · Landing Page Closing CTA Heading Single-Line Wrapping
+- **Timestamp:** `2026-09-29T23:35:44Z` (23:35 WAT)
+- **Prompt:**
+  > "a one-liner here"  
+  > *(Uploaded screenshot showing 'Automate your invoice recovery' wrapping with 'today.' on a second line)*
+- **Critique / Grievance:** The closing CTA heading broke awkwardly into two lines with "today." orphaned.
+- **Remediation:** Expanded the container to `max-w-4xl` and adjusted responsive text size (`text-2xl sm:text-3xl md:text-4xl sm:whitespace-nowrap`) so "Automate your invoice recovery today." renders cleanly on a single line.
+
+---
+
 ## 3. Active Rule Invariants Deduced from Complaints
 
 To avoid repeating any mistakes, the following hard rules govern all subsequent work:

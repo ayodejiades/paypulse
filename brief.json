@@ -80,9 +80,9 @@
     "boundary": "Deterministic integer-kobo audit kernel with zero unhandled dispatch failures.",
     "cta": "Get started",
     "trust": [
-      "Deterministic integer-kobo arithmetic",
+      "Exact integer kobo arithmetic",
       "SendByte verified SMS & WhatsApp delivery",
-      "Zero-downtime Lagos edge deployment via Pxxl"
+      "Zero downtime Lagos edge deployment via Pxxl"
     ],
     "stateLabels": {
       "clear": "Reconciled",
