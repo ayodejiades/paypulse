@@ -2,9 +2,9 @@
   "baseUrl": "${DEPLOY_URL}",
   "viewport": { "width": 1920, "height": 1080 },
   "steps": [
-    { "say": "Welcome to the overview", "goto": "/" },
-    { "say": "Launch the live demo workspace", "click": "[data-demo='launch-demo']", "waitFor": "[data-demo='list']" },
-    { "say": "Create a new record", "click": "[data-demo='new']", "fill": { "[data-demo='title']": "Lagos pilot" } },
-    { "say": "Submit and verify real-time state", "click": "[data-demo='submit']", "waitFor": "[data-demo='row']" }
+    { "say": "Explore verified solution", "goto": "/" },
+    { "say": "Launch the live workspace", "click": "[data-demo='launch-demo']", "waitFor": "[data-demo='flagged-count']" },
+    { "say": "Schedule a new item with a title and due time", "fill": { "[data-demo='title']": "Renew domain" } },
+    { "say": "Submit, and it appears in the list", "click": "[data-demo='submit']", "waitFor": "[data-demo='row']" }
   ]
 }

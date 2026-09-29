@@ -1,25 +1,27 @@
-// db/index.ts — reads DATABASE_URL. In DEMO_MODE, reads/writes an in-memory store seeded
-// from fixtures/ instead, so the vertical slice works with the Wi-Fi off.
+// db/index.ts — reads DATABASE_URL. In DEMO_MODE, reads/writes an in-memory store
+// seeded from fixtures/ instead, so the vertical slice works with the Wi-Fi off.
 import fs from "node:fs";
 import path from "node:path";
-import { desc } from "drizzle-orm";
+import { asc } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 import { isDemoMode } from "@/lib/demo-mode";
-import { requireDatabaseUrl } from "@/lib/env";
-import { records, type Record } from "./schema";
+import { env } from "@/lib/env";
+import { isOverdue } from "@/lib/schedule";
+import { reminders, type Reminder } from "./schema";
 
-type Store = { records: Record[]; nextId: number };
+type Store = { reminders: Reminder[]; nextId: number };
 
 let memoryStore: Store | null = null;
 
 function loadFixtureStore(): Store {
-  const fixturePath = path.join(process.cwd(), "fixtures", "records.json");
-  const seed: Array<{ title: string; createdAt: string }> = JSON.parse(
-    fs.readFileSync(fixturePath, "utf-8"),
-  );
-  const seeded = seed.map((row, i) => ({ id: i + 1, title: row.title, createdAt: new Date(row.createdAt) }));
-  return { records: seeded, nextId: seeded.length + 1 };
+  const fixturePath = path.join(process.cwd(), "fixtures", "reminders.json");
+  const seed: Array<{ title: string; dueAt: string }> = JSON.parse(fs.readFileSync(fixturePath, "utf-8"));
+  const seeded = seed.map((row, i) => {
+    const dueAt = new Date(row.dueAt);
+    return { id: i + 1, title: row.title, dueAt, overdueFlag: isOverdue(dueAt), createdAt: new Date() };
+  });
+  return { reminders: seeded, nextId: seeded.length + 1 };
 }
 
 function getMemoryStore(): Store {
@@ -30,94 +32,28 @@ function getMemoryStore(): Store {
 let sqlClient: ReturnType<typeof postgres> | null = null;
 function getDrizzle() {
   if (!sqlClient) {
-    sqlClient = postgres(requireDatabaseUrl(), { max: 5 });
+    sqlClient = postgres(env.DATABASE_URL as string, { max: 5 });
   }
   return drizzle(sqlClient);
 }
 
-/**
- * probeDatabase — the deep check behind /api/health.
- *
- * DEMO_MODE=1: reports `demo` without touching a database, because the whole point of
- * demo mode is that it works with the Wi-Fi off.
- * DEMO_MODE=0: opens a real connection, runs `SELECT 1`, and confirms the tables this
- * app reads actually exist. A missing table is the failure that used to reach a judge
- * as a 500 on every dashboard route, so it is reported here rather than discovered there.
- */
-export async function probeDatabase(): Promise<{
-  reachable: boolean;
-  tablesPresent: boolean;
-  detail: string;
-  latencyMs: number;
-}> {
+export async function listReminders(): Promise<Reminder[]> {
   if (isDemoMode()) {
-    const store = getMemoryStore();
-    return {
-      reachable: true,
-      tablesPresent: true,
-      detail: `demo mode — ${store.records.length} fixture rows, no database contacted`,
-      latencyMs: 0,
-    };
-  }
-
-  const started = Date.now();
-  // requireDatabaseUrl() throws when DATABASE_URL is unset, so it is called inside the
-  // try: a missing URL is a health finding to report, not a 500 on the health route.
-  let sql: ReturnType<typeof postgres>;
-  try {
-    sql = postgres(requireDatabaseUrl(), { max: 1, connect_timeout: 5 });
-  } catch (err) {
-    return {
-      reachable: false,
-      tablesPresent: false,
-      detail: (err as Error).message,
-      latencyMs: Date.now() - started,
-    };
-  }
-  try {
-    await sql`SELECT 1`;
-    // to_regclass returns NULL (not an error) when the table is absent, so a missing
-    // migration surfaces as a clear message instead of "relation does not exist".
-    const rows = await sql<{ present: number | null }[]>`
-      SELECT to_regclass('public.records') IS NOT NULL AS present
-    `;
-    const present = rows[0]?.present === 1;
-    return {
-      reachable: true,
-      tablesPresent: present,
-      detail: present
-        ? "connected; table 'records' present"
-        : "connected but table 'records' is missing — run `pnpm db:migrate` against this database",
-      latencyMs: Date.now() - started,
-    };
-  } catch (err) {
-    return {
-      reachable: false,
-      tablesPresent: false,
-      detail: (err as Error).message,
-      latencyMs: Date.now() - started,
-    };
-  } finally {
-    await sql.end({ timeout: 2 }).catch(() => {});
-  }
-}
-
-export async function listRecords(): Promise<Record[]> {
-  if (isDemoMode()) {
-    return [...getMemoryStore().records].sort((a, b) => +b.createdAt - +a.createdAt);
+    return [...getMemoryStore().reminders].sort((a, b) => +a.dueAt - +b.dueAt);
   }
   const db = getDrizzle();
-  return db.select().from(records).orderBy(desc(records.createdAt));
+  return db.select().from(reminders).orderBy(asc(reminders.dueAt));
 }
 
-export async function createRecord(title: string): Promise<Record> {
+export async function createReminder(title: string, dueAt: Date): Promise<Reminder> {
+  const overdueFlag = isOverdue(dueAt);
   if (isDemoMode()) {
     const store = getMemoryStore();
-    const row: Record = { id: store.nextId++, title, createdAt: new Date() };
-    store.records.push(row);
+    const row: Reminder = { id: store.nextId++, title, dueAt, overdueFlag, createdAt: new Date() };
+    store.reminders.push(row);
     return row;
   }
   const db = getDrizzle();
-  const [row] = await db.insert(records).values({ title }).returning();
+  const [row] = await db.insert(reminders).values({ title, dueAt, overdueFlag }).returning();
   return row;
 }

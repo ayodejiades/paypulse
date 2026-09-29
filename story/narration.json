@@ -1,0 +1,10 @@
+{
+  "beats": [
+    { "id": "hook", "narration": "An item is scheduled, and the ones already overdue are flagged the moment the page loads." },
+    { "id": "stakes", "narration": "Deadlines slip through when nothing surfaces them, and reminders get sent late or never." },
+    { "id": "act1", "narration": "Add a title and a due time, right from the dashboard." },
+    { "id": "act2", "narration": "Anything past its due time is flagged for a reminder automatically." },
+    { "id": "proof", "narration": "The flagged count updates live, so a team sees exactly what needs a reminder sent." },
+    { "id": "close", "narration": "One list, every overdue item caught, no reminder missed." }
+  ]
+}
