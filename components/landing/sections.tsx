@@ -5,7 +5,6 @@ import type { CSSProperties, ReactNode } from "react";
 import { DECISION_STATES, type LandingData } from "@/lib/landing";
 import { fontVariables } from "./fonts";
 import { EmptyFinding, FindingCard, Icon, type IconName } from "./primitives";
-import { TryButton } from "./sample-desk";
 
 export function Frame({ d, children }: { d: LandingData; children: ReactNode }) {
   return (
@@ -34,8 +33,8 @@ export function Nav({ d }: { d: LandingData }) {
           <Wordmark name={d.name} />
         </Link>
         <nav aria-label="Primary" className="flex items-center gap-1 text-sm text-[var(--muted)]">
-          <a href="#sample" className="lp-focus hidden rounded-[var(--pill)] px-3 py-2 hover:text-[var(--ink)] sm:inline-flex">Sample</a>
           {d.steps.length ? <a href="#how" className="lp-focus hidden rounded-[var(--pill)] px-3 py-2 hover:text-[var(--ink)] sm:inline-flex">How it works</a> : null}
+          <Link href="/demo" className="lp-focus hidden rounded-[var(--pill)] px-3 py-2 hover:text-[var(--ink)] sm:inline-flex">Walkthrough</Link>
           <Link href="/proof" className="lp-focus hidden rounded-[var(--pill)] px-3 py-2 hover:text-[var(--ink)] md:inline-flex">Proof</Link>
           <Link href="/dashboard" data-demo="launch-demo" className="lp-btn lp-btn-sm lp-btn-quiet ml-2">
             {d.cta}
@@ -88,9 +87,11 @@ function HeroCopy({ d, align = "left" }: { d: LandingData; align?: "left" | "cen
         </p>
       ) : null}
       <div className={`lp-rise flex flex-wrap gap-3 ${center ? "justify-center" : ""}`} style={{ "--delay": "180ms" } as CSSProperties}>
-        <TryButton disabled={!d.cases.length} />
-        <Link href="/dashboard" data-demo="launch-demo" className="lp-btn lp-btn-quiet">
+        <Link href="/dashboard" data-demo="launch-demo" className="lp-btn bg-[var(--accent,#059669)] text-white hover:bg-[#047857] transition-colors">
           {d.cta} &rarr;
+        </Link>
+        <Link href="/demo" className="lp-btn lp-btn-quiet">
+          Guided Walkthrough &rarr;
         </Link>
       </div>
       <TrustRow d={d} className={`lp-rise ${center ? "justify-center" : ""}`} />

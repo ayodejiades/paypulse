@@ -2,8 +2,7 @@
 // Every word and number comes from lib/landing.ts (brief.json, docs/demo-path.json and the
 // fixture). Reorder or swap the sections below to fit the product.
 import { loadLanding } from "@/lib/landing";
-import { Footer, Frame, Hero, Nav, Problem, Section, StepsRail } from "@/components/landing/sections";
-import { SampleDesk } from "@/components/landing/sample-desk";
+import { Footer, Frame, Hero, Nav, Problem, StepsRail } from "@/components/landing/sections";
 
 export default function Landing() {
   const d = loadLanding();
@@ -12,9 +11,6 @@ export default function Landing() {
       <Nav d={d} />
       <main className="flex flex-col">
         <Hero d={d} layout="split" />
-        <Section id="sample" label="The sample">
-          <SampleDesk d={d} view="pipeline" />
-        </Section>
         <StepsRail d={d} />
         <Problem d={d} />
       </main>

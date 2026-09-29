@@ -209,6 +209,16 @@ The complaints centered around six distinct failure categories:
 
 ---
 
+### Prompt 21 & 22 · Landing Page Sample Desk Removal
+- **Timestamp:** `2026-09-29T22:07:04Z` & `2026-09-29T22:07:29Z` (23:07 WAT)
+- **Prompt:**
+  > "what is sample doing on landing page?"  
+  > "yeah"
+- **Critique / Grievance:** Inappropriate placement of the raw `<SampleDesk />` test harness directly inside the marketing/overview landing page, cluttering the flow with an unneeded debug widget and duplicate test buttons.
+- **Remediation:** Removed `<Section id="sample">` from `app/page.tsx`, stripped the "Sample" nav link and "Try a sample" button from `components/landing/sections.tsx`, and directed users cleanly to the primary **Launch Workspace →** CTA and the dedicated **Guided Walkthrough →** (`/demo`).
+
+---
+
 ## 3. Active Rule Invariants Deduced from Complaints
 
 To avoid repeating any mistakes, the following hard rules govern all subsequent work:
@@ -218,5 +228,6 @@ To avoid repeating any mistakes, the following hard rules govern all subsequent 
 - [x] **Iconography Rule:** NO generic shadcn/lucide UI icons. Rely on characterful typography, hairline borders, and subtle ledger status dots.
 - [x] **Copywriting Rule:** ZERO em-dashes (`—`). Zero hyphens in body text or headings ("due date", "integer kobo", "kill switch"). No AI superlatives.
 - [x] **Badge Cluster Rule:** No colored status pills or badge clusters cluttering result cards.
+- [x] **Landing Page Rule:** No raw synthetic debug desks (`<SampleDesk />`) on the landing page. Keep landing page focused purely on product overview, pipeline stages, why it matters, and direct workspace launch.
 - [x] **Navigation Rule:** Every inner route (`/dashboard/*`, `/proof`, `/verify`, `/demo`, `/lab`) MUST share the unified `DashboardShell` navigation bar.
 - [x] **Footer Rule:** Single-line, compact standard footer (`py-4`) with clean copyright on the left and navigation links on the right.
