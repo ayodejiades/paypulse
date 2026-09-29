@@ -633,6 +633,15 @@ The complaints centered around six distinct failure categories:
 - **Critique / Grievance:** A single-column FAQ created unnecessary vertical scroll and felt stretched horizontally.
 - **Remediation:** Re-engineered `FaqSection` into a balanced two-column group (`grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 max-w-5xl`), grouping questions `01`–`03` in Column 1 and `04`–`06` in Column 2, with independent multi-item toggle state and clean hairline borders.
 
+### Prompt 65 · Sponsor Deployment & Usage Blueprint
+- **Timestamp:** `2026-09-29T23:55:57Z` (23:55 WAT)
+- **Prompt:**
+  > "let's use our sponsors in this project how do i go about this?"
+- **Critique / Grievance:** User needed a concrete, actionable roadmap on how to activate and utilize the 3 declared sponsors (SendByte, Sabilytics, Pxxl) in PayPulse.
+- **Remediation:**
+  1. Connected SendByte dispatch button on `/dashboard/items` directly to `POST /api/reminders/dispatch`.
+  2. Provided complete step-by-step instructions for all 3 sponsors (SendByte SMS/WhatsApp reminders, Sabilytics invoice telemetry, Pxxl Lagos edge deployment), documenting environment variables (`SENDBYTE_API_KEY`, `SABILYTICS_API_KEY`), offline deterministic fixture fallbacks, and test verification scripts.
+
 ---
 
 ## 3. Active Rule Invariants Deduced from Complaints

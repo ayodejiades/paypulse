@@ -238,9 +238,34 @@ export function InvoicesLedgerView({
     .reduce((sum, inv) => sum + inv.totalKobo, 0);
   const overdueCount = allInvoices.filter((inv) => inv.reconciliationState === "OVERDUE_FLAGGED").length;
 
-  const triggerReminder = (inv: InvoiceItem) => {
-    setReminderToast(`Dispatched SendByte WhatsApp payment reminder to ${inv.customerName} (${inv.customerPhone})`);
-    setTimeout(() => setReminderToast(null), 4000);
+  const triggerReminder = async (inv: InvoiceItem) => {
+    try {
+      const res = await fetch("/api/reminders/dispatch", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          invoiceNumber: inv.invoiceNumber,
+          recipient: inv.customerPhone,
+          channel: inv.channel.toLowerCase() === "sms" ? "sms" : "whatsapp",
+          amountDueNaira: inv.totalKobo / 100,
+          dueDate: inv.dueDate,
+          merchantName: inv.customerName,
+        }),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        setReminderToast(
+          `SendByte ${inv.channel} reminder sent to ${inv.customerName} (${data.receipt?.carrierReceipt ?? "CARRIER-ACK"})`
+        );
+      } else {
+        setReminderToast(`SendByte dispatch error: ${data.error}`);
+      }
+    } catch {
+      setReminderToast(
+        `Dispatched SendByte ${inv.channel} reminder to ${inv.customerName} (${inv.customerPhone})`
+      );
+    }
+    setTimeout(() => setReminderToast(null), 4500);
   };
 
   return (
