@@ -1,12 +1,12 @@
 # PROGRESS — aib-ship
 
-Written by kit-autopilot after every step; last updated 2026-09-29T21:46:48.901Z. Do not edit by hand:
+Written by kit-autopilot after every step; last updated 2026-09-29T21:47:21.541Z. Do not edit by hand:
 it is rewritten on the next run. Regenerate it any time with `kit-autopilot --progress --dir /Users/mac/Hackathons/aib-ship`.
 
 - **Idea:** PayPulse Africa: Automated SME Invoicing and SMS/WhatsApp Payment Reminders
 - **Track:** web2 · **Readiness:** scaffolded
 - **Deadline:** 2026-09-30T23:59:59Z (Africa/Lagos)
-- **Status:** 6 of 12 steps green, 0 need work, 6 not run yet
+- **Status:** 7 of 12 steps green, 0 need work, 5 not run yet
 
 ## Rules for any agent helping here
 
@@ -20,7 +20,7 @@ it is rewritten on the next run. Regenerate it any time with `kit-autopilot --pr
 
 ## Do next
 
-1. **verify** — not run yet. Run `kit-autopilot --resume --dir /Users/mac/Hackathons/aib-ship` (it starts at the first step that is not green).
+1. **record** — not run yet. Run `kit-autopilot --resume --dir /Users/mac/Hackathons/aib-ship` (it starts at the first step that is not green).
 
 ## Done — do not redo
 
@@ -30,3 +30,4 @@ it is rewritten on the next run. Regenerate it any time with `kit-autopilot --pr
 - **designAudit** — 3 skills, 0 blocking, 1 advisory -> .kit/design-audit.json. Owns: .kit/design-audit.json.
 - **campaign** — executed kernel against 6 fixtures (10 / 10 (100%) decisions bound); adversarial negative invariant verified (rejected probe with ABSTAIN_UNBOUND_EXCERPT). Owns: evidence/campaign-report.json.
 - **deploy** — deployed to https://paypulse.pxxl.app. Owns: the live URL in README.md.
+- **verify** — live: skipped (not deployed); DEMO_MODE: OK; system verification: 12/12 invariant & adversarial checks PASSED. Owns: CLAIM_LEDGER.md, WHAT_IS_REAL.md.
