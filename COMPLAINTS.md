@@ -575,6 +575,20 @@ The complaints centered around six distinct failure categories:
 
 ---
 
+### Prompt 60 · Backend Capability Query ("no backend working yet?")
+- **Timestamp:** `2026-09-29T23:45:20Z` (23:45 WAT)
+- **Prompt:**
+  > "no backend working yet?"
+- **Critique / Grievance:** User inquiry into whether the application has an actual working backend or is merely running static/fixture mocks.
+- **Investigation & Finding:**
+  1. Next.js Server Actions (`app/actions.ts`) and Drizzle ORM PostgreSQL integration (`db/index.ts`, `db/schema.ts`) are implemented with live SQL pool support and in-memory fixture fallback under `DEMO_MODE=1`.
+  2. Health diagnostic endpoint (`GET /api/health?deep=1`) actively probes table presence and reports round-trip latency.
+  3. SendByte API client (`lib/sponsors/sendbyte.ts`) is configured for carrier dispatch with idempotency keys.
+  4. Gaps identified: The dev server runs in `DEMO_MODE=1` without an active external `DATABASE_URL`; `/dashboard/create` lacked direct persistence from the rich line-item draft form into the database; and dedicated REST route handlers (`/api/invoices`) were not yet exposed alongside Server Actions.
+- **Remediation Plan:** Document existing backend architecture, offer live Postgres wiring instructions, and provide dedicated REST API routes for direct invoice generation and SendByte dispatch.
+
+---
+
 ## 3. Active Rule Invariants Deduced from Complaints
 
 To avoid repeating any mistakes, the following hard rules govern all subsequent work:
