@@ -35,11 +35,62 @@ const FAQS: FaqItem[] = [
 ];
 
 export function FaqSection() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [openIndices, setOpenIndices] = useState<number[]>([0]);
+
+  const toggleIndex = (idx: number) => {
+    setOpenIndices((prev) =>
+      prev.includes(idx) ? prev.filter((i) => i !== idx) : [...prev, idx]
+    );
+  };
+
+  const col1 = FAQS.slice(0, 3);
+  const col2 = FAQS.slice(3, 6);
+
+  const renderFaqItem = (faq: FaqItem, globalIdx: number) => {
+    const isOpen = openIndices.includes(globalIdx);
+    return (
+      <div
+        key={faq.q}
+        className={`transition-colors ${
+          isOpen ? "bg-[#121615]" : "hover:bg-[#121615]/50"
+        }`}
+      >
+        <button
+          type="button"
+          onClick={() => toggleIndex(globalIdx)}
+          className="flex w-full items-start justify-between gap-3 p-4 sm:p-5 text-left transition-colors cursor-pointer"
+          aria-expanded={isOpen}
+        >
+          <div className="flex items-start gap-3">
+            <span className="font-mono text-xs text-[#52665f] font-semibold select-none shrink-0 pt-0.5">
+              {String(globalIdx + 1).padStart(2, "0")}
+            </span>
+            <span className="text-xs sm:text-sm font-semibold tracking-tight text-[var(--ink,#e7f3ef)] [text-wrap:pretty]">
+              {faq.q}
+            </span>
+          </div>
+          <span
+            className={`flex h-5 w-5 items-center justify-center rounded-full border text-xs font-mono transition-transform duration-200 shrink-0 mt-0.5 ${
+              isOpen
+                ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-400 rotate-45"
+                : "border-[var(--line,#232b29)] bg-[#1c2321] text-[#8aa39a]"
+            }`}
+          >
+            +
+          </span>
+        </button>
+        {isOpen && (
+          <div className="px-4 pb-4 sm:px-5 sm:pb-5 pt-0 text-xs text-[var(--muted,#8aa39a)] leading-relaxed border-t border-[var(--line,#232b29)]/60">
+            <div className="pt-2.5 pl-6 sm:pl-7">{faq.a}</div>
+          </div>
+        )}
+      </div>
+    );
+  };
 
   return (
     <section className="relative overflow-hidden border-t border-[var(--line,#232b29)] bg-[var(--surface,#121615)] py-16 sm:py-24">
-      <div className="mx-auto w-full max-w-4xl px-4 sm:px-6">
+      <div className="mx-auto w-full max-w-5xl px-4 sm:px-6">
         {/* Section Header */}
         <div className="flex flex-col items-center text-center space-y-3 mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-[var(--ink,#e7f3ef)]">
@@ -50,49 +101,17 @@ export function FaqSection() {
           </p>
         </div>
 
-        {/* Accordion List */}
-        <div className="divide-y divide-[var(--line,#232b29)] rounded-xl border border-[var(--line,#232b29)] bg-[#0a0d0c] overflow-hidden shadow-sm">
-          {FAQS.map((faq, idx) => {
-            const isOpen = openIndex === idx;
-            return (
-              <div
-                key={faq.q}
-                className={`transition-colors ${
-                  isOpen ? "bg-[#121615]" : "hover:bg-[#121615]/50"
-                }`}
-              >
-                <button
-                  type="button"
-                  onClick={() => setOpenIndex(isOpen ? null : idx)}
-                  className="flex w-full items-center justify-between gap-4 p-5 sm:p-6 text-left transition-colors cursor-pointer"
-                  aria-expanded={isOpen}
-                >
-                  <div className="flex items-center gap-3.5">
-                    <span className="font-mono text-xs text-[#52665f] font-semibold select-none shrink-0">
-                      {String(idx + 1).padStart(2, "0")}
-                    </span>
-                    <span className="text-sm sm:text-[15px] font-semibold tracking-tight text-[var(--ink,#e7f3ef)]">
-                      {faq.q}
-                    </span>
-                  </div>
-                  <span
-                    className={`flex h-6 w-6 items-center justify-center rounded-full border text-xs font-mono transition-transform duration-200 shrink-0 ${
-                      isOpen
-                        ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-400 rotate-45"
-                        : "border-[var(--line,#232b29)] bg-[#1c2321] text-[#8aa39a]"
-                    }`}
-                  >
-                    +
-                  </span>
-                </button>
-                {isOpen && (
-                  <div className="px-5 pb-5 sm:px-6 sm:pb-6 pt-0 text-xs sm:text-sm text-[var(--muted,#8aa39a)] leading-relaxed border-t border-[var(--line,#232b29)]/60">
-                    <div className="pt-3.5 pl-7 sm:pl-8">{faq.a}</div>
-                  </div>
-                )}
-              </div>
-            );
-          })}
+        {/* Two Column Group */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 items-start">
+          {/* Column 1 Group (01 - 03) */}
+          <div className="divide-y divide-[var(--line,#232b29)] rounded-xl border border-[var(--line,#232b29)] bg-[#0a0d0c] overflow-hidden shadow-sm">
+            {col1.map((faq, i) => renderFaqItem(faq, i))}
+          </div>
+
+          {/* Column 2 Group (04 - 06) */}
+          <div className="divide-y divide-[var(--line,#232b29)] rounded-xl border border-[var(--line,#232b29)] bg-[#0a0d0c] overflow-hidden shadow-sm">
+            {col2.map((faq, i) => renderFaqItem(faq, i + 3))}
+          </div>
         </div>
       </div>
     </section>

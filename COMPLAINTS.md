@@ -625,6 +625,16 @@ The complaints centered around six distinct failure categories:
 
 ---
 
+### Prompt 64 · FAQ Accordion Two-Column Group Layout ("two column group")
+- **Timestamp:** `2026-09-29T23:55:19Z` (23:55 WAT)
+- **Prompt:**
+  > "two column group"  
+  > *(Uploaded screenshot of single-column FAQ accordion)*
+- **Critique / Grievance:** A single-column FAQ created unnecessary vertical scroll and felt stretched horizontally.
+- **Remediation:** Re-engineered `FaqSection` into a balanced two-column group (`grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 max-w-5xl`), grouping questions `01`–`03` in Column 1 and `04`–`06` in Column 2, with independent multi-item toggle state and clean hairline borders.
+
+---
+
 ## 3. Active Rule Invariants Deduced from Complaints
 
 To avoid repeating any mistakes, the following hard rules govern all subsequent work:
