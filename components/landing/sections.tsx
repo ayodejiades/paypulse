@@ -299,7 +299,9 @@ function PhoneFrame({ children, label }: { children: ReactNode; label: string })
           <span className="ph-time">09:41</span>
           <MobileStatusIcons />
         </div>
-        <span className="ph-notch" aria-hidden="true" />
+        <div className="ph-notch" aria-hidden="true">
+          <span className="ph-lens" />
+        </div>
         <div className="relative flex flex-1 flex-col p-2.5 overflow-hidden text-[10px]">
           {children}
         </div>
