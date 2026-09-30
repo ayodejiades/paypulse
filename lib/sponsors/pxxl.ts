@@ -9,6 +9,13 @@ export interface PxxlDeploymentConfig {
   edgeEndpoints: string[];
 }
 
+export interface PxxlRuntime {
+  region: string;
+  endpoint: string;
+  /** "env" when PXXL_URL / PXXL_REGION are set on the host, "fixture" otherwise. */
+  source: "env" | "fixture";
+}
+
 export function loadPxxlConfig(): PxxlDeploymentConfig {
   const fixturePath = path.join(process.cwd(), "fixtures", "sponsors", "pxxl.json");
   if (fs.existsSync(fixturePath)) {
@@ -28,4 +35,15 @@ export function loadPxxlConfig(): PxxlDeploymentConfig {
     sslEnabled: true,
     edgeEndpoints: ["https://paypulse.pxxl.app"],
   };
+}
+
+/** Where this process says it is deployed. The host's own settings win over the committed fixture. */
+export function getPxxlRuntime(): PxxlRuntime {
+  const config = loadPxxlConfig();
+  const endpoint = process.env.PXXL_URL || process.env.DEPLOY_URL;
+  const region = process.env.PXXL_REGION;
+  if (endpoint && !/localhost|127\.0\.0\.1/.test(endpoint) && region) {
+    return { region, endpoint, source: "env" };
+  }
+  return { region: config.region, endpoint: config.edgeEndpoints[0], source: "fixture" };
 }

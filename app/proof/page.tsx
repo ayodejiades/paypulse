@@ -129,7 +129,7 @@ export default function Web2ProofPage() {
                   data-demo={`proof-case-${c.caseId}`}
                   className={`text-left p-4 rounded-lg border transition-colors flex flex-col gap-1.5 cursor-pointer ${
                     isSelected
-                      ? "border-[var(--accent,#059669)] bg-[var(--surface-raised,#171c1b)]"
+                      ? "border-[var(--accent,#047857)] bg-[var(--surface-raised,#171c1b)]"
                       : "border-[var(--border,#232b29)] bg-[var(--surface,#121615)] hover:border-[var(--fg-muted,#8aa39a)]/40"
                   }`}
                 >

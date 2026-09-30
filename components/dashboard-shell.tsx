@@ -23,7 +23,7 @@ export function DashboardShell({
   const pathname = usePathname() || "/dashboard";
 
   return (
-    <div className="min-h-screen bg-[var(--bg,#0a0d0c)] text-[var(--fg,#e7f3ef)] antialiased font-sans selection:bg-[var(--accent,#059669)]/20 selection:text-white">
+    <div className="min-h-screen bg-[var(--bg,#0a0d0c)] text-[var(--fg,#e7f3ef)] antialiased font-sans selection:bg-[var(--accent,#047857)]/20 selection:text-white">
       {/* Top Header */}
       <header className="sticky top-0 z-40 border-b border-[var(--border,#232b29)] bg-[var(--surface,#121615)]/95 backdrop-blur-md px-4 py-2.5">
         <div className="mx-auto flex max-w-[1480px] items-center justify-between gap-4">

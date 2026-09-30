@@ -1,6 +1,6 @@
-# The One Hard Thing: aib-ship: Deterministic Constraint & State Reconciliation
+# The One Hard Thing: PayPulse: Deterministic Constraint & State Reconciliation
 
-Hackathons are won by demonstrating at least one non-trivial engineering feat. This document details the technical core of `aib-ship`, its algorithmic architecture, failure boundary handling, and test verification.
+Hackathons are won by demonstrating at least one non-trivial engineering feat. This document details the technical core of `PayPulse`, its algorithmic architecture, failure boundary handling, and test verification.
 
 ---
 

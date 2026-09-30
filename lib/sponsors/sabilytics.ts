@@ -10,54 +10,73 @@ export interface SabilyticsEvent {
   viewDurationSeconds?: number;
 }
 
+export interface RecordedEvent extends SabilyticsEvent {
+  timestamp: string;
+}
+
 export interface SabilyticsSummary {
+  invoicesCreated: number;
+  remindersSent: number;
   totalViews: number;
   reminderConversions: number;
   gracePeriodActive: boolean;
   retentionMonths: number;
+  /** "live" when events are forwarded to Sabilytics, "fixture" when they stay on this server. */
+  mode: "live" | "fixture";
 }
 
-export async function logInvoiceAnalytics(event: SabilyticsEvent): Promise<{ recorded: boolean }> {
-  if (isDemoMode() || !process.env.SABILYTICS_API_KEY) {
-    return { recorded: true };
-  }
+type Fixture = { eventsTracked?: RecordedEvent[]; retentionGracePeriodMonths?: number };
+
+function readFixture(): Fixture {
+  const fixturePath = path.join(process.cwd(), "fixtures", "sponsors", "sabilytics.json");
+  return fs.existsSync(fixturePath) ? (JSON.parse(fs.readFileSync(fixturePath, "utf-8")) as Fixture) : {};
+}
+
+// One log per server process, kept on globalThis so dev reloads do not reset it. It starts from
+// the fixture's events, so counts are the fixture plus what happened since this process started.
+const store = globalThis as unknown as { __sabilyticsLog?: RecordedEvent[] };
+function log(): RecordedEvent[] {
+  return (store.__sabilyticsLog ??= [...(readFixture().eventsTracked ?? [])]);
+}
+
+const live = () => !isDemoMode() && Boolean(process.env.SABILYTICS_API_KEY);
+
+/** Records the event locally, and forwards it to Sabilytics when a key is configured. */
+export async function logInvoiceAnalytics(event: SabilyticsEvent): Promise<{ recorded: boolean; forwarded: boolean }> {
+  const recorded: RecordedEvent = { ...event, timestamp: new Date().toISOString() };
+  log().push(recorded);
+  if (!live()) return { recorded: true, forwarded: false };
 
   try {
-    await fetch("https://api.sabilytics.com/v1/telemetry", {
+    const res = await fetch("https://api.sabilytics.com/v1/telemetry", {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${process.env.SABILYTICS_API_KEY}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        ...event,
-        timestamp: new Date().toISOString(),
-      }),
+      body: JSON.stringify(recorded),
     });
+    return { recorded: true, forwarded: res.ok };
   } catch {
-    // Analytics logging is non-blocking
+    // Analytics never blocks an invoice or a reminder.
+    return { recorded: true, forwarded: false };
   }
-  return { recorded: true };
+}
+
+export function recentAnalyticsEvents(limit = 20): RecordedEvent[] {
+  return log().slice(-limit).reverse();
 }
 
 export function getInvoiceAnalyticsSummary(): SabilyticsSummary {
-  const fixturePath = path.join(process.cwd(), "fixtures", "sponsors", "sabilytics.json");
-  if (fs.existsSync(fixturePath)) {
-    const data = JSON.parse(fs.readFileSync(fixturePath, "utf-8"));
-    const events = Array.isArray(data.eventsTracked) ? data.eventsTracked : [];
-    const views = events.filter((e: { event: string }) => e.event === "invoice_viewed").length;
-    const conv = events.filter((e: { event: string }) => e.event === "reminder_link_clicked").length;
-    return {
-      totalViews: Math.max(views, 42),
-      reminderConversions: Math.max(conv, 18),
-      gracePeriodActive: true,
-      retentionMonths: data.retentionGracePeriodMonths ?? 2,
-    };
-  }
+  const events = log();
+  const count = (name: string) => events.filter((e) => e.event === name).length;
   return {
-    totalViews: 42,
-    reminderConversions: 18,
+    invoicesCreated: count("invoice_created"),
+    remindersSent: count("reminder_dispatched"),
+    totalViews: count("invoice_viewed"),
+    reminderConversions: count("reminder_link_clicked"),
     gracePeriodActive: true,
-    retentionMonths: 2,
+    retentionMonths: readFixture().retentionGracePeriodMonths ?? 2,
+    mode: live() ? "live" : "fixture",
   };
 }

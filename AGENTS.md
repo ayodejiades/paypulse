@@ -1,10 +1,10 @@
-# aib-ship — project brief & agent build rules
+# PayPulse — project brief & agent build rules
 
 ## Start here
 If `PROGRESS.md` exists, read it before anything else. kit-autopilot rewrites it after every step: what is done (do not redo it), what is left in order, and the exact command for each item. Follow its rules, work on its first item only, and commit when it works.
 
 ## The idea
-PayPulse Africa: Automated SME Invoicing and SMS/WhatsApp Payment Reminders
+PayPulse: Automated SME Invoicing and SMS/WhatsApp Payment Reminders
 
 ## Chosen bounties
 - **Primary Hackathon Track** — End-to-end deterministic kernel and `/proof` verification

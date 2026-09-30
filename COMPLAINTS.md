@@ -108,7 +108,7 @@ The complaints centered around six distinct failure categories:
 - **Prompt:**
   > "no pink for the neo-brutalist oh."
 - **Critique / Grievance:** Rejection of playful, pastel/bubblegum neobrutalist tropes (especially pink highlights) which destroy fintech credibility.
-- **Remediation:** Locked palette to strict **dark ledger**: Graphite hairline borders (`#232b29`), Midnight Green surface (`#0a0d0c` / `#121615`), Mint White typography (`#e7f3ef`), and Ledger Green (`#059669`). Zero pink.
+- **Remediation:** Locked palette to strict **dark ledger**: Graphite hairline borders (`#232b29`), Midnight Green surface (`#0a0d0c` / `#121615`), Mint White typography (`#e7f3ef`), and Ledger Green (`#047857`). Zero pink.
 
 ---
 
@@ -670,7 +670,7 @@ To avoid repeating any mistakes, the following hard rules govern all subsequent 
 - [x] **Typography & Sizing Rule:** Proportional financial numbers (`text-[15px]`), never bloated overflowing text sizes.
 - [x] **Section Delineation Rule:** Every section MUST have hairline dividing borders (`border-t border-[#232b29]`), alternating surface tones (`#0a0d0c` vs `#121615`), and clear monospace section indicators.
 - [x] **No Duplicate Headers:** Never stack identical IDs or titles on top of each other.
-- [x] **Palette Rule:** Dark ledger theme only (`#0a0d0c`, `#121615`, `#232b29`, `#e7f3ef`, `#059669`). Never use pink, pastel neobrutalism, or unrequested accent colors.
+- [x] **Palette Rule:** Dark ledger theme only (`#0a0d0c`, `#121615`, `#232b29`, `#e7f3ef`, `#047857`). Never use pink, pastel neobrutalism, or unrequested accent colors.
 - [x] **Button Rule:** Oculupi-styled pill geometry (`rounded-full`, asymmetrical padding, circular badge housing a northeast `↗` arrow). Green buttons MUST ALWAYS have pure white text (`#ffffff` / `text-white`), NEVER black.
 - [x] **CTA Tone Rule:** Canonical, production-ready copy: **"Get started"**, NEVER demo toy labels like "Start live demo" or corporate jargon like "Launch Workspace".
 - [x] **Production Navigation Rule:** The main navigation MUST ONLY show commercial production routes (`Overview`, `Invoices & Ledger`, `New Invoice`). Never surface test harnesses (`Operator`, `Proof`, `Verifier`, `Chaos Lab`) in primary navigation.

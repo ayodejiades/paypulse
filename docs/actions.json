@@ -1,8 +1,8 @@
 {
-  "recordedAt": "2026-09-29T21:48:13.028+00:00",
+  "recordedAt": "2026-09-30T22:44:49.444+00:00",
   "baseUrl": "http://localhost:3000",
   "demoMode": true,
-  "durationSeconds": 24.833333,
+  "durationSeconds": 35.966667,
   "viewport": {
     "width": 1920,
     "height": 1080
@@ -11,22 +11,22 @@
     {
       "index": 0,
       "atSeconds": 0,
-      "say": "Explore verified solution"
+      "say": "Open PayPulse"
     },
     {
       "index": 1,
-      "atSeconds": 0.76,
-      "say": "Launch the live workspace"
+      "atSeconds": 0.93,
+      "say": "Get started and open the dashboard"
     },
     {
       "index": 2,
-      "atSeconds": 7.98,
-      "say": "Schedule a new item with a title and due time"
+      "atSeconds": 8.316,
+      "say": "Add a new invoice"
     },
     {
       "index": 3,
-      "atSeconds": 11.523,
-      "say": "Submit, and it appears in the list"
+      "atSeconds": 19.503,
+      "say": "Enter the customer and submit"
     }
   ],
   "clicks": []

@@ -1,10 +1,31 @@
 {
   "baseUrl": "${DEPLOY_URL}",
-  "viewport": { "width": 1920, "height": 1080 },
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  },
   "steps": [
-    { "say": "Explore verified solution", "goto": "/" },
-    { "say": "Launch the live workspace", "click": "[data-demo='launch-demo']", "waitFor": "[data-demo='flagged-count']" },
-    { "say": "Schedule a new item with a title and due time", "fill": { "[data-demo='title']": "Renew domain" } },
-    { "say": "Submit, and it appears in the list", "click": "[data-demo='submit']", "waitFor": "[data-demo='row']" }
+    {
+      "say": "Open PayPulse",
+      "goto": "/"
+    },
+    {
+      "say": "Get started and open the dashboard",
+      "click": "[data-demo='launch-demo']",
+      "waitFor": "[data-demo='list']"
+    },
+    {
+      "say": "Add a new invoice",
+      "click": "[data-demo='new']",
+      "waitFor": "[data-demo='title']"
+    },
+    {
+      "say": "Enter the customer and submit",
+      "fill": {
+        "[data-demo='title']": "Kazi Logistics Ltd"
+      },
+      "click": "[data-demo='submit']",
+      "waitFor": "[data-demo='row']"
+    }
   ]
 }

@@ -53,7 +53,7 @@ export function Nav({ d }: { d: LandingData }) {
           <Link
             href="/dashboard"
             data-demo="launch-demo"
-            className="group inline-flex items-center gap-2.5 pl-4 pr-1.5 py-1.5 rounded-full bg-[var(--accent,#059669)] hover:bg-[#047857] text-white text-xs font-medium tracking-tight transition-all duration-150 active:scale-[0.96] shadow-sm ml-2 cursor-pointer"
+            className="group inline-flex items-center gap-2.5 pl-4 pr-1.5 py-1.5 rounded-full bg-[var(--accent,#047857)] hover:bg-[#047857] text-white text-xs font-medium tracking-tight transition-all duration-150 active:scale-[0.96] shadow-sm ml-2 cursor-pointer"
           >
             <span>{d.cta}</span>
             <span className="w-5 h-5 rounded-full bg-[#033b2a] text-white flex items-center justify-center text-[10px] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0">
@@ -111,7 +111,7 @@ function HeroCopy({ d, align = "left" }: { d: LandingData; align?: "left" | "cen
         <Link
           href="/dashboard"
           data-demo="launch-demo"
-          className="group inline-flex items-center justify-center gap-3 pl-5 sm:pl-6 pr-2 py-2 rounded-full bg-[var(--accent,#059669)] hover:bg-[#047857] text-white font-medium text-sm tracking-tight transition-all duration-150 active:scale-[0.96] shadow-sm cursor-pointer"
+          className="group inline-flex items-center justify-center gap-3 pl-5 sm:pl-6 pr-2 py-2 rounded-full bg-[var(--accent,#047857)] hover:bg-[#047857] text-white font-medium text-sm tracking-tight transition-all duration-150 active:scale-[0.96] shadow-sm cursor-pointer"
         >
           <span>{d.cta}</span>
           <span className="w-7 h-7 rounded-full bg-[#033b2a] text-white flex items-center justify-center text-xs group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0">
@@ -639,7 +639,7 @@ export function ClosingCTA({ d }: { d: LandingData }) {
           <Link
             href="/dashboard"
             data-demo="launch-demo"
-            className="group inline-flex items-center justify-center gap-3.5 pl-6 pr-2 py-2.5 rounded-full bg-[var(--accent,#059669)] hover:bg-[#047857] text-white font-medium text-sm tracking-tight transition-all duration-150 active:scale-[0.96] shadow-sm cursor-pointer"
+            className="group inline-flex items-center justify-center gap-3.5 pl-6 pr-2 py-2.5 rounded-full bg-[var(--accent,#047857)] hover:bg-[#047857] text-white font-medium text-sm tracking-tight transition-all duration-150 active:scale-[0.96] shadow-sm cursor-pointer"
           >
             <span>{d.cta}</span>
             <span className="w-7 h-7 rounded-full bg-[#033b2a] text-white flex items-center justify-center text-xs group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0">

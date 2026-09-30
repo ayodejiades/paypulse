@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { dispatchPaymentReminder } from "@/lib/sponsors/sendbyte";
+import { logInvoiceAnalytics } from "@/lib/sponsors/sabilytics";
 
 export const dynamic = "force-dynamic";
 
@@ -28,6 +29,8 @@ export async function POST(request: Request) {
       dueDate,
       merchantName,
     });
+
+    await logInvoiceAnalytics({ event: "reminder_dispatched", invoiceNumber, source: `sendbyte_${channel}` });
 
     return NextResponse.json(
       {

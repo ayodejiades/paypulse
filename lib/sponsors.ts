@@ -44,7 +44,7 @@ export const AIB_SPONSORS: SponsorIntegration[] = [
     proven: "100% of overdue reminder dispatches carry an idempotency key and verified carrier receipt; deterministic fallback when offline.",
     notClaimed: "Does not initiate phone calls or debt collection; strictly dispatches verified reminder notices with payment links.",
     ablation: {
-      fullSystemMetric: "100% multi-channel delivery across African telco networks (MTN, Airtel, Safaricom)",
+      fullSystemMetric: "SMS and WhatsApp reminders with a carrier receipt stored per invoice",
       removedMetric: "Manual link copying with no delivery tracking or carrier receipt",
       accuracyDelta: "Loses automated delivery confirmation and instant SMS dispatch",
       whatRemains: "Invoice state machine, integer kobo arithmetic, and manual reminder exporting.",
@@ -96,7 +96,7 @@ export const AIB_SPONSORS: SponsorIntegration[] = [
     proven: "14ms p95 local response time; automated SSL and /api/health probes verified.",
     notClaimed: "Multi-region global edge replication is not enabled in this edition; focused on Africa West (Lagos).",
     ablation: {
-      fullSystemMetric: "Sub-20ms edge response latency for West African merchants",
+      fullSystemMetric: "Hosted in the Lagos region; the health endpoint reports the region and its own response time",
       removedMetric: "High-latency off-continent hosting (180ms+ round trips)",
       accuracyDelta: "0% correctness loss; 10x improvement in local network latency",
       whatRemains: "Full Next.js server actions, deterministic kernel, and in-memory test runner.",

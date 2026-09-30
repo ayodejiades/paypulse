@@ -39,7 +39,7 @@ export default function Web2OperatorPage() {
       <div className="flex flex-col gap-6">
         <div className="flex flex-wrap items-start justify-between gap-4 border-b border-[var(--border,#232b29)] pb-5">
           <div>
-            <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--accent,#059669)] font-semibold">
+            <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--accent,#047857)] font-semibold">
               Assurance · Non-Custodial AI Boundary
             </span>
             <h1 className="mt-1 text-2xl font-semibold tracking-[-0.02em] text-[var(--fg,#e7f3ef)]">

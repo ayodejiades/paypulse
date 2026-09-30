@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { listRecords, createRecord, createReminder } from "@/db";
 import { evaluateDeterministicKernel } from "@/lib/kernel";
+import { logInvoiceAnalytics } from "@/lib/sponsors/sabilytics";
 
 export const dynamic = "force-dynamic";
 
@@ -67,6 +68,8 @@ export async function POST(request: Request) {
       promisedCents: amountKobo,
       observedCents: 0,
     });
+
+    await logInvoiceAnalytics({ event: "invoice_created", invoiceNumber: `INV-2026-D${String(record.id).padStart(3, "0")}`, source: channel.toLowerCase() });
 
     revalidatePath("/");
     revalidatePath("/dashboard");

@@ -1,4 +1,4 @@
-# aib-ship — Style Reference
+# PayPulse — Style Reference
 > dark fintech, numbers that line up
 
 **Theme:** dark
@@ -15,7 +15,7 @@ Ledger is a dark fintech-dashboard aesthetic built around one governing constrai
 | Graphite Line | `#232B29` | `--border` | Hairline border on cards, tables and dividers — tight and precise |
 | Mint White | `#E7F3EF` | `--fg` | Primary text and primary numeric values |
 | Sage Gray | `#8AA39A` | `--fg-muted` | Secondary text — timestamps, captions, subordinate figures |
-| Ledger Green | `#059669` | `--accent` | The single accent — reserved for positive financial signal and the primary action |
+| Ledger Green | `#047857` | `--accent` | The single accent — reserved for positive financial signal and the primary action |
 | Deep Green Ink | `#021610` | `--accent-contrast` | Text/icon color placed on a filled Ledger Green surface |
 
 ## Tokens — Typography
@@ -195,7 +195,7 @@ No illustration beyond the shared empty-state set, recolored to the green accent
 - text (muted): #8AA39A
 - background: #0A0D0C
 - border: #232B29
-- accent / primary action: #059669
+- accent / primary action: #047857
 
 ## Example Component Prompts
 
@@ -344,7 +344,7 @@ To ensure unified, professional product quality, **every other page and view in 
   --surface: #121615;
   --surface-raised: #171c1b;
   --border: #232b29;
-  --accent: #059669;
+  --accent: #047857;
   --accent-contrast: #021610;
   --radius: 0.5rem;
   --radius-sm: 0.25rem;

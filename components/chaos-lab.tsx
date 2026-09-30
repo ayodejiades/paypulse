@@ -110,7 +110,7 @@ export function ChaosLab() {
         <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-mono text-xs uppercase tracking-widest text-[var(--accent,#059669)] font-semibold">
+              <span className="font-mono text-xs uppercase tracking-widest text-[var(--accent,#047857)] font-semibold">
                 System Hardening & Chaos Suite
               </span>
               <span className="rounded bg-emerald-950/60 px-2 py-0.5 text-[11px] font-mono text-emerald-300 border border-emerald-800/40">

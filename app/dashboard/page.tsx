@@ -78,7 +78,7 @@ export default async function ScheduleDashboardPage() {
           {/* Schedule Form */}
           <section className="lg:col-span-5 flex flex-col gap-4 rounded-[var(--radius,8px)] border border-[var(--border,#232b29)] bg-[var(--surface,#121615)] p-6 shadow-sm">
             <div className="border-b border-[var(--border,#232b29)] pb-3">
-              <span className="font-mono text-[10px] uppercase tracking-wider text-[var(--accent,#059669)] font-semibold">
+              <span className="font-mono text-[10px] uppercase tracking-wider text-[var(--accent,#047857)] font-semibold">
                 Automated Dispatch
               </span>
               <h2 className="text-base font-semibold text-[var(--fg,#e7f3ef)] mt-0.5">

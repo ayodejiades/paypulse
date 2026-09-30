@@ -1,4 +1,4 @@
-# Wedge Brief: aib-ship
+# Wedge Brief: PayPulse
 
 ## 1. The Differentiated Wedge
 * **Target User:** accounts payable manager reconciling vendor invoices under month-end close deadline

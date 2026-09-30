@@ -2,9 +2,9 @@
 
 Computed from `evidence/campaign-report.json` and `lib/kernel.ts` by `tools/verify-evidence.ts`.
 
-- Generated: 2026-09-29T21:47:21.525Z
+- Generated: 2026-09-30T04:14:57.982Z
 - Mechanism: deterministic-kernel-v2 · mode: EVALUATE
-- sha256: `43154afc11682a511bd790343de319a9265bef48ec3cb41f6298b885b863d2b5`
+- sha256: `bd8f4610d16c7568b70702805ac9b07df463e20069a219dbe9714ac10194769b`
 
 ## Executed Fixture Matrix
 

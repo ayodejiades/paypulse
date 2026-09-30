@@ -4,7 +4,7 @@
 const theme = {
   "name": "ledger",
   "mode": "dark",
-  "accent": "#059669",
+  "accent": "#047857",
   "accentContrast": "#021610",
   "surfaces": {
     "bg": "#0A0D0C",

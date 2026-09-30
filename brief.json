@@ -53,13 +53,13 @@
     }
   ],
   "theme": "ledger",
-  "accent": "#059669",
+  "accent": "#047857",
   "illustrations": "none",
   "source": "rules",
   "unknown": [],
   "wedge": {
     "title": "PayPulse",
-    "sector": "Fintech & Payments · PayPulse: Automated SME Invoicing",
+    "sector": "Fintech & Payments \u00b7 PayPulse: Automated SME Invoicing",
     "painful_moment": "Chasing overdue invoice payments across disparate bank transfers and WhatsApp threads without automated reminders or audit trails.",
     "unusual_constraint": "Zero unhandled exceptions under upstream telco failure with deterministic local queuing and SendByte fallback.",
     "proof_metric": "Reconcile 100 sample payment records in under 2 seconds with integer-kobo precision and proof receipts",
@@ -93,7 +93,7 @@
   },
   "design": {
     "preset": "night",
-    "accent": "#059669",
+    "accent": "#047857",
     "radius": 8,
     "tokens": {
       "mode": "dark",
@@ -103,14 +103,15 @@
       "ink": "#e7f3ef",
       "muted": "#8aa39a",
       "line": "#232b29",
-      "accent": "#059669",
-      "accent-ink": "#021610",
-      "state-clear": "#059669",
+      "accent": "#047857",
+      "accent-ink": "#ffffff",
+      "state-clear": "#047857",
       "state-flagged": "#f59e0b",
       "state-pending": "#eab308",
       "state-refused": "#ef4444",
       "edge": 1,
       "shadow": "0 10px 24px -12px rgba(0, 0, 0, 0.7)"
     }
-  }
+  },
+  "displayName": "PayPulse"
 }

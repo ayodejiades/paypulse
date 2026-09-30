@@ -1,4 +1,4 @@
-# Judge Evidence Matrix: aib-ship
+# Judge Evidence Matrix: PayPulse
 
 This document provides direct, verifiable links for every judging rubric criterion. All claims are backed by source files, test suites, and deterministic demo paths.
 

@@ -87,7 +87,7 @@ export default function CreateInvoicePage() {
       <div className="flex flex-col gap-6">
         {/* Header */}
         <div className="border-b border-[var(--border,#232b29)] pb-5">
-          <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--accent,#059669)] font-semibold">
+          <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--accent,#047857)] font-semibold">
             Invoices &amp; Billing
           </span>
           <h1 className="mt-1 text-2xl font-semibold tracking-[-0.02em] text-[var(--fg,#e7f3ef)]">
@@ -138,7 +138,7 @@ export default function CreateInvoicePage() {
                   required
                   value={customerName}
                   onChange={(e) => setCustomerName(e.target.value)}
-                  className="rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] p-2.5 font-medium text-xs text-[var(--fg,#e7f3ef)] focus:outline-none focus:border-[var(--accent,#059669)]"
+                  className="rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] p-2.5 font-medium text-xs text-[var(--fg,#e7f3ef)] focus:outline-none focus:border-[var(--accent,#047857)]"
                   placeholder="e.g. Dangote Retail Depot"
                 />
               </label>
@@ -150,7 +150,7 @@ export default function CreateInvoicePage() {
                   required
                   value={customerPhone}
                   onChange={(e) => setCustomerPhone(e.target.value)}
-                  className="rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] p-2.5 font-mono text-xs text-[var(--fg,#e7f3ef)] focus:outline-none focus:border-[var(--accent,#059669)]"
+                  className="rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] p-2.5 font-mono text-xs text-[var(--fg,#e7f3ef)] focus:outline-none focus:border-[var(--accent,#047857)]"
                   placeholder="+234 803 000 0000"
                 />
               </label>
@@ -163,7 +163,7 @@ export default function CreateInvoicePage() {
                   type="text"
                   value={customerLocation}
                   onChange={(e) => setCustomerLocation(e.target.value)}
-                  className="rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] p-2.5 text-xs text-[var(--fg,#e7f3ef)] focus:outline-none focus:border-[var(--accent,#059669)]"
+                  className="rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] p-2.5 text-xs text-[var(--fg,#e7f3ef)] focus:outline-none focus:border-[var(--accent,#047857)]"
                   placeholder="e.g. Ikeja Industrial Estate, Lagos"
                 />
               </label>
@@ -173,7 +173,7 @@ export default function CreateInvoicePage() {
                 <select
                   value={channel}
                   onChange={(e) => setChannel(e.target.value as "WhatsApp" | "SMS")}
-                  className="rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] p-2.5 text-xs text-[var(--fg,#e7f3ef)] focus:outline-none focus:border-[var(--accent,#059669)]"
+                  className="rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] p-2.5 text-xs text-[var(--fg,#e7f3ef)] focus:outline-none focus:border-[var(--accent,#047857)]"
                 >
                   <option value="WhatsApp">SendByte WhatsApp</option>
                   <option value="SMS">SendByte SMS</option>
@@ -188,7 +188,7 @@ export default function CreateInvoicePage() {
                 required
                 value={commodity}
                 onChange={(e) => setCommodity(e.target.value)}
-                className="rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] p-2.5 text-xs text-[var(--fg,#e7f3ef)] focus:outline-none focus:border-[var(--accent,#059669)]"
+                className="rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] p-2.5 text-xs text-[var(--fg,#e7f3ef)] focus:outline-none focus:border-[var(--accent,#047857)]"
                 placeholder="e.g. 50kg Portland Grade Limestone Cement"
               />
             </label>
@@ -201,7 +201,7 @@ export default function CreateInvoicePage() {
                   required
                   value={totalNaira}
                   onChange={(e) => setTotalNaira(e.target.value)}
-                  className="rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] p-2.5 font-mono text-xs text-[var(--fg,#e7f3ef)] tabular-nums focus:outline-none focus:border-[var(--accent,#059669)]"
+                  className="rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] p-2.5 font-mono text-xs text-[var(--fg,#e7f3ef)] tabular-nums focus:outline-none focus:border-[var(--accent,#047857)]"
                   placeholder="4,850,000.00"
                 />
               </label>
@@ -212,7 +212,7 @@ export default function CreateInvoicePage() {
                   type="text"
                   value={amountReceivedNaira}
                   onChange={(e) => setAmountReceivedNaira(e.target.value)}
-                  className="rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] p-2.5 font-mono text-xs text-[var(--fg,#e7f3ef)] tabular-nums focus:outline-none focus:border-[var(--accent,#059669)]"
+                  className="rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] p-2.5 font-mono text-xs text-[var(--fg,#e7f3ef)] tabular-nums focus:outline-none focus:border-[var(--accent,#047857)]"
                   placeholder="0.00"
                 />
               </label>
@@ -224,7 +224,7 @@ export default function CreateInvoicePage() {
                   required
                   value={dueDate}
                   onChange={(e) => setDueDate(e.target.value)}
-                  className="rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] p-2.5 font-mono text-xs text-[var(--fg,#e7f3ef)] focus:outline-none focus:border-[var(--accent,#059669)]"
+                  className="rounded border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] p-2.5 font-mono text-xs text-[var(--fg,#e7f3ef)] focus:outline-none focus:border-[var(--accent,#047857)]"
                 />
               </label>
             </div>
@@ -233,7 +233,7 @@ export default function CreateInvoicePage() {
               <button
                 type="submit"
                 disabled={isPending}
-                className="w-full inline-flex items-center justify-center gap-2 py-3 px-6 rounded-lg bg-[var(--accent,#059669)] hover:bg-[#047857] text-white font-medium text-sm transition-all duration-150 active:scale-[0.98] disabled:opacity-50 cursor-pointer shadow-sm"
+                className="w-full inline-flex items-center justify-center gap-2 py-3 px-6 rounded-lg bg-[var(--accent,#047857)] hover:bg-[#065f46] text-white font-medium text-sm transition-all duration-150 active:scale-[0.98] disabled:opacity-50 cursor-pointer shadow-sm"
               >
                 {isPending ? "Persisting to Database..." : "Save & Issue Invoice"}
               </button>
@@ -244,7 +244,7 @@ export default function CreateInvoicePage() {
           <div className="flex flex-col justify-between gap-4 rounded-lg border border-[var(--border,#232b29)] bg-[var(--surface,#121615)] p-6 lg:col-span-5 shadow-sm">
             <div>
               <div className="flex items-center justify-between">
-                <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-[var(--accent,#059669)] font-semibold">
+                <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-[var(--accent,#047857)] font-semibold">
                   Payment Status Preview
                 </span>
                 <span

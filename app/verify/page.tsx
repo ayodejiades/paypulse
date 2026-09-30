@@ -79,7 +79,7 @@ export default function VerifyPage() {
     <DashboardShell project="PayPulse">
       <div className="flex flex-col gap-8 max-w-[1200px] mx-auto">
         <div className="border-b border-[var(--border,#232b29)] pb-5">
-          <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-[var(--accent,#059669)] font-semibold">
+          <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-[var(--accent,#047857)] font-semibold">
             Independent verification · Zero credentials required
           </p>
           <h1 className="mt-1 text-3xl font-semibold tracking-[-0.03em] text-[var(--fg,#e7f3ef)]">
@@ -143,7 +143,7 @@ export default function VerifyPage() {
                 type="button"
                 data-demo="restore-canonical"
                 onClick={restoreCanonical}
-                className="rounded-[var(--radius-sm,4px)] bg-[var(--accent,#059669)] px-3.5 py-1.5 font-mono text-[12px] font-medium text-white hover:bg-[var(--accent,#059669)]/90 transition-colors cursor-pointer"
+                className="rounded-[var(--radius-sm,4px)] bg-[var(--accent,#047857)] px-3.5 py-1.5 font-mono text-[12px] font-medium text-white hover:bg-[var(--accent,#047857)]/90 transition-colors cursor-pointer"
               >
                 Restore canonical payload
               </button>
@@ -169,7 +169,7 @@ export default function VerifyPage() {
                 setTampered(e.target.value !== canonicalPayload);
               }}
               rows={14}
-              className="w-full rounded-[var(--radius-sm,4px)] border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] p-3.5 font-mono text-[12px] leading-relaxed text-[var(--fg,#e7f3ef)] focus:outline-none focus:border-[var(--accent,#059669)]"
+              className="w-full rounded-[var(--radius-sm,4px)] border border-[var(--border,#232b29)] bg-[var(--surface-raised,#171c1b)] p-3.5 font-mono text-[12px] leading-relaxed text-[var(--fg,#e7f3ef)] focus:outline-none focus:border-[var(--accent,#047857)]"
             />
           </div>
 

@@ -53,3 +53,22 @@ test("Pxxl sponsor fixture exists and satisfies 4-part verification contract", a
   assert.equal(config.region, "africa-west-lagos");
   assert.equal(config.sslEnabled, true);
 });
+
+test("Sabilytics counts recorded events instead of inventing totals", async () => {
+  const { getInvoiceAnalyticsSummary, logInvoiceAnalytics } = await import("../lib/sponsors/sabilytics.ts");
+  const before = getInvoiceAnalyticsSummary();
+  await logInvoiceAnalytics({ event: "reminder_dispatched", invoiceNumber: "INV-TEST-1" });
+  await logInvoiceAnalytics({ event: "invoice_viewed", invoiceNumber: "INV-TEST-1" });
+  const after = getInvoiceAnalyticsSummary();
+  assert.equal(after.remindersSent, before.remindersSent + 1);
+  assert.equal(after.totalViews, before.totalViews + 1);
+});
+
+test("Pxxl runtime uses the fixture until the host sets PXXL_URL and PXXL_REGION", async () => {
+  const { getPxxlRuntime } = await import("../lib/sponsors/pxxl.ts");
+  delete process.env.PXXL_URL; delete process.env.PXXL_REGION;
+  assert.equal(getPxxlRuntime().source, "fixture");
+  process.env.PXXL_URL = "https://paypulse.example.app"; process.env.PXXL_REGION = "africa-west-lagos";
+  assert.equal(getPxxlRuntime().source, "env");
+  delete process.env.PXXL_URL; delete process.env.PXXL_REGION;
+});

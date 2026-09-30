@@ -108,7 +108,7 @@ export default function GuidedDemoPage() {
               type="button"
               data-demo="advance-stage"
               onClick={advanceStage}
-              className="rounded-md bg-[var(--accent,#059669)] px-4 py-2.5 font-mono text-xs font-semibold text-white transition-colors hover:bg-[#047857]"
+              className="rounded-md bg-[var(--accent,#047857)] px-4 py-2.5 font-mono text-xs font-semibold text-white transition-colors hover:bg-[#065f46]"
             >
               Advance Lifecycle Stage ({stageIndex + 1}/5) &rarr;
             </button>

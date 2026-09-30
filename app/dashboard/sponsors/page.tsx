@@ -23,7 +23,7 @@ export default function Web2SponsorsPage() {
       <div className="flex flex-col gap-6">
         <div className="flex flex-wrap items-start justify-between gap-4 border-b border-[var(--border,#232b29)] pb-5">
           <div>
-            <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--accent,#059669)] font-semibold">
+            <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--accent,#047857)] font-semibold">
               Assurance · Load-Bearing Sponsor Architecture
             </span>
             <h1 className="mt-1 text-2xl font-semibold tracking-[-0.02em] text-[var(--fg,#e7f3ef)]">
@@ -53,7 +53,7 @@ export default function Web2SponsorsPage() {
                 key={s.id}
                 onClick={() => setSelectedSponsorId(s.id)}
                 className={`cursor-pointer bg-[var(--surface,#121615)] p-5 transition-colors ${
-                  isSelected ? "ring-1 ring-inset ring-[var(--accent,#059669)]" : "hover:bg-[var(--surface-raised,#171c1b)]"
+                  isSelected ? "ring-1 ring-inset ring-[var(--accent,#047857)]" : "hover:bg-[var(--surface-raised,#171c1b)]"
                 }`}
               >
                 <div className="flex items-start justify-between gap-3">
@@ -116,7 +116,7 @@ export default function Web2SponsorsPage() {
           <section className="rounded-lg border border-[var(--border,#232b29)] bg-[var(--surface,#121615)] p-6 shadow-sm">
             <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[var(--border,#232b29)] pb-4">
               <div>
-                <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--accent,#059669)] font-semibold">
+                <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--accent,#047857)] font-semibold">
                   Integrator Field Report · docs/SPONSOR_FINDINGS.md
                 </span>
                 <h3 className="mt-0.5 text-lg font-semibold text-[var(--fg,#e7f3ef)]">

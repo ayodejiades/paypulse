@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import type { Record as DbRecord, Reminder as DbReminder } from "@/db/schema";
 
@@ -155,6 +155,16 @@ export function InvoicesLedgerView({
   const [filter, setFilter] = useState<"ALL" | "OVERDUE" | "PENDING" | "SETTLED">("ALL");
   const [search, setSearch] = useState("");
   const [selectedInvoice, setSelectedInvoice] = useState<InvoiceItem | null>(null);
+
+  // Opening an invoice counts as a view in Sabilytics.
+  useEffect(() => {
+    if (!selectedInvoice) return;
+    void fetch("/api/analytics", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ event: "invoice_viewed", invoiceNumber: selectedInvoice.invoiceNumber }),
+    }).catch(() => {});
+  }, [selectedInvoice]);
   const [reminderToast, setReminderToast] = useState<string | null>(null);
 
   // Combine commercial seed invoices with dynamic database rows
@@ -292,7 +302,7 @@ export function InvoicesLedgerView({
         <div className="flex items-center gap-3">
           <Link
             href="/dashboard/create"
-            className="group inline-flex items-center gap-3 pl-4 sm:pl-5 pr-1.5 py-1.5 rounded-full bg-[var(--accent,#059669)] hover:bg-[#047857] text-white text-xs font-medium tracking-tight transition-all active:scale-[0.98] shadow-sm cursor-pointer"
+            className="group inline-flex items-center gap-3 pl-4 sm:pl-5 pr-1.5 py-1.5 rounded-full bg-[var(--accent,#047857)] hover:bg-[#047857] text-white text-xs font-medium tracking-tight transition-all active:scale-[0.98] shadow-sm cursor-pointer"
           >
             <span>+ New Invoice</span>
             <span className="w-5 h-5 rounded-full bg-[#033b2a] text-white flex items-center justify-center text-[10px] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0">
@@ -694,7 +704,7 @@ export function InvoicesLedgerView({
                     triggerReminder(selectedInvoice);
                     setSelectedInvoice(null);
                   }}
-                  className="rounded-full px-5 py-2 text-xs font-medium bg-[var(--accent,#059669)] hover:bg-[#047857] text-white shadow-sm transition-colors cursor-pointer"
+                  className="rounded-full px-5 py-2 text-xs font-medium bg-[var(--accent,#047857)] hover:bg-[#047857] text-white shadow-sm transition-colors cursor-pointer"
                 >
                   Send WhatsApp Reminder Now ↗
                 </button>

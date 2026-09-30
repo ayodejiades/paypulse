@@ -13,14 +13,17 @@
 import { NextResponse } from "next/server";
 import { isDemoMode } from "@/lib/demo-mode";
 import { probeDatabase } from "@/db";
+import { getPxxlRuntime } from "@/lib/sponsors/pxxl";
 
 // Never cache a health result: a stale "ok" from a warm CDN is the exact bug this fixes.
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export async function GET(request: Request) {
+  const startedAt = performance.now();
   const deep = new URL(request.url).searchParams.get("deep") === "1";
   const base = {
+    platform: { sponsor: "Pxxl", ...getPxxlRuntime() },
     ok: true,
     sha: process.env.VERCEL_GIT_COMMIT_SHA ?? process.env.GIT_COMMIT ?? "dev",
     demoMode: isDemoMode(),
@@ -28,7 +31,7 @@ export async function GET(request: Request) {
   };
 
   if (!deep) {
-    return NextResponse.json(base, { headers: { "cache-control": "no-store" } });
+    return NextResponse.json({ ...base, handlerMs: Math.round(performance.now() - startedAt) }, { headers: { "cache-control": "no-store" } });
   }
 
   const db = await probeDatabase();
@@ -37,7 +40,7 @@ export async function GET(request: Request) {
   const ok = db.reachable && db.tablesPresent;
 
   return NextResponse.json(
-    { ...base, ok, database: db },
+    { ...base, ok, database: db, handlerMs: Math.round(performance.now() - startedAt) },
     { status: ok ? 200 : 503, headers: { "cache-control": "no-store" } },
   );
 }
